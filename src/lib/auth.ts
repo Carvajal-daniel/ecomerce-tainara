@@ -7,6 +7,8 @@ import { db } from "@/db";
 
 
 console.log(Object.keys(schema)); 
+
+
 export const auth = betterAuth({
   emailAndPassword: {
     enabled: true,
