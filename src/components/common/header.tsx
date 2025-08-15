@@ -19,7 +19,7 @@ const Header = () => {
   const { data: session } = authClient.useSession();
 
   return (
-    <header className="bg-white border-b border-gray-200 shadow-sm py-4 px-6">
+    <header className="bg-white z-10 border-b border-gray-200 shadow-sm py-4 px-6">
       <div className="flex items-center justify-between max-w-7xl mx-auto">
         {/* Logo */}
         <Link href="/" className="group">
