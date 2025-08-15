@@ -13,7 +13,7 @@ export default function AuthScreen() {
     <div>
   <Header/>
   
-    <div className="min-h-screen flex items-center justify-center p-4  bg-[#f5f5f5] relative overflow-hidden">
+    <div className=" h-[calc(100vh-73px)] flex items-center justify-center p-4  bg-[#f5f5f5] relative overflow-hidden">
      
       <div className="w-full max-w-md px-5 -mt-14 relative z-10  ">
       

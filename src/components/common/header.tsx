@@ -28,7 +28,6 @@ const Header = () => {
           </h2>
         </Link>
 
-        {/* Menu lateral */}
         <Sheet>
           <SheetTrigger className="p-2 rounded-lg hover:bg-gray-100 transition-colors">
             <MenuIcon className="w-6 h-6 text-gray-800" />
