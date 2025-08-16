@@ -9,8 +9,8 @@ import {
 } from "@/components/ui/sheet";
 import { MenuIcon } from "lucide-react";
 import Link from "next/link";
-import SearchBar from "@/components/common/header/SearchBar";
-import UserActions from "@/components/common/header/UserActions";
+import SearchBar from "./SearchBar";
+import UserActions from "./UserActions";
 import { authClient } from "@/lib/auth-client";
 
 const MobileHeader = () => {
@@ -19,7 +19,7 @@ const MobileHeader = () => {
   return (
     <Sheet>
       <SheetTrigger className="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors">
-        <MenuIcon className="w-6 h-6 text-gray-500" />
+        <MenuIcon className="w-6 h-6 text-gray-600" />
       </SheetTrigger>
 
       <SheetContent className="w-72 bg-white">
@@ -30,12 +30,12 @@ const MobileHeader = () => {
         </SheetHeader>
 
         {/* Search */}
-        <div className="mb-6">
+        <div className="mb-4">
           <SearchBar />
         </div>
 
         {/* Navigation */}
-        <nav className="space-y-2 mb-4">
+        <nav className="space-y-2 mb-6">
           <Link href="/produtos" className="block text-gray-700 hover:text-gray-800 font-medium py-2 px-2 rounded-lg hover:bg-gray-50 transition-colors">
             Produtos
           </Link>
