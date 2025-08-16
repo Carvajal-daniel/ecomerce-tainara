@@ -48,7 +48,7 @@ const MobileHeader = () => {
           {/* Botões Minha Conta e Pedidos */}
           <div className="grid grid-cols-2 gap-3">
             <Link
-              href={session?.user ? "/minha-conta" : "/login"}
+              href={session?.user ? "/minha-conta" : "/authentication"}
               className="flex items-center justify-center gap-2 py-2.5 px-3 bg-white hover:bg-pink-50 shadow-md shadow-gray-300 rounded-lg transition-colors text-gray-800 border "
             >
               <User className="w-4 h-4" />
@@ -57,7 +57,7 @@ const MobileHeader = () => {
               </span>
             </Link>
             <Link
-              href={session?.user ? "/pedidos" : "/login"}
+              href={session?.user ? "/pedidos" : "/authentication"}
               className="flex items-center shadow-md shadow-gray-300 justify-center gap-2 py-2.5 px-3 bg-white hover:bg-pink-50 rounded-lg transition-colors border text-gray-800"
             >
               <Package className="w-4 h-4" />
