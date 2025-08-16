@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Heart } from "lucide-react";
 import SignInForm from "./components/sign-in-form";
 import SignUpForm from "./components/sign-up-form";
-import Header from "@/components/common/header";
+import Header from "@/components/common/header/header";
 
 export default function AuthScreen() {
   const [isLogin, setIsLogin] = useState(true);
