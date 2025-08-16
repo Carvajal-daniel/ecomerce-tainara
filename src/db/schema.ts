@@ -1,3 +1,4 @@
+import { relations } from "drizzle-orm";
 import {
   pgTable,
   text,
@@ -66,6 +67,22 @@ export const verification = pgTable("verification", {
   ),
 });
 
+export const bannerTable = pgTable("banner", {
+  id: text("id").primaryKey(),
+  name: text("name").notNull(),
+  imageUrlDesktop: text("Desktop_image").notNull(),
+  imageUrlMobile: text("Mobile_image").notNull(),
+  categoryId: text("category_id")
+    .notNull()
+    .references(() => categoryTable.id, { onDelete: "cascade" }),
+  slug: text("slug").notNull(),
+  createdAt: timestamp("created_at")
+    .$defaultFn(() => /* @__PURE__ */ new Date())
+    .notNull(),
+  updatedAt: timestamp("updated_at")
+    .$defaultFn(() => /* @__PURE__ */ new Date())
+    .notNull(),
+})
 
 export const categoryTable = pgTable("category", {
   id: text("id").primaryKey(),
@@ -78,3 +95,11 @@ export const categoryTable = pgTable("category", {
     .$defaultFn(() => /* @__PURE__ */ new Date())
     .notNull(),
 })
+
+export const bannerRelations = relations(bannerTable, ({ one }) => ({
+  category: one(categoryTable, {
+    fields: [bannerTable.categoryId],
+    references: [categoryTable.id],
+  }),
+}))
+
