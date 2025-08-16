@@ -29,7 +29,7 @@ const HeroBanner = async () => {
       </div>
       {/* Seção de Vantagens */}
 <div className="shadow-sm lg:w-8xl lg:mx-auto py-1">
-  <div className="grid grid-cols-3 sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-6 lg:w-1/2 lg:mx-auto">
+  <div className="grid grid-cols-3 xl:grid-cols-3 sm:ml-12 gap-3 md:gap-1 lg:w-1/2 lg:mx-auto">
 
     {/* Cartão de Crédito */}
     <div className="flex flex-col sm:flex-row items-center text-center sm:text-left gap-2 p-2 rounded-xl bg-white">
