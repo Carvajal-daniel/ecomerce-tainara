@@ -9,8 +9,8 @@ const HeroBanner = async () => {
   const banners = bannersFromDb.map((b) => ({
     id: b.id,
     name: b.name,
-    imageUrlDesktop: b.imageUrlDesktop,
-    imageUrlMobile: b.imageUrlMobile,
+    imageUrlDesktop: b.desktop_image,
+    imageUrlMobile: b.mobile_image,
     slug: b.slug,
   }));
 

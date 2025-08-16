@@ -1,105 +1,121 @@
 import { relations } from "drizzle-orm";
-import {
-  pgTable,
-  text,
-  timestamp,
-  boolean,
-  integer,
-} from "drizzle-orm/pg-core";
+import { pgTable, text, timestamp, boolean } from "drizzle-orm/pg-core";
 
+// =====================
+// USERS
+// =====================
 export const user = pgTable("user", {
   id: text("id").primaryKey(),
   name: text("name").notNull(),
   email: text("email").notNull().unique(),
-  emailVerified: boolean("email_verified")
-    .$defaultFn(() => false)
-    .notNull(),
+  email_verified: boolean("email_verified").default(false).notNull(),
   image: text("image"),
-  createdAt: timestamp("created_at")
-    .$defaultFn(() => /* @__PURE__ */ new Date())
-    .notNull(),
-  updatedAt: timestamp("updated_at")
-    .$defaultFn(() => /* @__PURE__ */ new Date())
-    .notNull(),
+  created_at: timestamp("created_at").defaultNow().notNull(),
+  updated_at: timestamp("updated_at").defaultNow().notNull(),
 });
 
+// =====================
+// SESSIONS
+// =====================
 export const session = pgTable("session", {
   id: text("id").primaryKey(),
-  expiresAt: timestamp("expires_at").notNull(),
   token: text("token").notNull().unique(),
-  createdAt: timestamp("created_at").notNull(),
-  updatedAt: timestamp("updated_at").notNull(),
-  ipAddress: text("ip_address"),
-  userAgent: text("user_agent"),
-  userId: text("user_id")
-    .notNull()
-    .references(() => user.id, { onDelete: "cascade" }),
+  expires_at: timestamp("expires_at").notNull(),
+  ip_address: text("ip_address"),
+  user_agent: text("user_agent"),
+  user_id: text("user_id").notNull().references(() => user.id, { onDelete: "cascade" }),
+  created_at: timestamp("created_at").defaultNow().notNull(),
+  updated_at: timestamp("updated_at").defaultNow().notNull(),
 });
 
+// =====================
+// ACCOUNTS
+// =====================
 export const account = pgTable("account", {
   id: text("id").primaryKey(),
-  accountId: text("account_id").notNull(),
-  providerId: text("provider_id").notNull(),
-  userId: text("user_id")
-    .notNull()
-    .references(() => user.id, { onDelete: "cascade" }),
-  accessToken: text("access_token"),
-  refreshToken: text("refresh_token"),
-  idToken: text("id_token"),
-  accessTokenExpiresAt: timestamp("access_token_expires_at"),
-  refreshTokenExpiresAt: timestamp("refresh_token_expires_at"),
+  account_id: text("account_id").notNull(),
+  provider_id: text("provider_id").notNull(),
+  user_id: text("user_id").notNull().references(() => user.id, { onDelete: "cascade" }),
+  access_token: text("access_token"),
+  refresh_token: text("refresh_token"),
+  id_token: text("id_token"),
+  access_token_expires_at: timestamp("access_token_expires_at"),
+  refresh_token_expires_at: timestamp("refresh_token_expires_at"),
   scope: text("scope"),
   password: text("password"),
-  createdAt: timestamp("created_at").notNull(),
-  updatedAt: timestamp("updated_at").notNull(),
+  created_at: timestamp("created_at").defaultNow().notNull(),
+  updated_at: timestamp("updated_at").defaultNow().notNull(),
 });
 
+// =====================
+// VERIFICATIONS
+// =====================
 export const verification = pgTable("verification", {
   id: text("id").primaryKey(),
   identifier: text("identifier").notNull(),
   value: text("value").notNull(),
-  expiresAt: timestamp("expires_at").notNull(),
-  createdAt: timestamp("created_at").$defaultFn(
-    () => /* @__PURE__ */ new Date()
-  ),
-  updatedAt: timestamp("updated_at").$defaultFn(
-    () => /* @__PURE__ */ new Date()
-  ),
+  expires_at: timestamp("expires_at").notNull(),
+  created_at: timestamp("created_at").defaultNow().notNull(),
+  updated_at: timestamp("updated_at").defaultNow().notNull(),
 });
 
-export const bannerTable = pgTable("banner", {
-  id: text("id").primaryKey(),
-  name: text("name").notNull(),
-  imageUrlDesktop: text("Desktop_image").notNull(),
-  imageUrlMobile: text("Mobile_image").notNull(),
-  categoryId: text("category_id")
-    .notNull()
-    .references(() => categoryTable.id, { onDelete: "cascade" }),
-  slug: text("slug").notNull(),
-  createdAt: timestamp("created_at")
-    .$defaultFn(() => /* @__PURE__ */ new Date())
-    .notNull(),
-  updatedAt: timestamp("updated_at")
-    .$defaultFn(() => /* @__PURE__ */ new Date())
-    .notNull(),
-})
-
+// =====================
+// CATEGORIES
+// =====================
 export const categoryTable = pgTable("category", {
   id: text("id").primaryKey(),
   name: text("name").notNull(),
   slug: text("slug").notNull(),
-  createdAt: timestamp("created_at")
-    .$defaultFn(() => /* @__PURE__ */ new Date())
-    .notNull(),
-  updatedAt: timestamp("updated_at")
-    .$defaultFn(() => /* @__PURE__ */ new Date())
-    .notNull(),
-})
+  created_at: timestamp("created_at").defaultNow().notNull(),
+  updated_at: timestamp("updated_at").defaultNow().notNull(),
+});
+
+// =====================
+// BANNERS
+// =====================
+export const bannerTable = pgTable("banner", {
+  id: text("id").primaryKey(),
+  name: text("name").notNull(),
+  desktop_image: text("desktop_image").notNull(),
+  mobile_image: text("mobile_image").notNull(),
+  category_id: text("category_id").notNull().references(() => categoryTable.id, { onDelete: "cascade" }),
+  slug: text("slug").notNull(),
+  created_at: timestamp("created_at").defaultNow().notNull(),
+  updated_at: timestamp("updated_at").defaultNow().notNull(),
+});
+
+// =====================
+// PRODUCTS
+// =====================
+export const productTable = pgTable("product", {
+  id: text("id").primaryKey(),
+  name: text("name").notNull(),
+  description: text("description").notNull(),
+  image: text("image").notNull(),
+  slug: text("slug").notNull(),
+  category_id: text("category_id").notNull().references(() => categoryTable.id, { onDelete: "cascade" }),
+  created_at: timestamp("created_at").defaultNow().notNull(),
+  updated_at: timestamp("updated_at").defaultNow().notNull(),
+});
+
+// =====================
+// RELAÇÕES
+// =====================
+export const categoryRelations = relations(categoryTable, ({ many }) => ({
+  products: many(productTable),
+  banners: many(bannerTable),
+}));
 
 export const bannerRelations = relations(bannerTable, ({ one }) => ({
   category: one(categoryTable, {
-    fields: [bannerTable.categoryId],
+    fields: [bannerTable.category_id],
     references: [categoryTable.id],
   }),
-}))
+}));
 
+export const productRelations = relations(productTable, ({ one }) => ({
+  category: one(categoryTable, {
+    fields: [productTable.category_id],
+    references: [categoryTable.id],
+  }),
+}));
