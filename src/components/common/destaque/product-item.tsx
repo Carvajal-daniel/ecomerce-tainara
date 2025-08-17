@@ -15,7 +15,7 @@ const ProductItemDestaque = ({ products }: ProductItemProps) => {
       {products.map((product) => (
         <div 
           key={product.id} 
-          className="group bg-white rounded-xl p-3 flex flex-col items-center shadow-lg hover:shadow-xl transition-all duration-300 transform  border border-gray-100"
+          className="group bg-white rounded-xl p-2 flex flex-col items-center shadow-lg hover:shadow-xl transition-all duration-300 transform  border border-gray-100"
         >
           {/* Container da Imagem */}
           <div className="relative overflow-hidden rounded-lg bg-gradient-to-br from-gray-50 to-gray-100 w-full">
