@@ -66,7 +66,7 @@ const Products = async () => {
     return (
       <div className="container mx-auto px-4 py-4 md:mt-7">
         <div className=" w-full flex flex-col items-center ">
-          <h1 className="md:text-2xl text-xl font-medium text-gray-900 mb-1">
+          <h1 className="md:text-2xl text-lg font-medium text-gray-900 mb-1">
             Nossas Categorias
           </h1>
           <div className="h-[2px] w-40 bg-rose-300"></div>

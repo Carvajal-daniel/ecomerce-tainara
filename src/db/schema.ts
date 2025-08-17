@@ -113,6 +113,27 @@ export const productVariationTable = pgTable("product_variation", {
 });
 
 
+export const featuredTable = pgTable("featured", {
+  id: text("id").primaryKey(),
+  product_id: text("product_id")
+    .notNull()
+    .references(() => productTable.id, { onDelete: "cascade" }),
+  order: integer("order").default(0),
+  starts_at: timestamp("starts_at"),
+  ends_at: timestamp("ends_at"),
+  created_at: timestamp("created_at").defaultNow().notNull(),
+  updated_at: timestamp("updated_at").defaultNow().notNull(), // adicionar
+});
+
+
+export const featuredRelations = relations(featuredTable, ({ one }) => ({
+  product: one(productTable, {
+    fields: [featuredTable.product_id],
+    references: [productTable.id],
+  }),
+}));
+
+
 export const productVariationRelations = relations(productVariationTable, ({ one,  }) => ({
   product: one(productTable, {
     fields: [productVariationTable.product_id],
