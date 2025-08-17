@@ -45,7 +45,7 @@ const ProductItemDestaque = ({ products }: ProductItemProps) => {
             </div>
             
             {/* Botão */}
-            <button className="w-2/3 bg-[#e8968c] hover:bg-rose-400 hover:to-rose-400 text-[#fcf3f1] font-medium py-2 px-4 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-md text-sm">
+            <button className="w-2/3 bg-rose-400 mb-2 hover:bg-rose-400 hover:to-rose-400 text-[#fcf3f1] font-medium py-2 px-4 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-md text-sm">
               Ver Produto
             </button>
           </div>
