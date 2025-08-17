@@ -65,6 +65,7 @@ export const verification = pgTable("verification", {
 export const categoryTable = pgTable("category", {
   id: text("id").primaryKey(),
   name: text("name").notNull(),
+  imageUrl: text("imageUrl").notNull(),
   slug: text("slug").notNull().unique(),
   created_at: timestamp("created_at").defaultNow().notNull(),
   updated_at: timestamp("updated_at").defaultNow().notNull(),

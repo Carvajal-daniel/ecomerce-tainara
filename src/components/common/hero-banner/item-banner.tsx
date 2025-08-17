@@ -70,23 +70,34 @@ const ItemBanner = ({ banners }: ItemBannerProps) => {
         style={{ transform: `translateX(-${currentIndex * 100}%)` }}
       >
         {banners.map((banner) => (
-          <Link
-            key={banner.id}
-            href={`/categoria/${banner.slug}`}
-            className="flex-shrink-0 w-full"
-          >
-            <picture>
-              <source media="(max-width: 768px)" srcSet={banner.imageUrlMobile}  />
-              <Image
-                src={banner.imageUrlDesktop}
-                alt={banner.name}
-                width={1920}
-                height={600}
-                sizes="100vw"
-                className="w-full h-auto object-cover"
-              />
-            </picture>
-          </Link>
+        <Link
+  key={banner.id}
+  href={`/categoria/${banner.slug}`}
+  className="flex-shrink-0 w-full"
+>
+  {/* Mobile */}
+  <Image
+    src={banner.imageUrlMobile}
+    alt={banner.name}
+    width={768}
+    height={400}
+    sizes="100vw"
+    priority={currentIndex === 0}
+    className="w-full h-auto object-cover  lg:hidden"
+  />
+
+  {/* Desktop */}
+  <Image
+    src={banner.imageUrlDesktop}
+    alt={banner.name}
+    width={1920}
+    height={600}
+    sizes="100vw"
+    priority={currentIndex === 0}
+    className="w-full h-auto object-cover  hidden lg:block"
+  />
+</Link>
+
         ))}
       </div>
 
