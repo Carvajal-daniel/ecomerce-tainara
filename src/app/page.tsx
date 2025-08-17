@@ -1,5 +1,6 @@
 import Header from "@/components/common/header/header";
 import HeroBanner from "@/components/common/hero-banner/hero-banner";
+import Products from "@/components/common/products/productPage";
 
 export default function Home() {
   return (
@@ -10,6 +11,10 @@ export default function Home() {
   <main>
     <section>
       <HeroBanner/>
+    </section>
+
+    <section>
+      <Products/>
     </section>
   </main>
   </>

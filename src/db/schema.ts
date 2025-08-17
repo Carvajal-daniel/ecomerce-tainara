@@ -1,5 +1,5 @@
 import { relations } from "drizzle-orm";
-import { pgTable, text, timestamp, boolean } from "drizzle-orm/pg-core";
+import { pgTable, text, timestamp, boolean, integer } from "drizzle-orm/pg-core";
 
 // =====================
 // USERS
@@ -65,7 +65,7 @@ export const verification = pgTable("verification", {
 export const categoryTable = pgTable("category", {
   id: text("id").primaryKey(),
   name: text("name").notNull(),
-  slug: text("slug").notNull(),
+  slug: text("slug").notNull().unique(),
   created_at: timestamp("created_at").defaultNow().notNull(),
   updated_at: timestamp("updated_at").defaultNow().notNull(),
 });
@@ -79,7 +79,7 @@ export const bannerTable = pgTable("banner", {
   desktop_image: text("desktop_image").notNull(),
   mobile_image: text("mobile_image").notNull(),
   category_id: text("category_id").notNull().references(() => categoryTable.id, { onDelete: "cascade" }),
-  slug: text("slug").notNull(),
+  slug: text("slug").notNull().unique(),
   created_at: timestamp("created_at").defaultNow().notNull(),
   updated_at: timestamp("updated_at").defaultNow().notNull(),
 });
@@ -92,11 +92,32 @@ export const productTable = pgTable("product", {
   name: text("name").notNull(),
   description: text("description").notNull(),
   image: text("image").notNull(),
-  slug: text("slug").notNull(),
+  slug: text("slug").notNull().unique(),
   category_id: text("category_id").notNull().references(() => categoryTable.id, { onDelete: "cascade" }),
   created_at: timestamp("created_at").defaultNow().notNull(),
   updated_at: timestamp("updated_at").defaultNow().notNull(),
 });
+
+
+export const productVariationTable = pgTable("product_variation", {
+  id: text("id").primaryKey(),
+  name: text("name").notNull(),
+  price: integer("price").notNull(), // em centavos
+  product_id: text("product_id").notNull().references(() => productTable.id, { onDelete: "cascade" }),
+  slug: text("slug").notNull(),
+  color: text("color").notNull(),
+  image_url: text("image_url").notNull(),
+  created_at: timestamp("created_at").defaultNow().notNull(),
+  updated_at: timestamp("updated_at").defaultNow().notNull(),
+});
+
+
+export const productVariationRelations = relations(productVariationTable, ({ one,  }) => ({
+  product: one(productTable, {
+    fields: [productVariationTable.product_id],
+    references: [productTable.id],
+  }),
+}))
 
 // =====================
 // RELAÇÕES
@@ -104,7 +125,9 @@ export const productTable = pgTable("product", {
 export const categoryRelations = relations(categoryTable, ({ many }) => ({
   products: many(productTable),
   banners: many(bannerTable),
-}));
+}),
+
+);
 
 export const bannerRelations = relations(bannerTable, ({ one }) => ({
   category: one(categoryTable, {
@@ -113,9 +136,11 @@ export const bannerRelations = relations(bannerTable, ({ one }) => ({
   }),
 }));
 
-export const productRelations = relations(productTable, ({ one }) => ({
+export const productRelations = relations(productTable, ({ one,many }) => ({
   category: one(categoryTable, {
     fields: [productTable.category_id],
     references: [categoryTable.id],
   }),
+
+  variations: many(productVariationTable),
 }));
