@@ -31,7 +31,7 @@ const ProductsDestaque = async () => {
       
       <div className="relative container mx-auto px-4">
         {/* Header da seção */}
-        <div className="text-center mb-12">
+        <div className="text-center mb-9">
           <div className="inline-flex items-center space-x-3 mb-4">
             <div className="w-12 h-0.5 bg-gradient-to-r from-transparent to-red-500"></div>
             <span className="text-red-600 font-medium text-sm uppercase tracking-wider">
