@@ -37,11 +37,11 @@ const HeroBanner = async () => {
         <CreditCardIcon className="w-4 h-4 md:w-6 md:h-6" />
       </div>
       <div>
-        <h3 className="font-semibold text-gray-600 text-xs md:text-sm mb-0.5">
+        <h3 className="font-semibold text-gray-700 text-xs md:text-sm mb-0.5">
           Pagamento Flexível
         </h3>
         <p className="font-light text-gray-600 text-xs leading-tight">
-          Cartão de crédito ou PIX
+          Cartão ou PIX
         </p>
       </div>
     </div>
@@ -52,7 +52,7 @@ const HeroBanner = async () => {
         <PackageCheck className="w-4 h-4 md:w-6 md:h-6" />
       </div>
       <div>
-        <h3 className="font-semibold text-gray-600 text-xs md:text-sm mb-0.5">
+        <h3 className="font-semibold text-gray-700 text-xs md:text-sm mb-0.5">
           Entrega Rápida
         </h3>
         <p className="font-light text-gray-600 text-xs leading-tight">
@@ -67,7 +67,7 @@ const HeroBanner = async () => {
         <Truck className="w-4 h-4 md:w-6 md:h-6" />
       </div>
       <div>
-        <h3 className="font-semibold text-gray-600 text-xs md:text-sm mb-0.5">
+        <h3 className="font-semibold text-gray-700 text-xs md:text-sm mb-0.5">
           Nacional
         </h3>
         <p className="font-light text-gray-600 text-xs leading-tight">
