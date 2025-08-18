@@ -79,8 +79,8 @@ const ProductsLancamentos = async () => {
               </CarouselItem>
             ))}
           </CarouselContent>
-          <CarouselPrevious className="hidden md:flex bg-gradient-to-l from-rose-400 to-red-500 -left-8 text-white hover:bg-white border-gray-200 hover:border-red-300 p-5" />
-          <CarouselNext className="hidden md:flex text-white -right-14 p-5 bg-gradient-to-r from-rose-400 to-red-500 hover:bg-white border-gray-200 hover:border-red-300" />
+          <CarouselPrevious className=" md:flex text-black  md:-left-8 -left-3  hover:bg-white border-gray-200 hover:border-red-300 p-5" />
+          <CarouselNext className=" md:flex text-black md:-right-8 -right-3 p-5  hover:bg-white border-gray-200 hover:border-red-300" />
         </Carousel>
       </div>
     </section>

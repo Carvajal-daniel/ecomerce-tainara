@@ -29,7 +29,7 @@ const ProductItemDestaque = ({ products }: ProductItemProps) => {
             <img
               src={product.image || "/placeholder.jpg"}
               alt={product.name}
-              className="w-full h-[30rem] md:h-[35rem] lg:h-[28rem] sm:w-full sm:h-full object-cover transition-all duration-700 group-hover:scale-110 group/image:hover:brightness-110"
+              className="w-full h-[32rem] md:h-[35rem] lg:h-[28rem] sm:w-full sm:h-full object-cover transition-all duration-700 group-hover:scale-110 group/image:hover:brightness-110"
             />
 
             {/* Badges */}
