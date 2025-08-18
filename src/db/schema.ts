@@ -94,6 +94,7 @@ export const productTable = pgTable("product", {
   description: text("description").notNull(),
   image: text("image").notNull(),
   slug: text("slug").notNull().unique(),
+  is_active: boolean("is_active").default(false).notNull(),
   category_id: text("category_id").notNull().references(() => categoryTable.id, { onDelete: "cascade" }),
   created_at: timestamp("created_at").defaultNow().notNull(),
   updated_at: timestamp("updated_at").defaultNow().notNull(),
@@ -120,6 +121,9 @@ export const featuredTable = pgTable("featured", {
     .references(() => productTable.id, { onDelete: "cascade" }),
   order: integer("order").default(0),
   starts_at: timestamp("starts_at"),
+  is_offer: boolean("is_offer").default(false).notNull(),
+  is_new: boolean("is_new").default(false).notNull(),
+  is_featured: boolean("is_featured").default(false).notNull(),
   ends_at: timestamp("ends_at"),
   created_at: timestamp("created_at").defaultNow().notNull(),
   updated_at: timestamp("updated_at").defaultNow().notNull(), // adicionar

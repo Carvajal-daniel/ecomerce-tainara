@@ -1,53 +1,83 @@
 "use client";
 
+import Link from "next/link";
+
 interface ProductItemProps {
   products: {
     id: string;
     name: string;
     image: string;
     slug: string;
+    is_offer: boolean;
+    is_new: boolean;
   }[];
 }
 
 const ProductItemDestaque = ({ products }: ProductItemProps) => {
   return (
-    <div className="grid grid-cols-2 md:grid-cols-4 lg:w-7xl lg:mx-auto gap-4">
-      {products.map((product) => (
-        <div 
-          key={product.id} 
-          className="group bg-white rounded-xl p-2 flex flex-col items-center shadow-lg hover:shadow-xl transition-all duration-300 transform  border border-gray-100"
+    <div className="grid grid-cols-2 md:grid-cols-4 lg:w-7xl lg:mx-auto gap-6 p-4">
+      {products?.map((product) => (
+        <div
+          key={product.id}
+          className="group relative bg-white rounded-2xl p-2 flex flex-col items-center shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-1 border border-gray-100/50 overflow-hidden"
         >
           {/* Container da Imagem */}
-          <div className="relative overflow-hidden rounded-lg bg-gradient-to-br from-gray-50 to-gray-100 w-full">
+          <Link
+            href={`/produto/${product.slug}`}
+            className="relative overflow-hidden rounded-xl w-full group/image"
+          >
             <img
               src={product.image || "/placeholder.jpg"}
               alt={product.name}
-              className="w-full h-48 md:h-80 object-cover transition-transform duration-500 group-hover:scale-105"
+              className="w-full h-48 md:h-80 sm:h-72 object-cover transition-all duration-700 group-hover:scale-110 group/image:hover:brightness-110"
             />
-            
-            {/* Badge de destaque */}
-            <div className="absolute top-2 left-2 bg-gradient-to-r from-green-500 to-green-600 opacity-90 text-white text-xs font-bold px-2 py-1 rounded-full shadow-md">
-              OFERTA
+
+            {/* Badges */}
+            <div className="absolute top-3 left-3 flex flex-col gap-2 z-10">
+              {product.is_offer && (
+                <div className="bg-gradient-to-r from-emerald-500 via-green-500 to-emerald-600 text-white text-xs font-bold px-2 md:px-3 py-1.5 rounded-full shadow-md">
+                  OFERTA
+                </div>
+              )}
+              {product.is_new && (
+                <div className="bg-gradient-to-r from-rose-500 via-pink-500 to-rose-600 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-md">
+                  NOVO
+                </div>
+              )}
             </div>
-          </div>
-          
+
+            {/* Ícone de favorito */}
+            <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
+              <div className="w-8 h-8 bg-white/90 rounded-full flex items-center justify-center shadow-md hover:bg-white hover:scale-110 transition-all duration-300 cursor-pointer">
+                <svg
+                  className="w-4 h-4 text-gray-600 hover:text-rose-500 transition-colors duration-300"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                  />
+                </svg>
+              </div>
+            </div>
+          </Link>
+
           {/* Conteúdo do Card */}
-          <div className="flex flex-col items-center w-full mt-3 space-y-3">
-            {/* Nome do Produto */}
-            <h3 className="text-sm md:text-base font-light text-gray-800 text-center line-clamp-2  transition-colors duration-300">
+          <div className="flex flex-col items-center w-full mt-4 space-y-3 relative z-10">
+            <h3 className="text-sm md:text-base font-medium text-gray-800 text-center line-clamp-2 transition-colors duration-300 group-hover:text-gray-900 leading-relaxed">
               {product.name}
             </h3>
-            
-            {/* Preço */}
-            <div className="text-center">
-              <span className="text-xs text-gray-500 line-through block">R$ 399,90</span>
-              <span className="text-lg md:text-xl font-bold text-gray-700">R$ 299,90</span>
-            </div>
-            
+
             {/* Botão */}
-            <button className="w-2/3 bg-rose-400 mb-2 hover:bg-rose-400 hover:to-rose-400 text-[#fcf3f1] font-medium py-2 px-4 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-md text-sm">
-              Ver Produto
-            </button>
+            <Link href={`/produto/${product.slug}`}>
+              <button className="relative cursor-pointer overflow-hidden bg-gradient-to-r from-rose-400 via-rose-500 to-rose-600 hover:from-rose-500 hover:via-rose-600 hover:to-rose-700 text-white font-semibold py-2 px-4 rounded-xl transition-all duration-500 transform hover:scale-105 hover:shadow-xl shadow-md text-sm min-w-[140px]">
+                Ver Produto
+              </button>
+            </Link>
           </div>
         </div>
       ))}
