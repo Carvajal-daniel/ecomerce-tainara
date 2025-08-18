@@ -15,11 +15,11 @@ interface ProductItemProps {
 
 const ProductItemDestaque = ({ products }: ProductItemProps) => {
   return (
-    <div className="grid grid-cols-2 md:grid-cols-4 lg:w-7xl lg:mx-auto gap-6 p-4">
+    <div className="grid grid-cols-2 md:grid-cols-4 -mt-3 lg:w-7xl lg:mx-auto gap-6 p-1">
       {products?.map((product) => (
         <div
           key={product.id}
-          className="group relative bg-white rounded-2xl p-2 flex flex-col items-center shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-1 border border-gray-100/50 overflow-hidden"
+          className="group relative bg-white rounded-2xl md:p-2 p-1 flex flex-col items-center shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-1 border border-gray-100/50 overflow-hidden"
         >
           {/* Container da Imagem */}
           <Link
@@ -74,7 +74,7 @@ const ProductItemDestaque = ({ products }: ProductItemProps) => {
 
             {/* Botão */}
             <Link href={`/produto/${product.slug}`}>
-              <button className="relative cursor-pointer overflow-hidden bg-gradient-to-r from-rose-400 via-rose-500 to-rose-600 hover:from-rose-500 hover:via-rose-600 hover:to-rose-700 text-white font-semibold py-2 px-4 rounded-xl transition-all duration-500 transform hover:scale-105 hover:shadow-xl shadow-md text-sm min-w-[140px]">
+              <button className="relative cursor-pointer overflow-hidden bg-gradient-to-r from-rose-400 via-rose-500 to-rose-600 hover:from-rose-500 hover:via-rose-600 hover:to-rose-700 text-white font-semibold py-2 px-4 mb-1 rounded-xl transition-all duration-500 transform hover:scale-105 hover:shadow-xl shadow-md text-sm min-w-[140px]">
                 Ver Produto
               </button>
             </Link>

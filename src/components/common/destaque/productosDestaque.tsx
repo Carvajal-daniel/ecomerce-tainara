@@ -31,7 +31,7 @@ const ProductsLancamentos = async () => {
   }));
 
   return (
-    <section className="relative py-10 bg-gradient-to-br from-gray-50 via-white to-gray-50 overflow-hidden">
+    <section className="relative py-6 bg-gradient-to-br from-gray-50 via-white to-gray-50 overflow-hidden">
       {/* Background decorativo */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute top-20 left-10 w-72 h-72 bg-red-500 rounded-full blur-3xl"></div>
