@@ -2,6 +2,7 @@ import { db } from "@/db";
 import ProductItemDestaque from "./product-item";
 import { eq, is } from "drizzle-orm";
 import { featuredTable } from "@/db/schema";
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 
 // Componente que renderiza os lançamentos
 const ProductsLancamentos = async () => {
@@ -63,8 +64,24 @@ const ProductsLancamentos = async () => {
           </div>
         </div>
 
-        {/* Grid de produtos */}
-        <ProductItemDestaque products={productItems} />
+        {/* Carousel de produtos */}
+        <Carousel
+          opts={{
+            align: "start",
+            loop: true,
+          }}
+          className="w-full max-w-7xl mx-auto"
+        >
+          <CarouselContent className="">
+            {productItems.map((product) => (
+              <CarouselItem key={product.id} className="pl-2 md:pl-4  sm:basis-1/2 lg:basis-1/3 xl:basis-1/4">
+                <ProductItemDestaque products={[product]} />
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          <CarouselPrevious className="hidden md:flex bg-gradient-to-l from-rose-400 to-red-500 -left-8 text-white hover:bg-white border-gray-200 hover:border-red-300 p-5" />
+          <CarouselNext className="hidden md:flex text-white -right-14 p-5 bg-gradient-to-r from-rose-400 to-red-500 hover:bg-white border-gray-200 hover:border-red-300" />
+        </Carousel>
       </div>
     </section>
   );

@@ -15,7 +15,7 @@ interface ProductItemProps {
 
 const ProductItemDestaque = ({ products }: ProductItemProps) => {
   return (
-    <div className="grid grid-cols-2 md:grid-cols-4 -mt-3 lg:w-7xl lg:mx-auto gap-6 p-1">
+    <div className="grid sm:grid-col-2 md:grid-cols-4 -mt-3 lg:w-7xl lg:px-6 lg:mx-auto gap-6 p-1">
       {products?.map((product) => (
         <div
           key={product.id}
@@ -29,7 +29,7 @@ const ProductItemDestaque = ({ products }: ProductItemProps) => {
             <img
               src={product.image || "/placeholder.jpg"}
               alt={product.name}
-              className="w-full h-48 md:h-80 sm:h-72 object-cover transition-all duration-700 group-hover:scale-110 group/image:hover:brightness-110"
+              className="w-full h-[35rem] md:h-90 sm:w-full sm:h-full  object-cover transition-all duration-700 group-hover:scale-110 group/image:hover:brightness-110"
             />
 
             {/* Badges */}
@@ -39,11 +39,7 @@ const ProductItemDestaque = ({ products }: ProductItemProps) => {
                   OFERTA
                 </div>
               )}
-              {product.is_new && (
-                <div className="bg-gradient-to-r from-rose-500 via-pink-500 to-rose-600 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-md">
-                  NOVO
-                </div>
-              )}
+             
             </div>
 
             {/* Ícone de favorito */}
