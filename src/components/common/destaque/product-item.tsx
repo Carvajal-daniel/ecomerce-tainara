@@ -29,7 +29,7 @@ const ProductItemDestaque = ({ products }: ProductItemProps) => {
             <img
               src={product.image || "/placeholder.jpg"}
               alt={product.name}
-              className="w-full h-[35rem] md:h-90 sm:w-full sm:h-full  object-cover transition-all duration-700 group-hover:scale-110 group/image:hover:brightness-110"
+              className="w-full h-[30rem] md:h-[35rem] lg:h-[28rem] sm:w-full sm:h-full object-cover transition-all duration-700 group-hover:scale-110 group/image:hover:brightness-110"
             />
 
             {/* Badges */}
@@ -64,9 +64,10 @@ const ProductItemDestaque = ({ products }: ProductItemProps) => {
 
           {/* Conteúdo do Card */}
           <div className="flex flex-col items-center w-full mt-4 space-y-3 relative z-10">
-            <h3 className="text-sm md:text-base font-medium text-gray-800 text-center line-clamp-2 transition-colors duration-300 group-hover:text-gray-900 leading-relaxed">
-              {product.name}
-            </h3>
+         <p className="w-full text-sm md:text-base font-medium text-gray-800 text-center truncate transition-colors duration-300 group-hover:text-gray-900">
+  {product.name}
+</p>
+
 
             {/* Botão */}
             <Link href={`/produto/${product.slug}`}>
