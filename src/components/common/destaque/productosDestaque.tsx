@@ -70,11 +70,11 @@ const ProductsLancamentos = async () => {
             align: "start",
             loop: true,
           }}
-          className="w-full max-w-8xl mx-auto"
+          className="w-full max-w-7xl mx-auto"
         >
           <CarouselContent>
             {productItems.map((product) => (
-              <CarouselItem key={product.id} className="pl-3 md:pl-4 md:basis-4/1 sm:basis-1/2 lg:basis-1/3 xl:basis-1/4">
+              <CarouselItem key={product.id} className="pl-3 md:pl-4 basis-1/1 md:basis-4/1 sm:basis-1/2 lg:basis-1/3 xl:basis-1/4">
                 <ProductItemDestaque products={[product]} />
               </CarouselItem>
             ))}
