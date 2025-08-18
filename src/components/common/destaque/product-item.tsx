@@ -26,11 +26,12 @@ const ProductItemDestaque = ({ products }: ProductItemProps) => {
             href={`/produto/${product.slug}`}
             className="relative overflow-hidden rounded-xl w-full group/image"
           >
-            <img
-              src={product.image || "/placeholder.jpg"}
-              alt={product.name}
-              className="w-full h-[32rem] sm:h-[32rem] md:h-[35rem] lg:h-[28rem] sm:w-full object-cover transition-all duration-700 group-hover:scale-110 group/image:hover:brightness-110"
-            />
+          <img
+  src={product.image || "/placeholder.jpg"}
+  alt={product.name}
+  className="w-full aspect-[4/5] lg:aspect-[4/6] object-cover transition-transform duration-300 group-hover:scale-110 group-hover:brightness-110"
+/>
+
 
             {/* Badges */}
             <div className="absolute top-3 left-3 flex flex-col gap-2 z-10">
