@@ -10,13 +10,11 @@ export default function Home() {
     <Header/>
   </header>
   <main>
-
+  
 
     <section>
-      <Products/>
+      <ProductosDestaque/>
     </section>
-
-
   </main>
   </>
   );
