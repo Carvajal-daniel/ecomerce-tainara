@@ -61,6 +61,9 @@ const Products = async () => {
       image: c.imageUrl || "/placeholder.jpg",
     }));
 
+    console.log("Products renderizou no servidor em", new Date().toISOString());
+
+
     return (
       <div className="container mx-auto p-4 mt-4 md:mt-7">
         <div className="w-full flex flex-col items-center">
