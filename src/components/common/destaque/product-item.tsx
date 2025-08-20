@@ -20,7 +20,7 @@ const ProductItemDestaque = ({ products }: ProductItemProps) => {
       {products?.map((product) => (
         <div
           key={product.id}
-          className="group relative bg-white  rounded-2xl md:p-2 p-1 flex flex-col items-center shadow-lg  hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-1 border border-gray-200/80 overflow-hidden"
+          className="group relative bg-white  rounded-2xl md:p-2 p-1 flex flex-col items-center shadow-lg  hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-1 border border-gray-200/ overflow-hidden"
         >
           {/* Container da Imagem */}
           <Link
@@ -31,7 +31,7 @@ const ProductItemDestaque = ({ products }: ProductItemProps) => {
               src={product.image || "/placeholder.jpg"}
               alt={product.name}
               loading="lazy"
-              className="w-full h-[32rem] sm:h-[32rem] md:h-[30rem] lg:h-[26rem] object-cover transition-transform duration-500 ease-out group-hover:scale-110 "
+              className="w-full h-[32rem] sm:h-[26rem] md:h-[30rem] lg:h-[26rem] object-cover transition-transform duration-500 ease-out group-hover:scale-110 "
             />
 
             {/* Badges */}
@@ -86,7 +86,7 @@ const ProductItemDestaque = ({ products }: ProductItemProps) => {
 
             {/* Botão */}
             <Link href={`/produto/${product.slug}`}>
-              <button className="relative cursor-pointer overflow-hidden border text-gray-600  hover:from-rose-500 hover:via-rose-600 hover:to-rose-700  font-semibold py-3 px-20 mb-3 rounded-lg transition-all duration-500 transform hover:scale-105 hover:shadow-xl shadow-md text-sm min-w-[140px]">
+              <button className="relative cursor-pointer bg-gray-700 overflow-hidden border text-white  hover:from-rose-500 hover:via-rose-600 hover:to-rose-700  font-semibold py-3 px-20 mb-3 rounded-lg transition-all duration-500 transform hover:scale-105 hover:shadow-xl shadow-md text-sm min-w-[140px]">
                 Ver Produto
               </button>
             </Link>
