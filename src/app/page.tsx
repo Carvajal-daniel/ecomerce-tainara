@@ -10,7 +10,13 @@ export default function Home() {
     <Header/>
   </header>
   <main>
-  
+    <section>
+      <HeroBanner/>
+    </section>
+
+    <section>
+      <Products/>
+    </section>
 
     <section>
       <ProductosDestaque/>
