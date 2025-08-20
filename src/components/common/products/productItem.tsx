@@ -1,4 +1,5 @@
 "use client";
+
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import {
@@ -42,11 +43,7 @@ const ProductItem = ({ categories }: CategoryItemProps) => {
 
   return (
     <div className="w-full max-w-7xl mx-auto">
-      <Carousel
-        opts={{ align: "start", loop: false }}
-        setApi={setApi}
-        className="w-full"
-      >
+      <Carousel opts={{ align: "start", loop: false }} setApi={setApi} className="w-full">
         <CarouselContent className="-ml-2 md:-ml-4 py-2">
           {categories.map((category) => (
             <CarouselItem
@@ -80,9 +77,7 @@ const ProductItem = ({ categories }: CategoryItemProps) => {
           <button
             key={index}
             onClick={() => api?.scrollTo(index)}
-            className={`w-2 h-2 rounded-full transition ${
-              index === current ? "bg-black" : "bg-gray-300"
-            }`}
+            className={`w-2 h-2 rounded-full transition ${index === current ? "bg-black" : "bg-gray-300"}`}
           />
         ))}
       </div>

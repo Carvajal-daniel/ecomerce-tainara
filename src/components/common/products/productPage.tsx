@@ -1,20 +1,19 @@
 import { db } from "@/db";
-import React from "react";
-import ProductItem from "./product-item";
+import ProductItem from "./productItem";
 
-// Type definitions para categorias
+export const revalidate = 10; // Revalida a cada 10 segundos no deploy
+
 interface DatabaseCategory {
   id: string;
   name: string;
   slug: string;
-  imageUrl: string; // 👈 ajuste aqui
+  imageUrl: string;
   created_at?: Date;
   updated_at?: Date;
 }
 
 const Products = async () => {
   try {
-    // Busca categorias do banco
     const categories = await db.query.categoryTable.findMany({
       columns: {
         id: true,
@@ -55,7 +54,6 @@ const Products = async () => {
       );
     }
 
-    // Mapeia dados tratados
     const categoriesItems = categories.map((c: DatabaseCategory) => ({
       id: c.id,
       name: c.name || "Categoria sem nome",
@@ -65,7 +63,7 @@ const Products = async () => {
 
     return (
       <div className="container mx-auto p-4 mt-4 md:mt-7">
-        <div className=" w-full flex flex-col items-center ">
+        <div className="w-full flex flex-col items-center">
           <h1 className="text-xl font-medium text-gray-900 mb-1">
             Nossas Categorias
           </h1>

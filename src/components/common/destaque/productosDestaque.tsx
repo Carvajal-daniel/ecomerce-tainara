@@ -4,6 +4,9 @@ import { eq, is } from "drizzle-orm";
 import { featuredTable } from "@/db/schema";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 
+
+export const revalidate = 10;
+
 // Componente que renderiza os lançamentos
 const ProductsLancamentos = async () => {
   // Busca apenas produtos marcados como lançamento

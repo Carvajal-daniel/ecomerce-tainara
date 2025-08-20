@@ -1,7 +1,10 @@
-// HeroBanner.tsx
+
 import { db } from "@/db";
 import ItemBanner from "./item-banner";
 import { CreditCardIcon, PackageCheck, Truck } from "lucide-react";
+
+
+export const revalidate= 10
 
 const HeroBanner = async () => {
   const bannersFromDb = await db.query.bannerTable.findMany();
