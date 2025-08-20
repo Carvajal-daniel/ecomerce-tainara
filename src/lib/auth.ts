@@ -29,4 +29,5 @@ export const auth = betterAuth({
   verification: {
     modelName: "verification",
   },
+  
 });

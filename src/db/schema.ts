@@ -8,11 +8,15 @@ export const user = pgTable("user", {
   id: text("id").primaryKey(),
   name: text("name").notNull(),
   email: text("email").notNull().unique(),
-  email_verified: boolean("email_verified").default(false).notNull(),
+  emailVerified: boolean("email_verified")
+  .$defaultFn(() => false)
+  .notNull(),
+
   image: text("image"),
-  created_at: timestamp("created_at").defaultNow().notNull(),
-  updated_at: timestamp("updated_at").defaultNow().notNull(),
+  createdAt: timestamp("created_at").$defaultFn(() => new Date()).notNull(),
+  updatedAt: timestamp("updated_at").$defaultFn(() => new Date()).notNull(),
 });
+
 
 // =====================
 // SESSIONS
@@ -20,12 +24,12 @@ export const user = pgTable("user", {
 export const session = pgTable("session", {
   id: text("id").primaryKey(),
   token: text("token").notNull().unique(),
-  expires_at: timestamp("expires_at").notNull(),
-  ip_address: text("ip_address"),
-  user_agent: text("user_agent"),
-  user_id: text("user_id").notNull().references(() => user.id, { onDelete: "cascade" }),
-  created_at: timestamp("created_at").defaultNow().notNull(),
-  updated_at: timestamp("updated_at").defaultNow().notNull(),
+  userId: text("userId").notNull().references(() => user.id, { onDelete: "cascade" }),
+  expiresAt: timestamp("expiresAt").notNull(), // timestamp verdadeiro
+  ipAddress: text("ipAddress"),
+  userAgent: text("userAgent"),
+  createdAt: timestamp("createdAt").$defaultFn(() => new Date()).notNull(),
+  updatedAt: timestamp("updatedAt").$defaultFn(() => new Date()).notNull(),
 });
 
 // =====================
@@ -33,19 +37,20 @@ export const session = pgTable("session", {
 // =====================
 export const account = pgTable("account", {
   id: text("id").primaryKey(),
-  account_id: text("account_id").notNull(),
-  provider_id: text("provider_id").notNull(),
-  user_id: text("user_id").notNull().references(() => user.id, { onDelete: "cascade" }),
-  access_token: text("access_token"),
-  refresh_token: text("refresh_token"),
-  id_token: text("id_token"),
-  access_token_expires_at: timestamp("access_token_expires_at"),
-  refresh_token_expires_at: timestamp("refresh_token_expires_at"),
+ accountId: text("account_id").notNull(),
+  providerId: text("provider_id").notNull(),
+  userId: text("user_id").notNull().references(() => user.id, { onDelete: "cascade" }),
+  accessToken: text("access_token"),
+  refreshToken: text("refresh_token"),
+  idToken: text("id_token"),
+  accessTokenExpiresAt: timestamp("access_token_expires_at"),
+  refreshTokenExpiresAt: timestamp("refresh_token_expires_at"),
   scope: text("scope"),
   password: text("password"),
-  created_at: timestamp("created_at").defaultNow().notNull(),
-  updated_at: timestamp("updated_at").defaultNow().notNull(),
+  createdAt: timestamp("created_at").$defaultFn(() => new Date()).notNull(),
+  updatedAt: timestamp("updated_at").$defaultFn(() => new Date()).notNull(),
 });
+
 
 // =====================
 // VERIFICATIONS
