@@ -18,7 +18,7 @@ export default function AuthScreen() {
       <div className="w-full max-w-md px-5 -mt-14 relative z-10  ">
       
         <div className="text-center mb-6">
-          <div className="inline-flex items-center justify-center w-14 h-14 bg-gradient-to-br from-pink-400 to-rose-500 rounded-3xl mb-4 shadow-lg shadow-pink-200/50">
+          <div className="inline-flex items-center justify-center w-14 h-14 bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-600 text-white rounded-3xl mb-4 shadow-lg shadow-pink-200/50">
             <Heart className="w-6 h-6 text-white" />
           </div>
           <h1 className="text-2xl font-light text-slate-800 mb-1 tracking-wide">

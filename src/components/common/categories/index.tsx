@@ -1,5 +1,5 @@
 import { db } from "@/db";
-import ProductItem from "./productItem";
+import CategoryItem from "./Categories-Item";
 
 export const revalidate = 10; // Revalida a cada 10 segundos no deploy
 
@@ -73,7 +73,7 @@ const Products = async () => {
           <div className="h-[2px] w-40 bg-rose-300"></div>
         </div>
 
-        <ProductItem categories={categoriesItems} />
+        <CategoryItem categories={categoriesItems} />
       </div>
     );
   } catch (error) {

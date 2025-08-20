@@ -134,7 +134,7 @@ export default function SignInForm() {
         <Button
           type="submit"
           disabled={isLoading}
-          className={`w-full bg-rose-400  text-white py-3 px-4 rounded-2xl font-medium hover:from-pink-600 hover:to-rose-600 transform hover:scale-[1.02] transition-all duration-300 shadow-lg shadow-pink-200/40 hover:shadow-xl hover:shadow-pink-300/50 flex items-center justify-center gap-2 group mt-5 ${
+          className={`w-full bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-600 text-white md:py-6 py-5 px-4 rounded-2xl font-medium  transform hover:scale-[1.02] transition-all duration-300 shadow-lg shadow-gray-400/40  hover:shadow-gray-600/50 flex items-center justify-center gap-2 group mt-5 ${
             isLoading ? "cursor-not-allowed opacity-70" : ""
           }`}
         >

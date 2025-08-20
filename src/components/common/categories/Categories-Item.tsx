@@ -20,7 +20,7 @@ interface CategoryItemProps {
   }[];
 }
 
-const ProductItem = ({ categories }: CategoryItemProps) => {
+const CategoryItem = ({ categories }: CategoryItemProps) => {
   const [api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
   const [count, setCount] = useState(0);
@@ -42,7 +42,7 @@ const ProductItem = ({ categories }: CategoryItemProps) => {
   }, [api]);
 
   return (
-    <div className="w-full max-w-7xl mx-auto">
+    <div className="w-full max-w-5xl mx-auto">
       <Carousel opts={{ align: "start", loop: false }} setApi={setApi} className="w-full">
         <CarouselContent className="-ml-2 md:-ml-4 py-2">
           {categories.map((category) => (
@@ -85,4 +85,4 @@ const ProductItem = ({ categories }: CategoryItemProps) => {
   );
 };
 
-export default ProductItem;
+export default CategoryItem;
