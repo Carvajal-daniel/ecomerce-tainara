@@ -47,7 +47,7 @@ const MobileHeader = () => {
           <div className="grid grid-cols-2 gap-3">
             <Link
               href={session?.user ? "/minha-conta" : "/authentication"}
-              className="flex items-center justify-center gap-2 px-4  text-white bg-rose-400 rounded-lg transition-colors shadow-sm"
+              className="flex items-center justify-center gap-2 px-4  text-white bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-600 rounded-lg transition-colors shadow-sm"
             >
               <User className="w-4 h-4" />
               <span className="text-sm font-medium">
@@ -98,7 +98,7 @@ const MobileHeader = () => {
             </Link>
             <Link
               href="/ofertas"
-              className="block text-white hover:text-pink-100 font-semibold py-1 px-3 rounded-lg bg-rose-400 hover:bg-pink-600 transition-colors shadow-sm"
+              className="block text-white hover:text-pink-100 font-semibold py-1 px-3 rounded-lg bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-600 hover:bg-pink-600 transition-colors shadow-sm"
             >
               Ofertas
               🔥

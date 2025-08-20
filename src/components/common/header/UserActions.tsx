@@ -81,8 +81,8 @@ const UserActions = ({ mobile }: UserActionsProps) => {
           asChild
           className="w-full bg-primary hover:bg-primary/90 text-white font-medium py-2 rounded-lg transition-colors"
         >
-          <Link href="/authentication" className="flex items-center justify-center gap-2">
-            <LogInIcon className="w-5 h-5" />
+          <Link href="/authentication" className="flex items-center  justify-center gap-2">
+            <LogInIcon className="w-50 h-5" />
             Entrar
           </Link>
         </Button>
@@ -95,7 +95,7 @@ const UserActions = ({ mobile }: UserActionsProps) => {
       asChild
       variant="outline"
       size="sm"
-      className="text-gray-600 hover:text-gray-800 hover:bg-gray-50 border-gray-300"
+      className="text-gray-600 py-5 hover:text-gray-800 hover:bg-gray-50 border-gray-300"
     >
       <Link href="/authentication" className="flex items-center gap-2">
         <LogInIcon className="w-4 h-4" />
