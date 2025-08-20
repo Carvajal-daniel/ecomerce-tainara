@@ -26,10 +26,10 @@ const ProductItemDestaque = ({ products }: ProductItemProps) => {
             href={`/produto/${product.slug}`}
             className="relative overflow-hidden rounded-xl w-full group/image"
           >
-          <img
+     <img
   src={product.image || "/placeholder.jpg"}
   alt={product.name}
-  className="w-full aspect-[4/5] lg:aspect-[4/6] object-cover transition-transform duration-300 group-hover:scale-110 group-hover:brightness-110"
+  className="w-full h-[32rem] sm:h-[32rem] md:h-[35rem] lg:h-[24rem] object-cover transition-transform duration-500 ease-out group-hover:scale-110 "
 />
 
 
