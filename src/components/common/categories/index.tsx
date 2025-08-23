@@ -12,7 +12,7 @@ interface DatabaseCategory {
   updated_at?: Date;
 }
 
-const Products = async () => {
+const CategoryProducts = async () => {
   try {
     const categories = await db.query.categoryTable.findMany({
       columns: {
@@ -107,4 +107,4 @@ const Products = async () => {
   }
 };
 
-export default Products;
+export default CategoryProducts;

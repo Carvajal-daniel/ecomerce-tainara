@@ -1,9 +1,8 @@
 // src/db/seed.ts
-import { seedProducts } from "./seed-products";
+import { seedProductsCalcas } from "./seed-products";
 
 const runSeed = async () => {
-  await seedProducts();
-  process.exit(0);
+  await seedProductsCalcas();
 };
 
 runSeed();

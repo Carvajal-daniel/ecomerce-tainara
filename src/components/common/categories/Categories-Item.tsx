@@ -59,7 +59,7 @@ const CategoryItem = ({ categories }: CategoryItemProps) => {
                       className="object-cover"
                     />
                   </div>
-                  <h2 className="mt-1 md:mt-2 text-sm font-light text-center">
+                  <h2 className="mt-1 md:mt-2 text-md font-medium text-center">
                     {category.name}
                   </h2>
                 </Link>

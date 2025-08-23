@@ -52,36 +52,30 @@ async function fetchNewProducts() {
 
 // Componente para o cabeçalho da seção
 const SectionHeader = () => (
-  <div className="text-center mb-9">
-    <div className="inline-flex items-center space-x-3 mb-4">
-      <div className="w-12 h-0.5 bg-gradient-to-r from-transparent to-red-500" />
-      <span className="text-red-600 font-medium text-sm uppercase tracking-wider">
+  <div className="mb-10">
+    <div className="flex items-center gap-3 mb-2">
+      <div className="w-1 h-8 bg-gradient-to-b from-purple-500 to-purple-600 rounded-full"></div>
+      <h1 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">
         Lançamentos
-      </span>
-      <div className="w-12 h-0.5 bg-gradient-to-l from-transparent to-red-500" />
+      </h1>
     </div>
-
-    <h1 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-gray-800 via-gray-900 to-gray-800 bg-clip-text text-transparent mb-2">
-      Novidades para elas!
-    </h1>
-
-    <p className="text-gray-600 max-w-2xl mx-auto md:text-lg leading-relaxed">
-      Encontre o estilo perfeito para você.
-    </p>
-
-    {/* Linha decorativa */}
-    <div className="flex justify-center mt-5">
-      <div className="w-24 h-1 bg-gradient-to-r from-red-500 to-red-600 rounded-full" />
+    <div className="flex items-center gap-2 mb-4">
+      <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200">
+        <svg className="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+          <path fillRule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clipRule="evenodd" />
+        </svg>
+        Novidades
+      </span>
+      <p className="text-gray-600 dark:text-gray-400 text-sm">
+        Novidades para elas! Encontre o estilo perfeito para você.
+      </p>
     </div>
   </div>
 );
 
 // Componente para o background decorativo
 const DecorativeBackground = () => (
-  <div className="absolute inset-0 opacity-5 pointer-events-none">
-    <div className="absolute top-20 left-10 w-72 h-72 bg-red-500 rounded-full blur-3xl" />
-    <div className="absolute bottom-20 right-10 w-96 h-96 bg-blue-500 rounded-full blur-3xl" />
-  </div>
+  <div className="absolute inset-0 bg-gradient-to-r from-purple-50 via-transparent to-purple-50 dark:from-purple-950 dark:to-purple-950 rounded-2xl opacity-50 pointer-events-none"></div>
 );
 
 // Componente principal
@@ -94,19 +88,19 @@ const ProductsLancamentos = async () => {
   }
 
   return (
-    <section className="relative py-6 bg-gradient-to-br from-gray-50 via-white to-gray-50 overflow-hidden">
-      <DecorativeBackground />
+    <section className="my-12 max-w-[93rem] mx-auto px-4 lg:px-1">
+      <SectionHeader />
 
-      <div className="relative container mx-auto px-4">
-        <SectionHeader />
-
+      <div className="relative">
+        <DecorativeBackground />
+        
         {/* Carousel de produtos */}
         <Carousel
           opts={{
             align: "start",
             loop: true,
           }}
-          className="w-full max-w-8xl mx-auto"
+          className="w-full"
         >
           <CarouselContent className="md:mx-3 py-2">
             {productItems.map((product) => (
@@ -119,8 +113,8 @@ const ProductsLancamentos = async () => {
             ))}
           </CarouselContent>
 
-          <CarouselPrevious className="md:flex text-black md:-left-8 -left-3 hover:bg-white border-gray-200 hover:border-red-300 p-5" />
-          <CarouselNext className="md:flex text-black md:-right-8 -right-3 p-5 hover:bg-white border-gray-200 hover:border-red-300" />
+          <CarouselPrevious className="md:flex text-black md:-left-8 -left-3 hover:bg-white border-gray-200 hover:border-purple-300 p-5 transition-all duration-200 hover:shadow-lg" />
+          <CarouselNext className="md:flex text-black md:-right-8 -right-3 p-5 hover:bg-white border-gray-200 hover:border-purple-300 transition-all duration-200 hover:shadow-lg" />
         </Carousel>
       </div>
     </section>
