@@ -73,7 +73,7 @@ const ProductClient: React.FC<Props> = ({ product, feature }) => {
               />
               {hasOffer && (
                 <div className="absolute m-4">
-                  <span className="inline-block bg-rose-600 text-white px-3 py-1 rounded-full text-xs font-semibold shadow">
+                  <span className="inline-block bg-rose-600 text-white px-3 py-1 rounded-full text-xs font-semibold shadow ">
                     Oferta -{offerPercent}%
                   </span>
                 </div>

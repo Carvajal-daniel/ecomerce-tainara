@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 
 interface ProductItemProps {
@@ -15,23 +16,25 @@ interface ProductItemProps {
 
 const ProductItemDestaque = ({ products }: ProductItemProps) => {
   return (
-  <div className="grid sm:grid-cols-1 lg:grid-cols-1 md:grid-cols-4 md:gap-4 p-1 mx-auto lg:max-w-7xl">
+  <div className="grid sm:grid-cols-1 lg:grid-cols-1md:grid-cols-4 md:gap-4 p-1 ">
 
       {products?.map((product) => (
         <div
           key={product.id}
-          className="group relative lg:w-[22rem] bg-white rounded-2xl md:p-2 p-1 flex flex-col items-center shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-1 border border-gray-200/ overflow-hidden"
+          className="group relative lg:w-[22rem] bg-white rounded-2xl md:p-1 p-1 flex flex-col items-center shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-1 border border-gray-200/ overflow-hidden"
         >
           {/* Container da Imagem */}
           <Link
             href={`/produto/${product.slug}`}
               className="relative overflow-hidden rounded-lg w-full group/image "
           >
-            <img
+            <Image
+            width={400}
+            height={400}
               src={product.image || "/placeholder.jpg"}
               alt={product.name}
               loading="lazy"
-              className="w-full h-[28rem] sm:h-[24rem] md:h-[30rem] lg:w-[40rem] lg:h-[24rem] object-cover transition-transform duration-500 ease-out group-hover:scale-110 "
+              className="w-full max-h-[34rem] h-full sm:h-[24rem] md:h-[30rem] lg:w-[40rem] lg:h-[30rem] object-cover transition-transform duration-500 ease-out group-hover:scale-110 "
             />
 
             {/* Badges */}

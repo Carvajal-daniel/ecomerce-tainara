@@ -52,7 +52,7 @@ async function fetchNewProducts() {
 
 // Componente para o cabeçalho da seção
 const SectionHeader = () => (
-  <div className="mb-10">
+  <div className="mb-10 ">
     <div className="flex items-center gap-3 mb-2">
       <div className="w-1 h-8 bg-gradient-to-b from-purple-500 to-purple-600 rounded-full"></div>
       <h1 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">
@@ -88,13 +88,12 @@ const ProductsLancamentos = async () => {
   }
 
   return (
-    <section className="my-12 max-w-[93rem] mx-auto px-4 lg:px-1">
+    <section className="my-12 bg-gray-50 mx-auto px-4 lg:px-[41rem] py-6 ">
       <SectionHeader />
 
       <div className="relative">
         <DecorativeBackground />
         
-        {/* Carousel de produtos */}
         <Carousel
           opts={{
             align: "start",
@@ -102,7 +101,7 @@ const ProductsLancamentos = async () => {
           }}
           className="w-full"
         >
-          <CarouselContent className="md:mx-3 py-2">
+          <CarouselContent className=" py-2">
             {productItems.map((product) => (
               <CarouselItem 
                 key={product.id} 

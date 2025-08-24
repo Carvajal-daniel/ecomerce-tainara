@@ -2,6 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 interface ProductOfferProps {
   productOffer: {
@@ -41,7 +42,7 @@ const ProductOfferPage = ({ productOffer }: ProductOfferProps) => {
               {/* Badge de Oferta */}
               {item.is_offer && (
                 <div className="absolute top-2 left-2 md:left-4 md:top-4 z-10">
-                  <span className="bg-gradient-to-r from-red-500 to-pink-500 text-white text-xs font-bold px-1 py-1.5 rounded-full shadow-lg animate-pulse">
+                  <span className="bg-gradient-to-r from-red-500 to-pink-500 text-white text-[8px] md:text-xs font-bold px-2 py-1.5 rounded-full shadow-lg animate-pulse">
                     🔥 OFERTA
                   </span>
                 </div>
@@ -49,9 +50,11 @@ const ProductOfferPage = ({ productOffer }: ProductOfferProps) => {
 
               {/* Container da Imagem */}
               <div className="relative overflow-hidden bg-gray-50">
-                <img
+                <Image
                   src={image}
                   alt={item.product.name}
+                  width={400}
+                  height={400}
                   className="w-full h-[15rem] lg:h-[22rem] object-cover  group-hover:scale-110 transition-transform duration-500 ease-out"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>

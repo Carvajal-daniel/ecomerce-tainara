@@ -10,6 +10,7 @@ import {
   CarouselPrevious,
   type CarouselApi,
 } from "@/components/ui/carousel";
+import Image from "next/image";
 
 interface CategoryItemProps {
   categories: {
@@ -53,7 +54,10 @@ const CategoryItem = ({ categories }: CategoryItemProps) => {
               <div className="bg-white p-2 rounded-lg hover:shadow-md transition flex flex-col">
                 <Link href={`/categories/${category.slug}`}>
                   <div className="w-30 h-30 md:w-36 md:h-36 aspect-square overflow-hidden rounded-lg">
-                    <img
+                    <Image
+                      width={200}
+                      height={200}
+                      sizes="100vw"
                       src={category.image || "/placeholder.jpg"}
                       alt={category.name}
                       className="object-cover"
