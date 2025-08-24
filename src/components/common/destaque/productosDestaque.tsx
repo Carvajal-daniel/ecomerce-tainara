@@ -74,9 +74,6 @@ const SectionHeader = () => (
 );
 
 // Componente para o background decorativo
-const DecorativeBackground = () => (
-  <div className="absolute inset-0 bg-gradient-to-r from-purple-50 via-transparent to-purple-50 dark:from-purple-950 dark:to-purple-950 rounded-2xl opacity-50 pointer-events-none"></div>
-);
 
 // Componente principal
 const ProductsLancamentos = async () => {
@@ -91,8 +88,7 @@ const ProductsLancamentos = async () => {
     <section className="my-12 bg-gray-50 mx-auto px-4 lg:px-[41rem] py-6 ">
       <SectionHeader />
 
-      <div className="relative">
-        <DecorativeBackground />
+      <div className="relative ">
         
         <Carousel
           opts={{

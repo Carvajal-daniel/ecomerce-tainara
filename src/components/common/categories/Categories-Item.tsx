@@ -43,7 +43,7 @@ const CategoryItem = ({ categories }: CategoryItemProps) => {
   }, [api]);
 
   return (
-    <div className="w-full max-w-5xl mx-auto">
+    <div className="w-full max-w-7xl mx-auto">
       <Carousel opts={{ align: "start", loop: false }} setApi={setApi} className="w-full">
         <CarouselContent className="-ml-2 md:-ml-4 py-2">
           {categories.map((category) => (
@@ -53,16 +53,7 @@ const CategoryItem = ({ categories }: CategoryItemProps) => {
             >
               <div className="bg-white p-2 rounded-lg hover:shadow-md transition flex flex-col">
                 <Link href={`/categories/${category.slug}`}>
-                  <div className="w-30 h-30 md:w-36 md:h-36 aspect-square overflow-hidden rounded-lg">
-                    <Image
-                      width={200}
-                      height={200}
-                      sizes="100vw"
-                      src={category.image || "/placeholder.jpg"}
-                      alt={category.name}
-                      className="object-cover"
-                    />
-                  </div>
+                  
                   <h2 className="mt-1 md:mt-2 text-md font-medium text-center">
                     {category.name}
                   </h2>

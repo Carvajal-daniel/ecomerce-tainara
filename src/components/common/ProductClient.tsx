@@ -97,7 +97,7 @@ const ProductClient: React.FC<Props> = ({ product, feature }) => {
             <div className="rounded-xl border border-slate-200 bg-white p-5">
               {hasOffer ? (
                 <div className="flex items-center gap-3">
-                  <span className="text-2xl font-bold text-slate-900">
+                  <span className="text-xl md:text-2xl font-bold text-slate-900">
                     R$ {formatBRL(finalUnitPrice)}
                   </span>
                   <span className="text-base line-through text-slate-400">
@@ -113,7 +113,7 @@ const ProductClient: React.FC<Props> = ({ product, feature }) => {
                 </span>
               )}
               <p className="text-sm text-slate-500 mt-2">
-                ou 12x de R$ {formatBRL(finalUnitPrice / 12)} sem juros
+                ou 6x de R$ {formatBRL(finalUnitPrice / 6)} sem juros
               </p>
             </div>
 

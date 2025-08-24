@@ -34,7 +34,7 @@ const ProductItemDestaque = ({ products }: ProductItemProps) => {
               src={product.image || "/placeholder.jpg"}
               alt={product.name}
               loading="lazy"
-              className="w-full max-h-[34rem] h-full sm:h-[24rem] md:h-[30rem] lg:w-[40rem] lg:h-[30rem] object-cover transition-transform duration-500 ease-out group-hover:scale-110 "
+              className="w-full max-h-[32rem] h-full sm:h-[24rem] md:h-[30rem] lg:w-[40rem] lg:h-[30rem] object-cover transition-transform duration-500 ease-out group-hover:scale-110 "
             />
 
             {/* Badges */}

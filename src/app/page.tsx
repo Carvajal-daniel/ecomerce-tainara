@@ -14,13 +14,11 @@ export default function Home() {
       <Header /> {/* Já é fixed dentro do componente */}
 
       <main > {/* Espaço para o Header não sobrepor conteúdo */}
+      
         <section>
           <HeroBanner />
         </section>
 
-        <section>
-          <CategoryProducts />
-        </section>
 
         <section>
           <ProductosDestaque />

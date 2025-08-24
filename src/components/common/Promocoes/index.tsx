@@ -19,6 +19,7 @@ const ProductsPromocoes = async () => {
     return null;
   }
 
+
   return (
     <section className="my-12 max-w-[93rem] mx-auto px-4 lg:px-6">
       <div className="mb-8">
@@ -43,7 +44,7 @@ const ProductsPromocoes = async () => {
       
       <div className="relative">
         <div className="absolute inset-0 bg-gradient-to-r from-red-50 via-transparent to-red-50 dark:from-red-950 dark:to-red-950 rounded-2xl opacity-50 pointer-events-none"></div>
-        <ProductOfferPage productOffer={productsOffer} />
+        <ProductOfferPage productOffer={productsOffer}  />
       </div>
     </section>
   );

@@ -65,14 +65,8 @@ const CategoryProducts = async () => {
 
 
     return (
-      <div className="container mx-auto p-4 mt-4 md:mt-7">
-        <div className="w-full flex flex-col items-center">
-          <h1 className="text-xl font-medium text-gray-900 mb-1">
-            Nossas Categorias
-          </h1>
-          <div className="h-[2px] w-40 bg-rose-300"></div>
-        </div>
-
+      <div className="container mx-auto p-4 mt-4 md:mt-8">
+        
         <CategoryItem categories={categoriesItems} />
       </div>
     );
@@ -80,7 +74,7 @@ const CategoryProducts = async () => {
     return (
       <div className="flex flex-col items-center justify-center p-12 bg-red-50 rounded-lg mx-2">
         <div className="text-center">
-          <div className="w-16 h-16 mx-auto mb-4 bg-red-200 rounded-full flex items-center justify-center">
+          <div className="w-10 h-16 mx-auto mb-4 bg-red-200 rounded-full flex items-center justify-center">
             <svg
               className="w-8 h-8 text-red-400"
               fill="none"

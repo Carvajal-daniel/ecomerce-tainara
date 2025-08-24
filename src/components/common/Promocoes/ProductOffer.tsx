@@ -8,6 +8,7 @@ interface ProductOfferProps {
   productOffer: {
     id: string;
     is_offer: boolean;
+    offer: number | null; // desconto em reais
     product: {
       id: string;
       name: string;
@@ -26,12 +27,23 @@ interface ProductOfferProps {
 
 const ProductOfferPage = ({ productOffer }: ProductOfferProps) => {
   return (
-    <div className="container mx-auto  sm:px-4 py-4">
-      <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2">
+    <div className="container mx-auto sm:px-4 py-4">
+      <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 sm:gap-4">
         {productOffer.map((item) => {
           const variation = item.product.variations[0];
           const price = variation ? variation.price / 100 : null;
           const image = variation?.image_url || item.product.image;
+
+          
+          const discountedPrice =
+            item.is_offer && item.offer && price
+              ? price - item.offer
+              : price;
+
+          const discountPercentage =
+            item.is_offer && item.offer && price
+              ? Math.round((item.offer / price) * 100)
+              : null;
 
           return (
             <Link
@@ -42,8 +54,8 @@ const ProductOfferPage = ({ productOffer }: ProductOfferProps) => {
               {/* Badge de Oferta */}
               {item.is_offer && (
                 <div className="absolute top-2 left-2 md:left-4 md:top-4 z-10">
-                  <span className="bg-gradient-to-r from-red-500 to-pink-500 text-white text-[8px] md:text-xs font-bold px-2 py-1.5 rounded-full shadow-lg animate-pulse">
-                    🔥 OFERTA
+                  <span className="bg-gradient-to-r from-red-500 to-pink-500 text-white text-[8px] md:text-xs font-bold px-2 py-1.5 rounded-full shadow-lg ">
+                    🔥 {discountPercentage ? `${discountPercentage}% OFF` : "OFERTA"}
                   </span>
                 </div>
               )}
@@ -55,42 +67,42 @@ const ProductOfferPage = ({ productOffer }: ProductOfferProps) => {
                   alt={item.product.name}
                   width={400}
                   height={400}
-                  className="w-full h-[15rem] lg:h-[22rem] object-cover  group-hover:scale-110 transition-transform duration-500 ease-out"
+                  className="w-full h-[15rem] lg:h-[22rem] object-cover group-hover:scale-110 transition-transform duration-500 ease-out"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               </div>
 
               {/* Conteúdo do Card */}
-              <div className="p-4 space-y-2">
-                <h3 className="text-sm lg:text-lg font-bold text-gray-600 transition-colors duration-200 line-clamp-1">
+              <div className="p-4 space-y-2 flex flex-col items-center">
+                <h3 className="text-sm lg:text-lg font-light text-gray-800 transition-colors duration-200 line-clamp-1">
                   {item.product.name}
                 </h3>
 
                 {/* Preço */}
                 {price && (
-                  <div className="flex items-center justify-between pt-1 border-t border-gray-100">
-                    <div className="flex flex-col">
-                      <span className="text-md md:text-xl font-extrabold text-green-600">
-                        R$ {price.toFixed(2)}
-                      </span>
-                      {item.is_offer && (
-                        <span className="text-xs text-gray-500 line-through">
-                          R$ {(price * 1.3).toFixed(2)}
+                  <div className="flex flex-col pt-1 border-t border-gray-100 w-full">
+                    <div className="flex flex-col items-center lg:flex-row md:gap-5 lg:justify-center ">
+                      {item.is_offer && discountedPrice !== price ? (
+                        <>
+                          <span className="text-sm md:text-lg text-gray-400 line-through">
+                            R$ {price.toFixed(2)}
+                          </span>
+                          <span className="text-md md:text-lg font-semibold text-green-600">
+                            R$ {discountedPrice?.toFixed(2)}
+                          </span>
+                        </>
+                      ) : (
+                        <span className="text-md md:text-xl font-extrabold text-gray-800">
+                          R$ {price.toFixed(2)}
                         </span>
                       )}
-                    </div>
-                    
-                    <div className="bg-blue-500 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-2 group-hover:translate-x-0">
-                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                      </svg>
                     </div>
                   </div>
                 )}
               </div>
 
               {/* Efeito de hover no border */}
-              <div className="absolute inset-0 rounded-2xl border-2 border-transparent  transition-colors duration-300 pointer-events-none"></div>
+              <div className="absolute inset-0 rounded-2xl border-2 border-transparent transition-colors duration-300 pointer-events-none"></div>
             </Link>
           );
         })}
