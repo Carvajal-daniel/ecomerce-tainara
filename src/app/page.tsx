@@ -1,37 +1,37 @@
 import CategoryProducts from "@/components/common/categories";
 import ProductosDestaque from "@/components/common/destaque/productosDestaque";
+import Footer from "@/components/common/footer/footer";
 import Header from "@/components/common/header/header";
 import HeroBanner from "@/components/common/hero-banner/hero-banner";
 import ProductsPromocoes from "@/components/common/Promocoes";
 
-// app/page.tsx
-export const revalidate = 10; // ou 0 se quiser sempre SSR
+
+export const revalidate = 10;
 
 export default function Home() {
-
-
   return (
-  <>
-  <header>
-    <Header/>
-  </header>
-  <main>
-    <section>
-      <HeroBanner/>
-    </section>
+    <>
+      <Header /> {/* Já é fixed dentro do componente */}
 
-    <section>
-      <CategoryProducts/>
-    </section>
+      <main > {/* Espaço para o Header não sobrepor conteúdo */}
+        <section>
+          <HeroBanner />
+        </section>
 
-    <section>
-      <ProductosDestaque/>
-    </section>
+        <section>
+          <CategoryProducts />
+        </section>
 
-    <section>
-      <ProductsPromocoes/>
-    </section>
-  </main>
-  </>
+        <section>
+          <ProductosDestaque />
+        </section>
+
+        <section>
+          <ProductsPromocoes />
+        </section>
+
+        <Footer />
+      </main>
+    </>
   );
 }

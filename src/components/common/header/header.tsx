@@ -6,7 +6,7 @@ import MobileHeader from "./MobileHeader";
 
 const Header = () => {
   return (
-    <header className="bg-white z-10 border-b  border-gray-200 shadow-md  py-3 md:py-5 px-3.5">
+    <header className="bg-white sticky top-0 z-10 border-b  border-gray-200 shadow-md py-3 md:py-5 px-3.5">
       <div className="flex items-center justify-between max-w-[100rem] mx-auto">
     
         <Link href="/" className="group">

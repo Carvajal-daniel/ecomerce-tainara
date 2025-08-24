@@ -112,6 +112,7 @@ export const productVariationTable = pgTable("product_variation", {
   price: integer("price").notNull(), // em centavos
   product_id: text("product_id").notNull().references(() => productTable.id, { onDelete: "cascade" }),
   slug: text("slug").notNull(),
+  sizes: text("sizes").default(""),
   color: text("color").notNull(),
   image_url: text("image_url").notNull(),
   created_at: timestamp("created_at").defaultNow().notNull(),
@@ -127,6 +128,7 @@ export const featuredTable = pgTable("featured", {
   order: integer("order").default(0),
   starts_at: timestamp("starts_at"),
   is_offer: boolean("is_offer").default(false).notNull(),
+  offer: integer("offer").default(0),
   is_new: boolean("is_new").default(false).notNull(),
   is_featured: boolean("is_featured").default(false).notNull(),
   ends_at: timestamp("ends_at"),
