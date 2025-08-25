@@ -31,16 +31,16 @@ const HeroBanner = async () => {
         <ItemBanner banners={banners} />
       </div>
       {/* Seção de Vantagens */}
-<div className="shadow-sm lg:w-8xl lg:mx-auto py-1">
+<div className="border-b border-gray-100 lg:w-8xl lg:mx-auto py-1">
   <div className="grid grid-cols-3 xl:grid-cols-3 sm:ml-12 gap-3 md:gap-1 lg:w-1/2 lg:mx-auto">
 
     {/* Cartão de Crédito */}
     <div className="flex flex-col sm:flex-row items-center text-center sm:text-left gap-2 p-2 rounded-xl bg-white">
-      <div className="flex-shrink-0 p-2 bg-pink-500 text-white rounded-full">
+      <div className="flex-shrink-0 p-2 border  rounded-full">
         <CreditCardIcon className="w-4 h-4 md:w-6 md:h-6" />
       </div>
       <div>
-        <h3 className="font-semibold text-gray-800 text-xs md:text-sm mb-0.5">
+        <h3 className="font-medium text-gray-800 text-xs md:text-sm mb-0.5">
           Pagamento Flexível
         </h3>
         <p className="font-light text-gray-600 text-xs leading-tight">
@@ -51,11 +51,11 @@ const HeroBanner = async () => {
 
     {/* Entrega Motoboy */}
     <div className="flex flex-col sm:flex-row items-center text-center sm:text-left gap-2 p-2 rounded-xl bg-white">
-      <div className="flex-shrink-0 p-2 bg-purple-500 text-white rounded-full">
+      <div className="flex-shrink-0 p-2 border rounded-full">
         <PackageCheck className="w-4 h-4 md:w-6 md:h-6" />
       </div>
       <div>
-        <h3 className="font-semibold text-gray-800 text-xs md:text-sm mb-0.5">
+        <h3 className="font-medium text-gray-800 text-xs md:text-sm mb-0.5">
           Entrega Rápida
         </h3>
         <p className="font-light text-gray-600 text-xs leading-tight">
@@ -66,11 +66,11 @@ const HeroBanner = async () => {
 
     {/* Entrega Brasil */}
     <div className="flex flex-col sm:flex-row items-center text-center sm:text-left gap-2 p-2 rounded-xl bg-white">
-      <div className="flex-shrink-0 p-2 bg-blue-500 text-white rounded-full">
+      <div className="flex-shrink-0 p-2 text-gray-800 rounded-full">
         <Truck className="w-4 h-4 md:w-6 md:h-6" />
       </div>
       <div>
-        <h3 className="font-semibold text-gray-800 text-xs md:text-sm mb-0.5">
+        <h3 className="font-medium text-gray-800 text-xs md:text-sm mb-0.5">
           Nacional
         </h3>
         <p className="font-light text-gray-600 text-xs leading-tight">

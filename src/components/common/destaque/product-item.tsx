@@ -16,12 +16,12 @@ interface ProductItemProps {
 
 const ProductItemDestaque = ({ products }: ProductItemProps) => {
   return (
-  <div className="grid sm:grid-cols-1 lg:grid-cols-1md:grid-cols-4 md:gap-4 p-1 ">
+  <div className=" grid sm:grid-cols-1 lg:grid-cols-1 md:grid-cols-10 md:gap-4 p-1 ">
 
       {products?.map((product) => (
         <div
           key={product.id}
-          className="group relative lg:w-[22rem] bg-white rounded-2xl md:p-1 p-1 flex flex-col items-center shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-1 border border-gray-200/ overflow-hidden"
+          className="group relative lg:w-[22rem] bg-white rounded-2xl md:p-1 p-1 flex flex-col items-center  hover:shadow-lg transition-all duration-500 transform hover:-translate-y-1 border border-gray-200/ overflow-hidden"
         >
           {/* Container da Imagem */}
           <Link
@@ -80,18 +80,13 @@ const ProductItemDestaque = ({ products }: ProductItemProps) => {
 
             {/* Botão */}
             <Link href={`/produto/${product.slug}`}>
-              <button className="relative cursor-pointer bg-gray-700 overflow-hidden border text-white  hover:from-rose-500 hover:via-rose-600 hover:to-rose-700  font-semibold py-3 px-20 mb-3 rounded-lg transition-all duration-500 transform hover:scale-105 hover:shadow-xl shadow-md text-sm min-w-[140px]">
-                Confira
+              <button className="relative cursor-pointer  overflow-hidden border text-gray-900 hover:from-rose-500 hover:via-rose-600 hover:to-rose-700 py-3 px-20 mb-3 rounded-lg transition-all duration-500 transform hover:scale-105 hover:shadow-xl shadow-md text-sm min-w-[140px]">
+                Ver Produto
               </button>
             </Link>
-          </div>
-
-          
+          </div> 
         </div>
       ))}
-
-
-
     </div>
   );
 };

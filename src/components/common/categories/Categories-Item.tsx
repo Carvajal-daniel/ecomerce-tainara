@@ -21,7 +21,7 @@ interface CategoryItemProps {
   }[];
 }
 
-const CategoryItem = ({ categories }: CategoryItemProps) => {
+const ProductosDestaque = ({ categories }: CategoryItemProps) => {
   const [api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
   const [count, setCount] = useState(0);
@@ -80,4 +80,4 @@ const CategoryItem = ({ categories }: CategoryItemProps) => {
   );
 };
 
-export default CategoryItem;
+export default ProductosDestaque;

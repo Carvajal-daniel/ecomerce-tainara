@@ -120,3 +120,10 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Media query para iPad Air 5 */
+@media (min-width: 820px) and (max-width: 1180px) {
+  .ipad-full {
+    flex-basis: 100% !important; /* Faz o CarouselItem ocupar 1 card por linha */
+  }
+}

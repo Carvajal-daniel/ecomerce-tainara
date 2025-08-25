@@ -78,27 +78,7 @@ const ProductOfferPage = ({ productOffer }: ProductOfferProps) => {
                   {item.product.name}
                 </h3>
 
-                {/* Preço */}
-                {price && (
-                  <div className="flex flex-col pt-1 border-t border-gray-100 w-full">
-                    <div className="flex flex-col items-center lg:flex-row md:gap-5 lg:justify-center ">
-                      {item.is_offer && discountedPrice !== price ? (
-                        <>
-                          <span className="text-sm md:text-lg text-gray-400 line-through">
-                            R$ {price.toFixed(2)}
-                          </span>
-                          <span className="text-md md:text-lg font-semibold text-green-600">
-                            R$ {discountedPrice?.toFixed(2)}
-                          </span>
-                        </>
-                      ) : (
-                        <span className="text-md md:text-xl font-extrabold text-gray-800">
-                          R$ {price.toFixed(2)}
-                        </span>
-                      )}
-                    </div>
-                  </div>
-                )}
+           
               </div>
 
               {/* Efeito de hover no border */}

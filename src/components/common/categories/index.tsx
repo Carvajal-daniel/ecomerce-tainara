@@ -67,7 +67,7 @@ const CategoryProducts = async () => {
     return (
       <div className="container mx-auto p-4 mt-4 md:mt-8">
         
-        <CategoryItem categories={categoriesItems} />
+       
       </div>
     );
   } catch (error) {

@@ -1,4 +1,4 @@
-import CategoryProducts from "@/components/common/categories";
+
 import ProductosDestaque from "@/components/common/destaque/productosDestaque";
 import Footer from "@/components/common/footer/footer";
 import Header from "@/components/common/header/header";
