@@ -1,20 +1,10 @@
-// src/components/common/header/header.tsx
-import { db } from "@/db";
-import NavPage from "./nav";
+
+
 import Link from "next/link";
 import DesktopHeader from "./DesktopHeader";
 import MobileHeader from "./MobileHeader";
 
 const Header = async () => {
-  const categories = await db.query.categoryTable.findMany();
-
-  const mappedCategories = categories.map(category => ({
-    id: category.id,
-    name: category.name,
-    slug: category.slug,
-    image: category.imageUrl,
-  }));
-
   return (
     <header className="bg-white sticky top-0 z-50 border-b border-gray-200 shadow-sm">
             <div className="py-4 px-4 lg:px-6">
@@ -32,7 +22,7 @@ const Header = async () => {
         </div>
       </div>
 
-      <NavPage categories={mappedCategories} /> {/* Passa dados como props */}
+     
     </header>
   );
 };
