@@ -3,8 +3,6 @@
 
 import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
-import DesktopHeader from "./DesktopHeader";
-import MobileHeader from "./MobileHeader";
 import { ChevronDown } from "lucide-react";
 
 interface NavPageProps {
@@ -32,22 +30,7 @@ const NavPage = ({ categories }: NavPageProps) => {
 
   return (
     <>
-      <div className="py-4 px-4 lg:px-6">
-        <div className="flex items-center justify-between max-w-7xl mx-auto">
-          <Link href="/" className="group">
-            <h1 className="md:text-3xl text-2xl text-gray-700 hover:text-rose-400 transition-colors duration-200">
-              E-commerce
-            </h1>
-          </Link>
 
-          <div className="flex items-center space-x-4">
-            <DesktopHeader />
-            <MobileHeader />
-          </div>
-        </div>
-      </div>
-
-      {/* Menu Desktop */}
       <div className="hidden md:block bg-gray-50 border-t border-gray-100">
         <div className="max-w-7xl mx-auto px-4 lg:px-6">
           <nav className="py-3">
