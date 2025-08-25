@@ -1,6 +1,8 @@
+// src/components/common/header/nav.tsx
 "use client";
+
 import Link from "next/link";
-import React, { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import DesktopHeader from "./DesktopHeader";
 import MobileHeader from "./MobileHeader";
 import { ChevronDown } from "lucide-react";
@@ -8,17 +10,16 @@ import { ChevronDown } from "lucide-react";
 interface NavPageProps {
   categories: {
     id: string;
-    name: string; 
+    name: string;
     slug: string;
     image: string;
-  }[]
+  }[];
 }
 
 const NavPage = ({ categories }: NavPageProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef<HTMLLIElement>(null);
 
-  // Fecha dropdown ao clicar fora
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
@@ -26,9 +27,7 @@ const NavPage = ({ categories }: NavPageProps) => {
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   return (
@@ -41,7 +40,6 @@ const NavPage = ({ categories }: NavPageProps) => {
             </h1>
           </Link>
 
-          {/* Desktop + Mobile */}
           <div className="flex items-center space-x-4">
             <DesktopHeader />
             <MobileHeader />
@@ -60,7 +58,12 @@ const NavPage = ({ categories }: NavPageProps) => {
                   className="flex items-center gap-1 text-gray-700 hover:text-blue-600 transition-colors duration-200"
                 >
                   <span>Produtos</span>
-                  <ChevronDown size={16} className={`transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`} />
+                  <ChevronDown
+                    size={16}
+                    className={`transition-transform duration-200 ${
+                      isOpen ? "rotate-180" : ""
+                    }`}
+                  />
                 </button>
 
                 {isOpen && (
@@ -69,7 +72,7 @@ const NavPage = ({ categories }: NavPageProps) => {
                       {categories.map((category) => (
                         <li key={category.id}>
                           <Link
-                            href={`/categories/${category.slug}`}
+                            href={`/categorie/${category.slug}`}
                             className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
                             onClick={() => setIsOpen(false)}
                           >
