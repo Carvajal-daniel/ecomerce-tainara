@@ -1,3 +1,4 @@
+
 import { db } from "@/db";
 import ProductItemDestaque from "./product-item";
 import { eq } from "drizzle-orm";
