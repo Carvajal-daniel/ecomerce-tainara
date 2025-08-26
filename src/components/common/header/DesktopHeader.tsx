@@ -1,24 +1,26 @@
 "use client";
 
-import Link from "next/link";
 import SearchBar from "./SearchBar";
-import UserActions from "./UserActions";
 
-const DesktopHeader = () => {
+interface Product {
+  id: string;
+  name: string;
+  slug: string;
+}
+
+interface Category {
+  products: Product[];
+}
+
+export default function DesktopHeader({ categories }: { categories: Category[] }) {
+  // Passa todos os produtos para o SearchBar
+  const products = categories.flatMap(cat => cat.products);
+
   return (
-    <>
-
-      {/* Search */}
-      <div className="hidden md:flex flex-1 max-w-md mx-8">
-        <SearchBar />
+    <div className="hidden md:flex flex-1 items-center justify-end space-x-4">
+      <div className="max-w-md w-full">
+        <SearchBar products={products} />
       </div>
-
-      {/* User */}
-      <div className="hidden md:flex items-center space-x-4">
-        <UserActions />
-      </div>
-    </>
+    </div>
   );
-};
-
-export default DesktopHeader;
+}

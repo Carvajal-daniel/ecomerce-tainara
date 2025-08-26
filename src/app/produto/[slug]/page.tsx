@@ -28,7 +28,6 @@ const ProductPage = async ({ params }: ProductPageProps) => {
 
   return (
     <>
-      <Header />
       <main className="pt-1">
         <ProductClient product={product} feature={feature} />
       </main>

@@ -4,15 +4,14 @@ import { useState } from "react";
 import { Heart } from "lucide-react";
 import SignInForm from "./components/sign-in-form";
 import SignUpForm from "./components/sign-up-form";
-import Header from "@/components/common/header/header";
+import HeaderAuth from "@/components/common/header/HeaderAuth";
 
 export default function AuthScreen() {
   const [isLogin, setIsLogin] = useState(true);
 
   return (
     <div>
-  <Header/>
-  
+      <HeaderAuth /> 
     <div className=" h-[calc(100vh-73px)] flex items-center justify-center p-4  bg-[#f5f5f5] relative overflow-hidden">
      
       <div className="w-full max-w-md px-5 -mt-14 relative z-10  ">
