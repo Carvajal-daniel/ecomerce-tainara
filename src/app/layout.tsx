@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Header from "@/components/common/header/header";
-import { db } from "@/db";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,22 +23,12 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
 
-    const categoriesData = await db.query.categoryTable.findMany({
-    with: { products: true }
-  });
-
-  const categories = categoriesData.map(cat => ({
-    ...cat,
-    products: cat.products
-  }));
-
 
   return (
     <html lang="pt-br">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-       <Header categories={categories} />
         {children}
       </body>
     </html>

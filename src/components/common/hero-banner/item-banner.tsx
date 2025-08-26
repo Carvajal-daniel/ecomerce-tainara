@@ -66,7 +66,7 @@ const ItemBanner = ({ banners }: ItemBannerProps) => {
       onTouchEnd={onTouchEnd}
     >
       <div
-        className="flex transition-transform duration-500 mt-2 ease-in-out"
+        className="flex transition-transform duration-500 mt-1 ease-in-out"
         style={{ transform: `translateX(-${currentIndex * 100}%)` }}
       >
         {banners.map((banner) => (

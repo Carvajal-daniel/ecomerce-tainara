@@ -19,24 +19,24 @@ export default function SearchBar({ products }: SearchBarProps) {
   const [query, setQuery] = useState("");
   const router = useRouter();
 
-  const filtered = products.filter(p =>
+  const filtered = products.filter((p) =>
     p.name.toLowerCase().includes(query.toLowerCase())
   );
 
   const handleSelect = (slug: string) => {
     setQuery("");
-    router.push(`/produto/${slug}`); 
+    router.push(`/produto/${slug}`);
   };
 
   return (
-    <div className="relative">
-    <Input
-  type="text"
-  value={query}
-  onChange={e => setQuery(e.target.value)}
-  placeholder="Pesquisar produtos..."
-  className="w-full pl-4 pr-10 py-2 border rounded-lg focus:outline-none focus:ring-0 focus:border-gray-300 !ring-0 !border-gray-300"
-/>
+    <div className="relative ">
+      <Input
+        type="text"
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+        placeholder="Pesquisar produtos..."
+        className="w-full bg-white pl-4 pr-10 py-2 border rounded-lg focus:outline-none focus:ring-0 focus:border-gray-300 !ring-0 !border-gray-300"
+      />
 
       <button
         type="button"
@@ -47,7 +47,7 @@ export default function SearchBar({ products }: SearchBarProps) {
 
       {query && (
         <ul className="absolute w-full bg-white border border-gray-200 mt-1 rounded-md max-h-60 overflow-auto z-50">
-          {filtered.map(p => (
+          {filtered.map((p) => (
             <li
               key={p.id}
               className="px-3 py-2 hover:bg-gray-100 cursor-pointer"
@@ -57,7 +57,9 @@ export default function SearchBar({ products }: SearchBarProps) {
             </li>
           ))}
           {filtered.length === 0 && (
-            <li className="px-3 py-2 text-gray-400">Nenhum produto encontrado</li>
+            <li className="px-3 py-2 text-gray-400">
+              Nenhum produto encontrado
+            </li>
           )}
         </ul>
       )}

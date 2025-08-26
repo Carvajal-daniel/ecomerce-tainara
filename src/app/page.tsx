@@ -1,23 +1,19 @@
 import ProductosDestaque from "@/components/common/destaque/productosDestaque";
 import Footer from "@/components/common/footer/footer";
-import Header from "@/components/common/header/header";
+import HeaderWrapper from "@/components/common/header/HeaderWrapper";
 import HeroBanner from "@/components/common/hero-banner/hero-banner";
 import ProductsPromocoes from "@/components/common/Promocoes";
-import { db } from "@/db"; // server import
 
 export const revalidate = 10;
 
 export default async function Home() {
-
-
   return (
     <>
-      {/* Passa as categorias para o Header Client */}
-    
-
+        <header className="sticky top-0 z-50 w-full">
+          <HeaderWrapper />
+        </header>
       <main>
-        {" "}
-        {/* Espaço para o Header não sobrepor conteúdo */}
+
         <section>
           <HeroBanner />
         </section>

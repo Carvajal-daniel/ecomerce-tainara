@@ -20,22 +20,19 @@ interface Category {
   products: Product[];
 }
 
-interface HeaderProps {
+interface HeaderContentProps {
   categories: Category[];
 }
 
-export default function Header({ categories }: HeaderProps) {
+export default function HeaderContent({ categories }: HeaderContentProps) {
   return (
-    <header className="bg-gradient-to-r  from-slate-800/90 via-purple-800/90 to-slate-800/90 backdrop-blur-sm sticky top-0 z-50 border-b border-gray-200 shadow-sm">
+    <header className="bg-gradient-to-r from-slate-800/90 via-purple-800/90 to-slate-800/90 backdrop-blur-sm sticky top-0 z-50 border-b border-gray-200 shadow-sm">
       <div className="py-4 px-4 lg:px-6 flex items-center justify-between max-w-7xl mx-auto">
-        <Link
-          href="/"
-          className="text-2xl font-bold text-white hover:text-rose-400"
-        >
+        <Link href="/" className="text-2xl font-bold text-white hover:text-rose-400">
           E-commerce
         </Link>
 
-        <div className="flex items-center md:space-x-6 space-x-3 ">
+        <div className="flex items-center md:space-x-6 space-x-3">
           {/* Desktop */}
           <CarPage />
           <div className="hidden md:flex items-center space-x-4">

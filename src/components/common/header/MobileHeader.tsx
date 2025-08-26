@@ -16,7 +16,7 @@ const MobileHeader = () => {
   return (
     <Sheet>
       <SheetTrigger className="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors">
-        <MenuIcon className="w-6 h-6 text-gray-700" />
+        <MenuIcon className="w-6 h-6 text-white" />
       </SheetTrigger>
 
       <SheetContent className="w-80 p-0 bg-white">
