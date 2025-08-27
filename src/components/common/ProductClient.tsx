@@ -60,7 +60,12 @@ const ProductClient: React.FC<Props> = ({ product, feature }) => {
     n.toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
   return (
+
+    <>
+
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-100">
+
+
       <div className="container mx-auto px-4 py-10">
         <div className="flex flex-col md:flex-row gap-10">
           {/* Imagem */}
@@ -213,6 +218,9 @@ const ProductClient: React.FC<Props> = ({ product, feature }) => {
         </div>
       </div>
     </div>
+
+    </>
+
   );
 };
 

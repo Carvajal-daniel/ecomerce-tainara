@@ -1,4 +1,4 @@
-import Header from "@/components/common/header/header";
+import HeaderWrapper from "@/components/common/header/HeaderWrapper";
 import ProductClient from "@/components/common/ProductClient";
 import { db } from "@/db";
 import { featuredTable, productTable } from "@/db/schema";
@@ -9,7 +9,6 @@ interface ProductPageProps {
 }
 
 const ProductPage = async ({ params }: ProductPageProps) => {
-  // Espera o params antes de usar
   const { slug } = await params;
 
   const product = await db.query.productTable.findFirst({
@@ -28,8 +27,9 @@ const ProductPage = async ({ params }: ProductPageProps) => {
 
   return (
     <>
+      <HeaderWrapper />
       <main className="pt-1">
-        <ProductClient product={product} feature={feature} />
+        <ProductClient product={product} feature={feature} /> 
       </main>
     </>
   );

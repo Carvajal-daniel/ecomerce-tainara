@@ -55,7 +55,7 @@ export default function Header({ categories }: HeaderProps) {
         <ul className="flex items-center gap-4">
           <li className="relative group">
             <Link
-              href="/products"
+              href="/produtos"
               className="flex items-center gap-1 text-gray-600 hover:text-rose-400 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200"
             >
               Todos os Produtos

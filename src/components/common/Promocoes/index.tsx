@@ -21,6 +21,8 @@ const ProductsPromocoes = async () => {
 
 
   return (
+
+
     <section className="my-12 max-w-[93rem] mx-auto px-4 lg:px-6">
       <div className="mb-8 ">
         <div className="flex items-center justify-center gap-3 mb-2">
@@ -47,6 +49,7 @@ const ProductsPromocoes = async () => {
         <ProductOfferPage productOffer={productsOffer}  />
       </div>
     </section>
+
   );
 };
 

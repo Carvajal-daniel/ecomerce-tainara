@@ -9,7 +9,7 @@ const AdvantagesCarousel = () => {
     { icon: <Truck className="w-4 h-4 md:w-6 md:h-6" />, title: "Nacional", description: "Todo o Brasil" },
   ];
 
-  const loopedAdvantages = [...advantages, ...advantages]; // duplicar para scroll infinito
+  const loopedAdvantages = [...advantages, ...advantages]; 
 
   return (
     <div className="border-b  border-gray-100 lg:w-8xl lg:mx-auto md:py-3">
@@ -30,7 +30,7 @@ const AdvantagesCarousel = () => {
       <div className="md:hidden overflow-hidden relative">
         <div className="flex animate-marquee">
           {loopedAdvantages.map((adv, i) => (
-            <div key={i} className="flex-shrink-0 min-w-[33%] p-1">
+            <div key={i} className="flex-shrink-0  min-w-[25%] p-1">
               <div className="flex justify-center items-center gap-2 md:p-4 p-3 bg-white">
                 <div className="flex-shrink-0 p-2 border rounded-full">{adv.icon}</div>
                 <div>
@@ -51,7 +51,7 @@ const AdvantagesCarousel = () => {
         .animate-marquee {
           display: flex;
           width: max-content;
-          animation: marquee 25s linear infinite;
+          animation: marquee 20s linear infinite;
         }
       `}</style>
     </div>

@@ -1,4 +1,4 @@
-// HeaderWrapper.tsx
+
 import { db } from "@/db";
 import Header from "./header";
 

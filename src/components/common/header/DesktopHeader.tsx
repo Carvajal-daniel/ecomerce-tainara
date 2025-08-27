@@ -13,7 +13,7 @@ interface Category {
 }
 
 export default function DesktopHeader({ categories }: { categories: Category[] }) {
-  // Passa todos os produtos para o SearchBar
+
   const products = categories.flatMap(cat => cat.products);
 
   return (

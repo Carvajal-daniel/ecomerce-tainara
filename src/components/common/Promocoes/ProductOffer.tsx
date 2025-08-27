@@ -1,7 +1,7 @@
 "use client";
 
-import React from "react";
-import Link from "next/link";
+import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 
 interface ProductOfferProps {
@@ -26,6 +26,16 @@ interface ProductOfferProps {
 }
 
 const ProductOfferPage = ({ productOffer }: ProductOfferProps) => {
+  const [loadingCard, setLoadingCard] = useState<string | null>(null);
+  const router = useRouter();
+
+  const handleClick = (id: string, slug: string) => {
+    setLoadingCard(id);
+    setTimeout(() => {
+      router.push(`/produto/${slug}`);
+    }, 0); 
+  };
+
   return (
     <div className="container mx-auto sm:px-4 py-4">
       <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 sm:gap-4">
@@ -34,11 +44,8 @@ const ProductOfferPage = ({ productOffer }: ProductOfferProps) => {
           const price = variation ? variation.price / 100 : null;
           const image = variation?.image_url || item.product.image;
 
-          
           const discountedPrice =
-            item.is_offer && item.offer && price
-              ? price - item.offer
-              : price;
+            item.is_offer && item.offer && price ? price - item.offer : price;
 
           const discountPercentage =
             item.is_offer && item.offer && price
@@ -46,16 +53,26 @@ const ProductOfferPage = ({ productOffer }: ProductOfferProps) => {
               : null;
 
           return (
-            <Link
-              href={`/produto/${item.product.slug}`}
+            <div
               key={item.id}
-              className="group relative bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300 ease-in-out"
+              onClick={() => handleClick(item.id, item.product.slug)}
+              className="group relative cursor-pointer bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300 ease-in-out"
             >
+              {/* Loader Overlay */}
+              {loadingCard === item.id && (
+                <div className="absolute inset-0 bg-white/70 backdrop-blur-sm flex items-center justify-center z-20">
+                  <div className="w-10 h-10 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+                </div>
+              )}
+
               {/* Badge de Oferta */}
               {item.is_offer && (
                 <div className="absolute top-2 left-2 md:left-4 md:top-4 z-10">
-                  <span className="bg-gradient-to-r from-red-500 to-pink-500 text-white text-[8px] md:text-xs font-bold px-2 py-1.5 rounded-full shadow-lg ">
-                    🔥 {discountPercentage ? `${discountPercentage}% OFF` : "OFERTA"}
+                  <span className="bg-gradient-to-r from-red-500 to-pink-500 text-white text-[8px] md:text-xs font-bold px-2 py-1.5 rounded-full shadow-lg">
+                    🔥{" "}
+                    {discountPercentage
+                      ? `${discountPercentage}% OFF`
+                      : "OFERTA"}
                   </span>
                 </div>
               )}
@@ -67,8 +84,9 @@ const ProductOfferPage = ({ productOffer }: ProductOfferProps) => {
                   alt={item.product.name}
                   width={400}
                   height={400}
-                  className="w-full h-[15rem] lg:h-[22rem] object-cover group-hover:scale-110 transition-transform duration-500 ease-out"
+                  className={`w-full h-[15rem] lg:h-[22rem] object-cover group-hover:scale-110 transition-transform duration-500 ease-out`}
                 />
+
                 <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               </div>
 
@@ -77,13 +95,11 @@ const ProductOfferPage = ({ productOffer }: ProductOfferProps) => {
                 <h3 className="text-sm lg:text-lg font-light text-gray-800 transition-colors duration-200 line-clamp-1">
                   {item.product.name}
                 </h3>
-
-           
               </div>
 
               {/* Efeito de hover no border */}
               <div className="absolute inset-0 rounded-2xl border-2 border-transparent transition-colors duration-300 pointer-events-none"></div>
-            </Link>
+            </div>
           );
         })}
       </div>
