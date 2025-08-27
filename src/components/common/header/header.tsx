@@ -45,13 +45,13 @@ export default function Header({ categories }: HeaderProps) {
 
           {/* Mobile */}
           <div className="flex md:hidden items-center">
-            <MobileHeader />
+            <MobileHeader categories={categories} />
           </div>
         </div>
       </div>
 
       {/* Navegação categorias */}
-      <nav className="hidden bg-gray-100 py-2 relative md:flex items-center justify-center">
+      <nav className=" hidden bg-gray-100 py-2 relative md:flex items-center justify-center">
         <ul className="flex items-center gap-4">
           <li className="relative group">
             <Link

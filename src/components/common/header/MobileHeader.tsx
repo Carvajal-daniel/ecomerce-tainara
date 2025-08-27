@@ -6,57 +6,95 @@ import {
   SheetTrigger,
   SheetTitle,
 } from "@/components/ui/sheet";
-import { MenuIcon, User, Package, LogOut, FireExtinguisher, FileSpreadsheet } from "lucide-react";
+import {
+  MenuIcon,
+  User,
+  Package,
+  LogOut,
+  ChevronDown,
+  Sparkles,
+  ShoppingBag,
+} from "lucide-react";
 import Link from "next/link";
 import { authClient } from "@/lib/auth-client";
+import { useState } from "react";
 
-const MobileHeader = () => {
+interface Product {
+  id: string;
+  name: string;
+  slug: string;
+}
+
+interface Category {
+  id: string;
+  name: string;
+  slug: string;
+  products: Product[];
+}
+
+interface HeaderProps {
+  categories: Category[];
+}
+
+const MobileHeader = ({ categories }: HeaderProps) => {
   const { data: session } = authClient.useSession();
+  const [openProductsMenu, setOpenProductsMenu] = useState(false);
 
   return (
     <Sheet>
-      <SheetTrigger className="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors">
-        <MenuIcon className="w-6 h-6 text-white" />
+      <SheetTrigger className="md:hidden p-3 rounded-xl transition-all duration-300">
+        <MenuIcon className="w-6 h-6 text-white drop-shadow-sm" />
       </SheetTrigger>
 
-      <SheetContent className="w-80 p-0 bg-white">
+      <SheetContent className="w-80 p-0 bg-gray-50 border-l border-slate-200">
         <SheetTitle className="sr-only">Menu Mobile</SheetTitle>
 
-        {/* Seção do usuário - Topo */}
-        <div className="bg-gray-50 p-6 border-b border-gray-200">
-          {/* Nome e Avatar */}
+        {/* User Section */}
+        <div className="p-6 bg-gradient-to-br from-slate-100 to-gray-100 border-b border-slate-200">
           <div className="flex items-center gap-4 mb-6">
-            <div className="w-14 h-14 rounded-full bg-white border border-gray-200 flex items-center justify-center shadow-sm">
-              {session?.user?.image ? (
-                <img
-                  src={session.user.image}
-                  alt="Foto do usuário"
-                  className="w-12 h-12 rounded-full object-cover"
-                />
-              ) : (
-                <User className="w-6 h-6 text-gray-500" />
+            <div className="relative">
+              <div className="w-12 h-12 rounded-xl bg-white shadow-md flex items-center justify-center">
+                {session?.user?.image ? (
+                  <img
+                    src={session.user.image}
+                    alt="User photo"
+                    className="w-12 h-12 rounded-xl object-cover"
+                  />
+                ) : (
+                  <User className="w-6 h-6 text-slate-600" />
+                )}
+              </div>
+              {session?.user && (
+                <div className="absolute -top-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-white"></div>
               )}
             </div>
 
-            <div className="text-lg font-medium text-gray-800">
-              {session?.user ? `Olá, ${session.user.name}!` : "Olá, Bem-vindo!"}
+            <div className="flex-1">
+              <h3 className="font-semibold text-slate-800">
+                {session?.user
+                  ? `Olá, ${session.user.name?.split(" ")[0]}!`
+                  : "Bem-vindo!"}
+              </h3>
+              {session?.user && (
+                <p className="text-sm text-slate-600">Bom ter você aqui ✨</p>
+              )}
             </div>
           </div>
 
-          {/* Botões Minha Conta e Pedidos */}
           <div className="grid grid-cols-2 gap-3">
             <Link
               href={session?.user ? "/minha-conta" : "/authentication"}
-              className="flex items-center justify-center gap-2 px-4  text-white bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-600 rounded-lg transition-colors shadow-sm"
+              className="flex items-center justify-center gap-2 py-3 px-4 bg-white hover:bg-gray-50 border border-slate-200 text-slate-700 rounded-lg shadow-sm hover:shadow-md transition-all duration-300"
             >
               <User className="w-4 h-4" />
               <span className="text-sm font-medium">
                 {session?.user ? "Conta" : "Login"}
               </span>
             </Link>
+
             <Link
               href={session?.user ? "/pedidos" : "/authentication"}
-              className="flex items-center justify-center gap-2 py-3 px-4 bg-white hover:bg-gray-50 border border-gray-200 text-gray-700 rounded-lg transition-colors shadow-sm"
+              className="flex items-center justify-center gap-2 py-3 px-4 bg-slate-600 hover:bg-slate-700 text-white rounded-lg shadow-sm hover:shadow-md transition-all duration-300"
             >
               <Package className="w-4 h-4" />
               <span className="text-sm font-medium">Pedidos</span>
@@ -64,56 +102,88 @@ const MobileHeader = () => {
           </div>
         </div>
 
-        {/* Conteúdo principal */}
+        {/* Navigation */}
         <div className="p-6">
-          {/* Categorias */}
-          <nav className="space-y-1 mb-8">
-            <div className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-4 px-2">
-              Categorias
+          <div className="flex items-center gap-2 text-sm font-bold text-slate-500 uppercase tracking-wide mb-4">
+            <ShoppingBag className="w-4 h-4" />
+            Categorias
+          </div>
+
+          <nav className="space-y-2">
+            {/* All Products Dropdown */}
+            <div className="bg-white rounded-lg border border-slate-200 shadow-sm">
+              <div className="flex items-center">
+                <Link
+                  href="/produtos"
+                  className="flex-1 text-slate-700 hover:text-rose-500 font-medium py-3 px-4 rounded-l-lg transition-colors"
+                >
+                  Todos os Produtos
+                </Link>
+                <button
+                  onClick={() => setOpenProductsMenu(!openProductsMenu)}
+                  className="p-3 hover:bg-slate-50 rounded-r-lg transition-colors"
+                >
+                  <ChevronDown
+                    className={`w-4 h-4 text-slate-500 transition-transform duration-300 ${
+                      openProductsMenu ? "rotate-180" : ""
+                    }`}
+                  />
+                </button>
+              </div>
+
+              {openProductsMenu && (
+                <div className="border-t border-slate-200 bg-slate-50 rounded-b-lg">
+                  <ul className="p-2 space-y-1">
+                    {categories.map((cat) => (
+                      <li key={cat.id}>
+                        <Link
+                          href={`/category/${cat.slug}`}
+                          className="block text-sm text-slate-600 hover:text-rose-500 hover:bg-white py-2 px-3 rounded transition-all duration-300"
+                          onClick={() => setOpenProductsMenu(false)}
+                        >
+                          {cat.name}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
             </div>
 
+            {/* Other Links */}
             <Link
-              href="/vestidos"
-              className="block text-gray-700 hover:text-pink-600 hover:bg-pink-50 font-medium py-3 px-3 rounded-lg transition-colors"
-            >
-              Vestidos
-            </Link>
-            <Link
-              href="/blusas"
-              className="block text-gray-700 hover:text-pink-600 hover:bg-pink-50 font-medium py-3 px-3 rounded-lg transition-colors"
-            >
-              Blusas & Tops
-            </Link>
-            <Link
-              href="/calcas"
-              className="block text-gray-700 hover:text-pink-600 hover:bg-pink-50 font-medium py-3 px-3 rounded-lg transition-colors"
-            >
-              Calças & Jeans
-            </Link>
-            <Link
-              href="/acessorios"
-              className="block text-gray-700 hover:text-pink-600 hover:bg-pink-50 font-medium py-3 px-3 rounded-lg transition-colors"
+              href="/accessories"
+              className="block text-slate-700 hover:text-rose-500 hover:bg-white py-3 px-4 rounded-lg transition-all duration-300"
             >
               Acessórios
             </Link>
+
+            <Link
+              href="/about"
+              className="block text-slate-700 hover:text-rose-500 hover:bg-white py-3 px-4 rounded-lg transition-all duration-300"
+            >
+              Sobre Nós
+            </Link>
+
             <Link
               href="/ofertas"
-              className="block text-white hover:text-pink-100 font-semibold py-1 px-3 rounded-lg bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-600 hover:bg-pink-600 transition-colors shadow-sm"
+              className="flex items-center justify-center gap-2 text-white font-bold py-3 px-4 rounded-lg bg-gradient-to-r from-rose-500 to-pink-500 hover:from-rose-600 hover:to-pink-600 shadow-md hover:shadow-lg transition-all duration-300"
             >
-              Ofertas
-              🔥
+              <Sparkles className="w-4 h-4" />
+              Ofertas Especiais
+              <span>🔥</span>
             </Link>
           </nav>
 
-          {/* Botão Sair */}
+          {/* Logout Button */}
           {session?.user && (
-            <div className="border-t border-gray-200 pt-6">
+            <div className="border-t border-slate-200 pt-6 mt-8">
               <button
                 onClick={() => authClient.signOut()}
-                className="flex items-center gap-3 w-full py-3 px-3 text-gray-600 hover:text-gray-800 hover:bg-gray-50 rounded-lg transition-colors"
+                className="flex items-center gap-3 w-full py-3 px-4 text-slate-600 hover:text-red-500 hover:bg-red-50 rounded-lg border border-slate-200 hover:border-red-200 transition-all duration-300"
               >
                 <LogOut className="w-4 h-4" />
-                <span className="font-medium">Sair</span>
+                <span className="font-medium">Sair da Conta</span>
               </button>
             </div>
           )}

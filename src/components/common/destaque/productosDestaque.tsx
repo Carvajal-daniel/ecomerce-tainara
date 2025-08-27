@@ -52,7 +52,7 @@ async function fetchNewProducts() {
 }
 
 const SectionHeader = () => (
-  <div className="mb-10 mt-5">
+  <div className="mb-10 mt-2 md:mt-5 ">
     <div className="flex items-center justify-center gap-3 mb-2">
       <div className="w-1 h-8 bg-gradient-to-b from-purple-500 to-purple-600 rounded-full"></div>
       <h1 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">
