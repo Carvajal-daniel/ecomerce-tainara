@@ -12,7 +12,7 @@ const AdvantagesCarousel = () => {
   const loopedAdvantages = [...advantages, ...advantages]; 
 
   return (
-    <div className="border-b  border-gray-100 lg:w-8xl lg:mx-auto md:py-3">
+    <div className="border-b border-gray-100 lg:w-8xl lg:mx-auto md:py-3">
       {/* Desktop */}
       <div className="hidden md:grid grid-cols-3 xl:grid-cols-3 sm:ml-12 gap-3 md:gap-1 lg:w-1/2 lg:mx-auto">
         {advantages.map((adv, i) => (

@@ -29,12 +29,11 @@ const ProductOfferPage = ({ productOffer }: ProductOfferProps) => {
   const [loadingCard, setLoadingCard] = useState<string | null>(null);
   const router = useRouter();
 
-  const handleClick = (id: string, slug: string) => {
-    setLoadingCard(id);
-    setTimeout(() => {
-      router.push(`/produto/${slug}`);
-    }, 0); 
-  };
+ const handleClick = (id: string, slug: string) => {
+  setLoadingCard(id);
+  router.push(`/produto/${slug}`);
+};
+
 
   return (
     <div className="container mx-auto sm:px-4 py-4">
@@ -61,7 +60,7 @@ const ProductOfferPage = ({ productOffer }: ProductOfferProps) => {
               {/* Loader Overlay */}
               {loadingCard === item.id && (
                 <div className="absolute inset-0 bg-white/70 backdrop-blur-sm flex items-center justify-center z-20">
-                  <div className="w-10 h-10 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+                  <div className="w-10 h-10 border-2 border-gray-800 border-t-transparent rounded-full animate-spin"></div>
                 </div>
               )}
 

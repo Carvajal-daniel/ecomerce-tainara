@@ -69,7 +69,7 @@ const UserActions = () => {
       asChild
       variant="ghost"
       size="sm"
-      className="text-white bg-gray-800 h-9 hover:bg-white"
+      className="text-white bg-white text-gay-800 h-9 hover:bg-white"
     >
       <Link href="/authentication" className="flex items-center gap-1">
         <LogInIcon className="w-4 h-4" />

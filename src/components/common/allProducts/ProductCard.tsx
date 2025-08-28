@@ -44,6 +44,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     setLoading(true);
     router.push(`/produto/${product.slug}`);
   };
+  
 
   return (
     <div
@@ -64,7 +65,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           height={500}
           src={product.variations[0]?.image_url || "/placeholder.jpg"}
           alt={product.name}
-          className="md:w-[25rem] h-[25rem] object-cover group-hover:scale-110 transition-transform duration-500"
+          className="md:w-[25rem] h-[17rem] object-cover group-hover:scale-110 transition-transform duration-500"
         />
 
         {/* Overlay gradient */}
@@ -81,9 +82,9 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
       </div>
 
       {/* Content */}
-      <div className="flex flex-col p-4 items-center text-center">
+      <div className="flex flex-col p-2 items-center text-center">
         {/* Nome do produto */}
-        <h3 className="text-gray-600 text-sm md:text-lg mb-2 line-clamp-1 group-hover:text-rose-300 transition-colors duration-200">
+        <h3 className="text-gray-600 text-sm md:text-lg mb-1 line-clamp-1 group-hover:text-rose-300 transition-colors duration-200">
           {product.name}
         </h3>
 
