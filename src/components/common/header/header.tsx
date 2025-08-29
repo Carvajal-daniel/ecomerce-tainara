@@ -123,33 +123,23 @@ export default function Header({ categories }: HeaderProps) {
                 </Link>
               </li>
 
-              {categories.map((cat) => (
-                <li key={cat.id}>
-                  <Link
-                    href={`/category/${cat.slug}`}
-                    className={`inline-block whitespace-nowrap px-3 py-1.5 rounded-full text-xs font-medium transition-all duration-200 active:scale-95 ${
-                      pathname === `/category/${cat.slug}`
-                        ? "bg-rose-50 text-rose-600 border border-rose-200"
-                        : "bg-gray-50 text-gray-700 border border-gray-200 hover:bg-gray-100"
-                    }`}
-                  >
-                    {cat.name}
-                  </Link>
-                </li>
-              ))}
+         {categories.map((cat) => (
+  <li key={cat.id}>
+    <Link
+      href={`/categoryproduct/${cat.slug}`}
+      className={`inline-block whitespace-nowrap px-3 py-1.5 rounded-full text-xs font-medium transition-all duration-200 active:scale-95 ${
+        pathname === `/categoryproduct/${cat.slug}`
+          ? "bg-rose-50 text-rose-600 border border-rose-200"
+          : "bg-gray-50 text-gray-700 border border-gray-200 hover:bg-gray-100"
+      }`}
+    >
+      {cat.name}
+    </Link>
+  </li>
+))}
 
-              <li>
-                <Link
-                  href="/about"
-                  className={`inline-block whitespace-nowrap px-3 py-1.5 rounded-full text-xs font-medium transition-all duration-200 active:scale-95 ${
-                    pathname === "/about"
-                      ? "bg-rose-50 text-rose-600 border border-rose-200"
-                      : "bg-gray-50 text-gray-700 border border-gray-200 hover:bg-gray-100"
-                  }`}
-                >
-                  Sobre Nós
-                </Link>
-              </li>
+
+            
             </ul>
           </div>
         </div>
