@@ -16,7 +16,7 @@ const AdvantagesCarousel = () => {
       {/* Desktop */}
       <div className="hidden md:grid grid-cols-3 xl:grid-cols-3 sm:ml-12 gap-3 md:gap-1 lg:w-1/2 lg:mx-auto">
         {advantages.map((adv, i) => (
-          <div key={i} className="flex sm:flex-row items-center text-center sm:text-left gap-2 p-2 rounded-xl bg-white">
+          <div key={i} className="flex sm:flex-row border items-center text-center sm:text-left gap-2 p-2 rounded-xl bg-white">
             <div className="flex-shrink-0 p-2 border rounded-full">{adv.icon}</div>
             <div>
               <h3 className="font-medium text-gray-800 text-xs md:text-sm mb-0.5">{adv.title}</h3>

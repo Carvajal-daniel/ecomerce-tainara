@@ -35,7 +35,7 @@ export default function SearchBar({ products }: SearchBarProps) {
         value={query}
         onChange={(e) => setQuery(e.target.value)}
         placeholder="Pesquisar produtos..."
-        className="w-full bg-white pl-4 pr-10 py-2 border rounded-lg focus:outline-none focus:ring-0 focus:border-gray-300 !ring-0 !border-gray-300"
+        className="w-full  bg-white pl-4 pr-10 py-2 border rounded-lg focus:outline-none focus:ring-0 focus:border-gray-300 !ring-0 !border-gray-300"
       />
 
       <button

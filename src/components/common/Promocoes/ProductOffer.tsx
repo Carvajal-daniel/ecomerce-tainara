@@ -77,12 +77,12 @@ const ProductOfferPage = ({ productOffer }: ProductOfferProps) => {
               )}
 
               {/* Container da Imagem */}
-              <div className="relative overflow-hidden bg-gray-50">
+              <div className="relative overflow-hidden bg-gray-50 aspect-[3/4]">
                 <Image
                   src={image}
                   alt={item.product.name}
-                  width={400}
-                  height={400}
+                  fill
+                  loading="lazy"
                   className={`w-full h-[15rem] lg:h-[22rem] object-cover group-hover:scale-110 transition-transform duration-500 ease-out`}
                 />
 

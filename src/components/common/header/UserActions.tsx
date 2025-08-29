@@ -11,12 +11,12 @@ const UserActions = () => {
 
   if (session?.user) {
     return (
-      <div className="flex items-center  space-x-4">
+      <div className="flex items-center  space-x-6">
         <Button
           asChild
           variant="ghost"
           size="sm"
-          className="text-white bg-slate-800 h-9 hover:text-white hover:bg-slate-700 transition-all duration-500 ease-in-out"
+          className="text-slate-700 bg-[#fefefe] h-9 w-30 hover:text-white hover:bg-slate-400 transition-all duration-500 ease-in-out"
         >
           <Link href="/pedidos" className="flex items-center gap-1">
             <ShoppingBagIcon className="w-4 h-4" />
@@ -28,7 +28,7 @@ const UserActions = () => {
           asChild
           variant="ghost"
           size="sm"
-          className="text-white bg-slate-800 h-9 hover:text-white hover:bg-slate-700 transition-all duration-500 ease-in-out"
+          className="text-slate-700 bg-[#fefefefe] h-9 w-28 hover:text-white hover:bg-slate-700 transition-all duration-500 ease-in-out"
         >
           <Link href="/conta" className="flex items-center gap-2">
             <UserIcon className="w-4 h-4" />

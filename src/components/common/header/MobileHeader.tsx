@@ -104,7 +104,7 @@ const MobileHeader = ({ categories }: HeaderProps) => {
 
         {/* Navigation */}
         <div className="p-6">
-          <div className="flex items-center gap-2 text-sm font-bold text-slate-500 uppercase tracking-wide mb-4">
+          <div className="flex items-center md:gap-20 gap-2 text-sm font-bold text-slate-500 uppercase tracking-wide mb-4">
             <ShoppingBag className="w-4 h-4" />
             Categorias
           </div>
@@ -113,12 +113,11 @@ const MobileHeader = ({ categories }: HeaderProps) => {
             {/* All Products Dropdown */}
             <div className="bg-white rounded-lg border border-slate-200 shadow-sm">
               <div className="flex items-center">
-                <Link
-                  href="/produtos"
+                <p
                   className="flex-1 text-slate-700 hover:text-rose-500 font-medium py-3 px-4 rounded-l-lg transition-colors"
                 >
-                  Todos os Produtos
-                </Link>
+                  Buscar por categoria
+                </p>
                 <button
                   onClick={() => setOpenProductsMenu(!openProductsMenu)}
                   className="p-3 hover:bg-slate-50 rounded-r-lg transition-colors"
@@ -155,7 +154,7 @@ const MobileHeader = ({ categories }: HeaderProps) => {
               href="/accessories"
               className="block text-slate-700 hover:text-rose-500 hover:bg-white py-3 px-4 rounded-lg transition-all duration-300"
             >
-              Acessórios
+              Compre pelo Whastapp
             </Link>
 
             <Link

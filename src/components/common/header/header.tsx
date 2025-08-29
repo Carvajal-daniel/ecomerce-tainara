@@ -26,19 +26,24 @@ interface HeaderProps {
 
 export default function Header({ categories }: HeaderProps) {
   return (
-    <header className="bg-gradient-to-r  from-slate-800/90 via-purple-800/90 to-slate-800/90 backdrop-blur-sm sticky top-0 z-50 border-b border-gray-200 shadow-sm">
-      <div className="py-4 px-4 lg:px-6 flex items-center justify-between max-w-7xl mx-auto">
+    <header className="bg-black/90 backdrop-blur-sm sticky top-0 z-50 border-b border-gray-200 shadow-sm">
+      {/* Header principal */}
+      <div className="py-3 px-3 sm:px-4 lg:px-6 flex items-center justify-between max-w-[100rem] mx-auto">
         <Link
           href="/"
-          className="text-2xl font-bold text-white hover:text-rose-400"
+          className="text-xl sm:text-2xl font-bold text-white hover:text-rose-400 transition-colors duration-200"
         >
           E-commerce
         </Link>
 
-        <div className="flex items-center md:space-x-6 space-x-3 ">
+        <div className="flex items-center space-x-2 sm:space-x-3 md:space-x-6">
+          {/* CarPage com melhor responsividade */}
+          <div className="flex-shrink-0">
+            <CarPage />
+          </div>
+          
           {/* Desktop */}
-          <CarPage />
-          <div className="hidden md:flex items-center space-x-4">
+          <div className=" hidden md:flex items-center space-x-8">
             <DesktopHeader categories={categories} />
             <UserActions />
           </div>
@@ -50,8 +55,8 @@ export default function Header({ categories }: HeaderProps) {
         </div>
       </div>
 
-      {/* Navegação categorias */}
-      <nav className=" hidden bg-gray-100 py-2 relative md:flex items-center justify-center">
+      {/* Navegação categorias - DESKTOP */}
+      <nav className="hidden md:flex bg-white py-2 relative items-center justify-center">
         <ul className="flex items-center gap-4">
           <li className="relative group">
             <Link
@@ -67,7 +72,7 @@ export default function Header({ categories }: HeaderProps) {
                 <li key={cat.id}>
                   <Link
                     href={`/category/${cat.slug}`}
-                    className="block rounded-md px-3 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    className="block rounded-md px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors duration-150"
                   >
                     {cat.name}
                   </Link>
@@ -81,7 +86,7 @@ export default function Header({ categories }: HeaderProps) {
               href="/accessories"
               className="text-gray-600 hover:text-rose-400 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200"
             >
-              Acessórios
+              Comprar pelo WhatsApp
             </Link>
           </li>
 
@@ -95,6 +100,51 @@ export default function Header({ categories }: HeaderProps) {
           </li>
         </ul>
       </nav>
+
+      {/* Navegação categorias - MOBILE (scroll horizontal otimizado) */}
+      <nav className="md:hidden bg-white border-t py-1 border-gray-100">
+        <div className="relative">
+          {/* Gradiente para indicar scroll */}
+          <div className="absolute right-0 top-0 bottom-0 w-6 bg-gradient-to-l from-white to-transparent pointer-events-none z-10"></div>
+          
+          <div className="overflow-x-auto scrollbar-hide py-2 px-3">
+            <ul className="flex space-x-1 min-w-max">
+              <li>
+                <Link
+                  href="/produtos"
+                  className="inline-block bg-rose-50 text-rose-600 border border-rose-200 whitespace-nowrap hover:bg-rose-100 px-3 py-1.5 rounded-full text-xs font-medium transition-all duration-200 active:scale-95"
+                >
+                  Todos
+                </Link>
+              </li>
+
+              {categories.map((cat) => (
+                <li key={cat.id}>
+                  <Link
+                    href={`/category/${cat.slug}`}
+                    className="inline-block bg-gray-50 text-gray-700 border border-gray-200 whitespace-nowrap hover:bg-gray-100 hover:border-gray-300 px-3 py-1.5 rounded-full text-xs font-medium transition-all duration-200 active:scale-95"
+                  >
+                    {cat.name}
+                  </Link>
+                </li>
+              ))}
+
+             
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+      {/* Estilos adicionais para esconder scrollbar */}
+      <style jsx>{`
+        .scrollbar-hide {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+        }
+        .scrollbar-hide::-webkit-scrollbar {
+          display: none;
+        }
+      `}</style>
     </header>
   );
 }

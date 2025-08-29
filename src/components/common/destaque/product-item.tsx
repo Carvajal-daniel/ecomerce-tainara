@@ -25,7 +25,7 @@ const handleClick = (id: string, slug: string) => {
 };
 
   return (
-    <div className="grid sm:grid-cols-1 lg:grid-cols-1 md:grid-cols-10 md:gap-6 p-4">
+    <div className="grid sm:grid-cols-1 md:grid-cols-10 md:gap-6 p-2">
       {products?.map((product) => (
         <div
           key={product.id}
@@ -46,6 +46,7 @@ const handleClick = (id: string, slug: string) => {
               height={400}
               src={product.image || "/placeholder.jpg"}
               alt={product.name}
+              loading="lazy"
               className="w-full max-h-[27rem] h-full sm:h-[24rem] md:h-[30rem] lg:w-[40rem] lg:h-[30rem] object-cover transition-transform duration-300 group-hover:scale-105"
             />
 

@@ -59,10 +59,9 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
       )}
 
       {/* Image */}
-      <div className="relative overflow-hidden bg-gray-100">
+    <div className="relative overflow-hidden bg-gray-100 md:aspect-[3/5] aspect-[3/4]">
         <Image
-          width={500}
-          height={500}
+          fill
           src={product.variations[0]?.image_url || "/placeholder.jpg"}
           alt={product.name}
           className="md:w-[25rem] h-[17rem] object-cover group-hover:scale-110 transition-transform duration-500"
