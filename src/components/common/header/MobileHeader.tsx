@@ -42,151 +42,170 @@ const MobileHeader = ({ categories }: HeaderProps) => {
 
   return (
     <Sheet>
-      <SheetTrigger className="md:hidden p-3 rounded-xl transition-all duration-300">
-        <MenuIcon className="w-6 h-6 text-white drop-shadow-sm" />
+      <SheetTrigger className="md:hidden p-2 rounded-full hover:bg-white/20 transition-all duration-300 ">
+        <MenuIcon className="w-6 h-6 text-white drop-shadow-lg" />
       </SheetTrigger>
 
-      <SheetContent className="w-80 p-0 bg-gray-50 border-l border-slate-200">
+      <SheetContent className="w-full max-w-xs p-0 border-none shadow-2xl backdrop-blur-xl">
         <SheetTitle className="sr-only">Menu Mobile</SheetTitle>
 
         {/* User Section */}
-        <div className="p-6 bg-gradient-to-br from-slate-100 to-gray-100 border-b border-slate-200">
-          <div className="flex items-center gap-4 mb-6">
+        <div className="p-4 border-b border-white/10">
+          <div className="flex items-center gap-3 mb-4">
             <div className="relative">
-              <div className="w-12 h-12 rounded-xl bg-white shadow-md flex items-center justify-center">
+              <div className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center overflow-hidden shadow-md">
                 {session?.user?.image ? (
                   <img
                     src={session.user.image}
                     alt="User photo"
-                    className="w-12 h-12 rounded-xl object-cover"
+                    className="w-12 h-12 rounded-full object-cover"
                   />
                 ) : (
                   <User className="w-6 h-6 text-slate-600" />
                 )}
               </div>
               {session?.user && (
-                <div className="absolute -top-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-white"></div>
+                <div className="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 bg-emerald-400 rounded-full border-2 border-white shadow-md"></div>
               )}
             </div>
 
             <div className="flex-1">
-              <h3 className="font-semibold text-slate-800">
+              <h2 className="font-semibold text-base text-slate-800">
                 {session?.user
-                  ? `Olá, ${session.user.name?.split(" ")[0]}!`
+                  ? `${session.user.name?.split(" ")[0]} ✨`
                   : "Bem-vindo!"}
-              </h3>
-              {session?.user && (
-                <p className="text-sm text-slate-600">Bom ter você aqui ✨</p>
-              )}
+              </h2>
+              <p className="text-slate-500 text-xs">
+                {session?.user ? "Pronto para comprar?" : "Faça login para continuar"}
+              </p>
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-3">
+          <div className="flex gap-2">
             <Link
               href={session?.user ? "/minha-conta" : "/authentication"}
-              className="flex items-center justify-center gap-2 py-3 px-4 bg-white hover:bg-gray-50 border border-slate-200 text-slate-700 rounded-lg shadow-sm hover:shadow-md transition-all duration-300"
+              className="flex-1 flex items-center justify-center gap-1.5 py-2.5 px-2 rounded-xl border border-slate-200 text-slate-700 text-sm hover:border-rose-300 hover:text-rose-600 transition-all duration-300 hover:shadow-md"
             >
               <User className="w-4 h-4" />
-              <span className="text-sm font-medium">
-                {session?.user ? "Conta" : "Login"}
-              </span>
+              <span>{session?.user ? "Perfil" : "Entrar"}</span>
             </Link>
 
             <Link
               href={session?.user ? "/pedidos" : "/authentication"}
-              className="flex items-center justify-center gap-2 py-3 px-4 bg-slate-600 hover:bg-slate-700 text-white rounded-lg shadow-sm hover:shadow-md transition-all duration-300"
+              className="flex-1 flex items-center justify-center gap-1.5 py-2.5 px-2 rounded-xl text-white text-sm font-medium shadow-md hover:shadow-lg transition-all duration-300 border border-slate-800 hover:border-slate-900"
+              style={{
+                background: "linear-gradient(135deg, #1e293b 0%, #334155 100%)",
+              }}
             >
               <Package className="w-4 h-4" />
-              <span className="text-sm font-medium">Pedidos</span>
+              <span>Pedidos</span>
             </Link>
           </div>
         </div>
 
         {/* Navigation */}
-        <div className="p-6">
-          <div className="flex items-center md:gap-20 gap-2 text-sm font-bold text-slate-500 uppercase tracking-wide mb-4">
-            <ShoppingBag className="w-4 h-4" />
-            Categorias
+        <div className="p-4 space-y-4">
+          <div className="flex items-center gap-2">
+            <div className="w-6 h-6 rounded-full border border-slate-300 flex items-center justify-center">
+              <ShoppingBag className="w-3.5 h-3.5 text-slate-600" />
+            </div>
+            <span className="font-bold text-slate-700 text-sm">Explorar</span>
           </div>
 
-          <nav className="space-y-2">
-            {/* All Products Dropdown */}
-            <div className="bg-white rounded-lg border border-slate-200 shadow-sm">
-              <div className="flex items-center">
-                <p
-                  className="flex-1 text-slate-700 hover:text-rose-500 font-medium py-3 px-4 rounded-l-lg transition-colors"
-                >
-                  Buscar por categoria
-                </p>
-                <button
-                  onClick={() => setOpenProductsMenu(!openProductsMenu)}
-                  className="p-3 hover:bg-slate-50 rounded-r-lg transition-colors"
-                >
-                  <ChevronDown
-                    className={`w-4 h-4 text-slate-500 transition-transform duration-300 ${
-                      openProductsMenu ? "rotate-180" : ""
-                    }`}
-                  />
-                </button>
-              </div>
+          <nav className="space-y-3">
+            {/* Categories Dropdown */}
+            <div className="rounded-xl border border-slate-200 overflow-hidden hover:border-slate-300 transition-all duration-300">
+              <button
+                onClick={() => setOpenProductsMenu(!openProductsMenu)}
+                className="w-full flex items-center justify-between px-3 py-3 hover:bg-slate-50 transition-all duration-300 text-sm font-medium"
+              >
+                <span className="text-slate-700">Categorias</span>
+                <ChevronDown
+                  className={`w-4 h-4 text-slate-500 transition-all duration-300 ${
+                    openProductsMenu ? "rotate-180 text-rose-500" : ""
+                  }`}
+                />
+              </button>
 
               {openProductsMenu && (
-                <div className="border-t border-slate-200 bg-slate-50 rounded-b-lg">
-                  <ul className="p-2 space-y-1">
+                <div className="border-t border-slate-100">
+                  <div className="p-2 space-y-1">
                     {categories.map((cat) => (
-                      <li key={cat.id}>
-                        <Link
-                          href={`/category/${cat.slug}`}
-                          className="block text-sm text-slate-600 hover:text-rose-500 hover:bg-white py-2 px-3 rounded transition-all duration-300"
-                          onClick={() => setOpenProductsMenu(false)}
-                        >
-                          {cat.name}
-                        </Link>
-                      </li>
+                      <Link
+                        key={cat.id}
+                        href={`/category/${cat.slug}`}
+                        className="block text-slate-600 hover:text-rose-500 py-2 px-3 rounded-lg hover:bg-slate-50 transition-all duration-300 text-sm"
+                        onClick={() => setOpenProductsMenu(false)}
+                      >
+                        {cat.name}
+                      </Link>
                     ))}
-                  </ul>
+                  </div>
                 </div>
               )}
             </div>
 
-            {/* Other Links */}
+            {/* Menu Items */}
             <Link
               href="/accessories"
-              className="block text-slate-700 hover:text-rose-500 hover:bg-white py-3 px-4 rounded-lg transition-all duration-300"
+              className="flex items-center gap-2 px-3 py-3 rounded-xl border border-transparent hover:border-slate-200 hover:bg-slate-50 transition-all duration-300 text-sm"
             >
-              Compre pelo Whastapp
+              <div className="w-2.5 h-2.5 rounded-full bg-emerald-400"></div>
+              <span className="font-medium text-slate-700">Compre pelo WhatsApp</span>
             </Link>
 
             <Link
               href="/about"
-              className="block text-slate-700 hover:text-rose-500 hover:bg-white py-3 px-4 rounded-lg transition-all duration-300"
+              className="flex items-center gap-2 px-3 py-3 rounded-xl border border-transparent hover:border-slate-200 hover:bg-slate-50 transition-all duration-300 text-sm"
             >
-              Sobre Nós
+              <div className="w-2.5 h-2.5 rounded-full bg-blue-400"></div>
+              <span className="font-medium text-slate-700">Sobre Nós</span>
             </Link>
 
             <Link
               href="/ofertas"
-              className="flex items-center justify-center gap-2 text-white font-bold py-3 px-4 rounded-lg bg-gradient-to-r from-rose-500 to-pink-500 hover:from-rose-600 hover:to-pink-600 shadow-md hover:shadow-lg transition-all duration-300"
+              className="relative flex items-center justify-center gap-2 px-3 py-3 rounded-xl text-white text-sm font-semibold shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden"
+              style={{
+                background:
+                  "linear-gradient(135deg, #ec4899 0%, #f97316 50%, #eab308 100%)",
+                backgroundSize: "200% 200%",
+                animation: "gradient 3s ease infinite",
+              }}
             >
-              <Sparkles className="w-4 h-4" />
-              Ofertas Especiais
-              <span>🔥</span>
+              <div className="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <Sparkles className="w-4 h-4 animate-spin" />
+              <span className="relative z-10">Ofertas</span>
+              <span className="text-lg animate-bounce">🔥</span>
             </Link>
           </nav>
 
           {/* Logout Button */}
           {session?.user && (
-            <div className="border-t border-slate-200 pt-6 mt-8">
+            <div className="pt-3 mt-4 border-t border-slate-100">
               <button
                 onClick={() => authClient.signOut()}
-                className="flex items-center gap-3 w-full py-3 px-4 text-slate-600 hover:text-red-500 hover:bg-red-50 rounded-lg border border-slate-200 hover:border-red-200 transition-all duration-300"
+                className="w-full flex items-center justify-center gap-2 py-2.5 text-red-500 hover:text-red-600 border border-red-200 hover:border-red-300 rounded-xl hover:bg-red-50 transition-all duration-300 text-sm font-medium"
               >
                 <LogOut className="w-4 h-4" />
-                <span className="font-medium">Sair da Conta</span>
+                <span>Sair</span>
               </button>
             </div>
           )}
         </div>
+
+        <style jsx>{`
+          @keyframes gradient {
+            0% {
+              background-position: 0% 50%;
+            }
+            50% {
+              background-position: 100% 50%;
+            }
+            100% {
+              background-position: 0% 50%;
+            }
+          }
+        `}</style>
       </SheetContent>
     </Sheet>
   );

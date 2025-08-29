@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation"; // 👈 Import aqui
 import { ChevronDown } from "lucide-react";
 import DesktopHeader from "./DesktopHeader";
 import MobileHeader from "./MobileHeader";
@@ -25,6 +26,8 @@ interface HeaderProps {
 }
 
 export default function Header({ categories }: HeaderProps) {
+  const pathname = usePathname(); // 👈 pega rota atual
+
   return (
     <header className="bg-black/90 backdrop-blur-sm sticky top-0 z-50 border-b border-gray-200 shadow-sm">
       {/* Header principal */}
@@ -37,11 +40,10 @@ export default function Header({ categories }: HeaderProps) {
         </Link>
 
         <div className="flex items-center space-x-2 sm:space-x-3 md:space-x-6">
-          {/* CarPage com melhor responsividade */}
           <div className="flex-shrink-0">
             <CarPage />
           </div>
-          
+
           {/* Desktop */}
           <div className=" hidden md:flex items-center space-x-8">
             <DesktopHeader categories={categories} />
@@ -101,18 +103,21 @@ export default function Header({ categories }: HeaderProps) {
         </ul>
       </nav>
 
-      {/* Navegação categorias - MOBILE (scroll horizontal otimizado) */}
+      {/* Navegação categorias - MOBILE */}
       <nav className="md:hidden bg-white border-t py-1 border-gray-100">
         <div className="relative">
-          {/* Gradiente para indicar scroll */}
           <div className="absolute right-0 top-0 bottom-0 w-6 bg-gradient-to-l from-white to-transparent pointer-events-none z-10"></div>
-          
+
           <div className="overflow-x-auto scrollbar-hide py-2 px-3">
             <ul className="flex space-x-1 min-w-max">
               <li>
                 <Link
                   href="/produtos"
-                  className="inline-block bg-rose-50 text-rose-600 border border-rose-200 whitespace-nowrap hover:bg-rose-100 px-3 py-1.5 rounded-full text-xs font-medium transition-all duration-200 active:scale-95"
+                  className={`inline-block whitespace-nowrap px-3 py-1.5 rounded-full text-xs font-medium transition-all duration-200 active:scale-95 ${
+                    pathname === "/produtos"
+                      ? "bg-rose-50 text-rose-600 border border-rose-200"
+                      : "bg-gray-50 text-gray-700 border border-gray-200 hover:bg-gray-100"
+                  }`}
                 >
                   Todos
                 </Link>
@@ -122,20 +127,34 @@ export default function Header({ categories }: HeaderProps) {
                 <li key={cat.id}>
                   <Link
                     href={`/category/${cat.slug}`}
-                    className="inline-block bg-gray-50 text-gray-700 border border-gray-200 whitespace-nowrap hover:bg-gray-100 hover:border-gray-300 px-3 py-1.5 rounded-full text-xs font-medium transition-all duration-200 active:scale-95"
+                    className={`inline-block whitespace-nowrap px-3 py-1.5 rounded-full text-xs font-medium transition-all duration-200 active:scale-95 ${
+                      pathname === `/category/${cat.slug}`
+                        ? "bg-rose-50 text-rose-600 border border-rose-200"
+                        : "bg-gray-50 text-gray-700 border border-gray-200 hover:bg-gray-100"
+                    }`}
                   >
                     {cat.name}
                   </Link>
                 </li>
               ))}
 
-             
+              <li>
+                <Link
+                  href="/about"
+                  className={`inline-block whitespace-nowrap px-3 py-1.5 rounded-full text-xs font-medium transition-all duration-200 active:scale-95 ${
+                    pathname === "/about"
+                      ? "bg-rose-50 text-rose-600 border border-rose-200"
+                      : "bg-gray-50 text-gray-700 border border-gray-200 hover:bg-gray-100"
+                  }`}
+                >
+                  Sobre Nós
+                </Link>
+              </li>
             </ul>
           </div>
         </div>
       </nav>
 
-      {/* Estilos adicionais para esconder scrollbar */}
       <style jsx>{`
         .scrollbar-hide {
           -ms-overflow-style: none;
