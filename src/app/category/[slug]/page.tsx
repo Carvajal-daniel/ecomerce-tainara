@@ -1,4 +1,5 @@
-import CategoryProduct from "@/components/common/CategoryProduct/CategoryProduct"
+
+import CategoryProduct from "@/components/common/CategoryProducts/CategoryProduct"
 
 interface CategoryProductPageProps {
   params: Promise<{ slug: string }>

@@ -22,7 +22,7 @@ const AllProducts = async () => {
       {/* Products Content */}
       <ProductsClient 
         products={TodosOsProdutos || []} 
-        allCategories={TodasAsCategorias || []} // <-- passar todas categorias
+        allCategories={TodasAsCategorias || []} 
       />
     </div>
   )

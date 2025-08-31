@@ -29,6 +29,8 @@ interface ProductCardProps {
   product: Product;
 }
 
+
+
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
@@ -39,6 +41,10 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
       maximumFractionDigits: 2,
     });
   };
+
+  const handleGoBack = () => {
+  router.back();
+};
 
   const handleClick = () => {
     setLoading(true);

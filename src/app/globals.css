@@ -127,3 +127,10 @@
     flex-basis: 100% !important; /* Faz o CarouselItem ocupar 1 card por linha */
   }
 }
+
+
+.truncate-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

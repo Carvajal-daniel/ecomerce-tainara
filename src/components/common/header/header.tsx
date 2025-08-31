@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation"; // 👈 Import aqui
+import { usePathname } from "next/navigation";
 import { ChevronDown } from "lucide-react";
 import DesktopHeader from "./DesktopHeader";
 import MobileHeader from "./MobileHeader";
@@ -26,7 +26,7 @@ interface HeaderProps {
 }
 
 export default function Header({ categories }: HeaderProps) {
-  const pathname = usePathname(); // 👈 pega rota atual
+  const pathname = usePathname();
 
   return (
     <header className="bg-black/90 backdrop-blur-sm sticky top-0 z-50 border-b border-gray-200 shadow-sm">
@@ -63,7 +63,11 @@ export default function Header({ categories }: HeaderProps) {
           <li className="relative group">
             <Link
               href="/produtos"
-              className="flex items-center gap-1 text-gray-600 hover:text-rose-400 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200"
+              className={`flex items-center gap-1 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 ${
+                pathname === "/produtos"
+                  ? "text-rose-500 font-bold"
+                  : "text-gray-600 hover:text-rose-400"
+              }`}
             >
               Todos os Produtos
               <ChevronDown className="w-4 h-4 transition-transform duration-200 group-hover:rotate-180" />
@@ -74,7 +78,11 @@ export default function Header({ categories }: HeaderProps) {
                 <li key={cat.id}>
                   <Link
                     href={`/category/${cat.slug}`}
-                    className="block rounded-md px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors duration-150"
+                    className={`block rounded-md px-3 py-2 text-sm transition-colors duration-150 ${
+                      pathname === `/category/${cat.slug}`
+                        ? "text-rose-500 font-medium bg-rose-50"
+                        : "text-gray-700 hover:bg-gray-100"
+                    }`}
                   >
                     {cat.name}
                   </Link>
@@ -86,7 +94,11 @@ export default function Header({ categories }: HeaderProps) {
           <li>
             <Link
               href="/accessories"
-              className="text-gray-600 hover:text-rose-400 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200"
+              className={`px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 ${
+                pathname === "/accessories"
+                  ? "text-rose-500 font-bold"
+                  : "text-gray-600 hover:text-rose-400"
+              }`}
             >
               Comprar pelo WhatsApp
             </Link>
@@ -95,7 +107,11 @@ export default function Header({ categories }: HeaderProps) {
           <li>
             <Link
               href="/about"
-              className="text-gray-600 hover:text-rose-400 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200"
+              className={`px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 ${
+                pathname === "/about"
+                  ? "text-rose-500 font-bold"
+                  : "text-gray-600 hover:text-rose-400"
+              }`}
             >
               Sobre Nós
             </Link>
@@ -104,7 +120,7 @@ export default function Header({ categories }: HeaderProps) {
       </nav>
 
       {/* Navegação categorias - MOBILE */}
-      <nav className="md:hidden bg-white border-t py-1 border-gray-100">
+      <nav className="md:hidden sm:flex sm:justify-center sm:items-center justify-center bg-white border-t py-1 border-gray-100">
         <div className="relative">
           <div className="absolute right-0 top-0 bottom-0 w-6 bg-gradient-to-l from-white to-transparent pointer-events-none z-10"></div>
 
@@ -123,23 +139,20 @@ export default function Header({ categories }: HeaderProps) {
                 </Link>
               </li>
 
-         {categories.map((cat) => (
-  <li key={cat.id}>
-    <Link
-      href={`/categoryproduct/${cat.slug}`}
-      className={`inline-block whitespace-nowrap px-3 py-1.5 rounded-full text-xs font-medium transition-all duration-200 active:scale-95 ${
-        pathname === `/categoryproduct/${cat.slug}`
-          ? "bg-rose-50 text-rose-600 border border-rose-200"
-          : "bg-gray-50 text-gray-700 border border-gray-200 hover:bg-gray-100"
-      }`}
-    >
-      {cat.name}
-    </Link>
-  </li>
-))}
-
-
-            
+              {categories.map((cat) => (
+                <li key={cat.id}>
+                  <Link
+                    href={`/category/${cat.slug}`}
+                    className={`inline-block whitespace-nowrap px-3 py-1.5 rounded-full text-xs font-medium transition-all duration-200 active:scale-95 ${
+                      pathname === `/category/${cat.slug}`
+                        ? "bg-rose-50 text-rose-600 border border-rose-200"
+                        : "bg-gray-50 text-gray-700 border border-gray-200 hover:bg-gray-100"
+                    }`}
+                  >
+                    {cat.name}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
         </div>

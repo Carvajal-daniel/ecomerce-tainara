@@ -8,44 +8,39 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { ShoppingBasket } from "lucide-react";
+import { ShoppingBasket, Trash } from "lucide-react";
+import Image from "next/image"; // Adicione esta importação
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-
-interface CartItem {
-  id: string;
-  name: string;
-  price: number;
-}
+import { useCart } from "@/context/CartContext";
 
 export default function CarPage() {
-  const [isClient, setIsClient] = useState(false); // só renderiza após o hydration
+  const [isClient, setIsClient] = useState(false);
   const router = useRouter();
+  const { cartItems, removeItem } = useCart();
 
   useEffect(() => {
     setIsClient(true);
   }, []);
 
-  if (!isClient) return null; // evita mismatch SSR
+  if (!isClient) return null;
 
-  // Produtos de exemplo
-  const cartItems: CartItem[] = [
-    { id: "1", name: "Tênis Esportivo", price: 199.9 },
-    { id: "2", name: "Camiseta Casual", price: 49.9 },
-    { id: "3", name: "Calça Jeans", price: 89.9 },
-    { id: "4", name: "Boné", price: 29.9 },
-    { id: "5", name: "Mochila", price: 129.9 },
-    { id: "6", name: "Relógio", price: 249.9 },
-  ];
-
-  const totalPrice = cartItems.reduce((sum, item) => sum + item.price, 0);
+  const totalPrice = cartItems.reduce(
+    (sum, item) => sum + (item.price / 100) * item.quantity,
+    0
+  );
 
   return (
     <div>
       <Sheet>
         <SheetTrigger asChild>
-          <button className="p-2">
+          <button className="p-2 relative">
             <ShoppingBasket className="w-6 h-6 text-gray-100" />
+            {cartItems.length > 0 && (
+              <span className="absolute -top-1 -right-1 bg-rose-500 text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center">
+                {cartItems.length}
+              </span>
+            )}
           </button>
         </SheetTrigger>
 
@@ -77,9 +72,42 @@ export default function CarPage() {
               </div>
             ) : (
               cartItems.map((item) => (
-                <div key={item.id} className="flex justify-between items-center p-3 border-b">
-                  <span>{item.name}</span>
-                  <span>R$ {item.price.toFixed(2)}</span>
+                <div
+                  key={item.id}
+                  className="flex items-center gap-4 p-4 border-b border-gray-200"
+                >
+                  {/* Imagem do produto */}
+                  <div className="relative flex-shrink-0 w-20 h-20 rounded-md overflow-hidden border border-gray-200">
+                    <Image
+                      src={item.image}
+                      alt={item.name}
+                      fill
+                      style={{ objectFit: "cover" }}
+                    />
+                  </div>
+
+                  {/* Nome e quantidade */}
+                  <div className="flex-1 flex flex-col justify-center">
+                    <h3 className="text-sm font-medium text-gray-800">
+                      {item.name}
+                    </h3>
+                    <p className="text-xs text-gray-500 mt-1">
+                      Quantidade: {item.quantity}
+                    </p>
+                  </div>
+
+                  {/* Preço e botão de remover */}
+                  <div className="flex-shrink-0 text-right">
+                    <span className="block text-sm font-semibold text-gray-900">
+                      R$ {((item.price / 100) * item.quantity).toFixed(2)}
+                    </span>
+                    <button
+                      onClick={() => removeItem(item.id)}
+                      className="mt-1 text-xs text-gray-400 hover:text-red-500 transition-colors"
+                    >
+                      Remover
+                    </button>
+                  </div>
                 </div>
               ))
             )}
