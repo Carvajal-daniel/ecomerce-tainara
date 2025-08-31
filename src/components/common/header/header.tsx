@@ -1,5 +1,6 @@
 "use client";
 
+import { useRef, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ChevronDown } from "lucide-react";
@@ -27,6 +28,26 @@ interface HeaderProps {
 
 export default function Header({ categories }: HeaderProps) {
   const pathname = usePathname();
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const container = scrollRef.current;
+    if (!container) return;
+
+    const activeLink = container.querySelector(
+      `a[href="${pathname}"]`
+    ) as HTMLElement | null;
+
+    if (activeLink) {
+      // Usa requestAnimationFrame para sincronizar com a renderização do navegador
+      requestAnimationFrame(() => {
+        activeLink.scrollIntoView({
+          behavior: 'smooth',
+          inline: 'center'
+        });
+      });
+    }
+  }, [pathname]);
 
   return (
     <header className="bg-black/90 backdrop-blur-sm sticky top-0 z-50 border-b border-gray-200 shadow-sm">
@@ -45,7 +66,7 @@ export default function Header({ categories }: HeaderProps) {
           </div>
 
           {/* Desktop */}
-          <div className=" hidden md:flex items-center space-x-8">
+          <div className="hidden md:flex items-center space-x-8">
             <DesktopHeader categories={categories} />
             <UserActions />
           </div>
@@ -124,7 +145,10 @@ export default function Header({ categories }: HeaderProps) {
         <div className="relative">
           <div className="absolute right-0 top-0 bottom-0 w-6 bg-gradient-to-l from-white to-transparent pointer-events-none z-10"></div>
 
-          <div className="overflow-x-auto scrollbar-hide py-2 px-3">
+          <div
+            ref={scrollRef}
+            className="overflow-x-auto scrollbar-hide py-2 px-3"
+          >
             <ul className="flex space-x-1 min-w-max">
               <li>
                 <Link
@@ -157,16 +181,6 @@ export default function Header({ categories }: HeaderProps) {
           </div>
         </div>
       </nav>
-
-      <style jsx>{`
-        .scrollbar-hide {
-          -ms-overflow-style: none;
-          scrollbar-width: none;
-        }
-        .scrollbar-hide::-webkit-scrollbar {
-          display: none;
-        }
-      `}</style>
     </header>
   );
 }
