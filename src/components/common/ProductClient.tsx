@@ -1,10 +1,10 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { ArrowLeft, Heart, Share2, ShoppingCart, Truck, Shield, RotateCcw } from "lucide-react";
 import { useCart } from "@/context/CartContext";
+import toast from 'react-hot-toast';
 
-// ... interfaces e props ...
 interface Variation {
   price: number;
   image_url: string;
@@ -20,9 +20,9 @@ interface Product {
 
 interface Feature {
   id: string;
-  product_id: string; 
+  product_id: string;
   is_offer?: boolean;
-  offer?: number | null; 
+  offer?: number | null;
   order?: number | null;
   created_at?: Date | string;
   updated_at?: Date | string;
@@ -40,9 +40,9 @@ interface Props {
 const ProductClient: React.FC<Props> = ({ product, feature }) => {
   const [quantity, setQuantity] = useState(1);
   const [isLiked, setIsLiked] = useState(false);
+  const [toastPosition, setToastPosition] = useState<'top-center' | 'bottom-center' | 'bottom-right'>('bottom-right');
   const { addItem } = useCart();
 
-  // Tratamento de variações e oferta de forma segura
   const variation = product.variations[0];
   const offerPercent = Math.max(0, Math.min(100, feature?.offer ?? 0));
   const hasOffer = Boolean(feature?.is_offer) && offerPercent > 0;
@@ -69,8 +69,26 @@ const ProductClient: React.FC<Props> = ({ product, feature }) => {
       },
       quantity
     );
+    toast.success(`${quantity} ${product.name} adicionado(s) ao carrinho!`, {
+      position: toastPosition
+    });
   };
-  
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 768) {
+        setToastPosition('top-center');
+      } else {
+        setToastPosition('bottom-right');
+      }
+    };
+
+    handleResize();
+    window.addEventListener('resize', handleResize);
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   return (
     <>
       <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-100">
