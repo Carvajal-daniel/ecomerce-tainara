@@ -1,13 +1,10 @@
-// Seu componente ProductClient
 "use client";
 
 import React, { useState } from "react";
 import { ArrowLeft, Heart, Share2, ShoppingCart, Truck, Shield, RotateCcw } from "lucide-react";
-import { useCart } from "@/context/CartContext"; // Adicione esta importação
-
+import { useCart } from "@/context/CartContext";
 
 // ... interfaces e props ...
-
 interface Variation {
   price: number;
   image_url: string;
@@ -22,8 +19,17 @@ interface Product {
 }
 
 interface Feature {
-  offer?: number;
+  id: string;
+  product_id: string; 
   is_offer?: boolean;
+  offer?: number | null; 
+  order?: number | null;
+  created_at?: Date | string;
+  updated_at?: Date | string;
+  starts_at?: Date | string | null;
+  ends_at?: Date | string | null;
+  is_new?: boolean;
+  is_featured?: boolean;
 }
 
 interface Props {
@@ -34,8 +40,9 @@ interface Props {
 const ProductClient: React.FC<Props> = ({ product, feature }) => {
   const [quantity, setQuantity] = useState(1);
   const [isLiked, setIsLiked] = useState(false);
-  const { addItem } = useCart(); // Use o hook aqui
+  const { addItem } = useCart();
 
+  // Tratamento de variações e oferta de forma segura
   const variation = product.variations[0];
   const offerPercent = Math.max(0, Math.min(100, feature?.offer ?? 0));
   const hasOffer = Boolean(feature?.is_offer) && offerPercent > 0;
