@@ -7,7 +7,7 @@ import { ChevronDown } from "lucide-react";
 import DesktopHeader from "./DesktopHeader";
 import MobileHeader from "./MobileHeader";
 import UserActions from "./UserActions";
-import CarPage from "../car";
+import CartItem from "../cart/cartItem";
 
 interface Product {
   id: string;
@@ -39,7 +39,6 @@ export default function Header({ categories }: HeaderProps) {
     ) as HTMLElement | null;
 
     if (activeLink) {
-      // Usa requestAnimationFrame para sincronizar com a renderização do navegador
       requestAnimationFrame(() => {
         activeLink.scrollIntoView({
           behavior: 'smooth',
@@ -61,17 +60,19 @@ export default function Header({ categories }: HeaderProps) {
         </Link>
 
         <div className="flex items-center space-x-2 sm:space-x-3 md:space-x-6">
-          <div className="flex-shrink-0">
-            <CarPage />
+          {/* CartItem mobile */}
+          <div className="md:hidden flex-shrink-0">
+            <CartItem />
           </div>
 
           {/* Desktop */}
           <div className="hidden md:flex items-center space-x-8">
             <DesktopHeader categories={categories} />
+            <CartItem />
             <UserActions />
           </div>
 
-          {/* Mobile */}
+          {/* Mobile menu */}
           <div className="flex md:hidden items-center">
             <MobileHeader categories={categories} />
           </div>
@@ -94,15 +95,15 @@ export default function Header({ categories }: HeaderProps) {
               <ChevronDown className="w-4 h-4 transition-transform duration-200 group-hover:rotate-180" />
             </Link>
 
-            <ul className="invisible opacity-0 translate-y-1 group-hover:visible group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-150 absolute left-0 top-full mt-2 min-w-56 bg-white border border-gray-200 shadow-lg rounded-md p-2 z-50 max-h-96 overflow-auto">
+            <ul className="invisible opacity-0 translate-y-1 group-hover:visible group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-200 absolute left-0 top-full mt-2 min-w-56 bg-white border border-gray-200 shadow-lg rounded-md p-2 z-50 max-h-96 overflow-auto">
               {categories.map((cat) => (
                 <li key={cat.id}>
                   <Link
                     href={`/category/${cat.slug}`}
-                    className={`block rounded-md px-3 py-2 text-sm transition-colors duration-150 ${
+                    className={`block rounded-md px-3 py-2 text-sm transition-all duration-150 ${
                       pathname === `/category/${cat.slug}`
                         ? "text-rose-500 font-medium bg-rose-50"
-                        : "text-gray-700 hover:bg-gray-100"
+                        : "text-gray-700 hover:bg-gray-100 hover:shadow-sm"
                     }`}
                   >
                     {cat.name}
@@ -118,7 +119,7 @@ export default function Header({ categories }: HeaderProps) {
               className={`px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 ${
                 pathname === "/accessories"
                   ? "text-rose-500 font-bold"
-                  : "text-gray-600 hover:text-rose-400"
+                  : "text-gray-600 hover:text-rose-400 hover:shadow-sm"
               }`}
             >
               Comprar pelo WhatsApp
@@ -131,7 +132,7 @@ export default function Header({ categories }: HeaderProps) {
               className={`px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 ${
                 pathname === "/about"
                   ? "text-rose-500 font-bold"
-                  : "text-gray-600 hover:text-rose-400"
+                  : "text-gray-600 hover:text-rose-400 hover:shadow-sm"
               }`}
             >
               Sobre Nós
@@ -142,18 +143,18 @@ export default function Header({ categories }: HeaderProps) {
 
       {/* Navegação categorias - MOBILE */}
       <nav className="md:hidden sm:flex sm:justify-center sm:items-center justify-center bg-white border-t py-1 border-gray-100">
-        <div className="relative">
+        <div className="relative w-full">
           <div className="absolute right-0 top-0 bottom-0 w-6 bg-gradient-to-l from-white to-transparent pointer-events-none z-10"></div>
 
           <div
             ref={scrollRef}
-            className="overflow-x-auto scrollbar-hide py-2 px-3"
+            className="overflow-x-auto scrollbar-hide py-2 px-3 snap-x"
           >
             <ul className="flex space-x-1 min-w-max">
               <li>
                 <Link
                   href="/produtos"
-                  className={`inline-block whitespace-nowrap px-3 py-1.5 rounded-full text-xs font-medium transition-all duration-200 active:scale-95 ${
+                  className={`inline-block whitespace-nowrap px-3 py-1.5 rounded-full text-xs font-medium transition-all duration-200 active:scale-95 hover:shadow-sm ${
                     pathname === "/produtos"
                       ? "bg-rose-50 text-rose-600 border border-rose-200"
                       : "bg-gray-50 text-gray-700 border border-gray-200 hover:bg-gray-100"
@@ -167,7 +168,7 @@ export default function Header({ categories }: HeaderProps) {
                 <li key={cat.id}>
                   <Link
                     href={`/category/${cat.slug}`}
-                    className={`inline-block whitespace-nowrap px-3 py-1.5 rounded-full text-xs font-medium transition-all duration-200 active:scale-95 ${
+                    className={`inline-block whitespace-nowrap px-3 py-1.5 rounded-full text-xs font-medium transition-all duration-200 active:scale-95 hover:shadow-sm ${
                       pathname === `/category/${cat.slug}`
                         ? "bg-rose-50 text-rose-600 border border-rose-200"
                         : "bg-gray-50 text-gray-700 border border-gray-200 hover:bg-gray-100"

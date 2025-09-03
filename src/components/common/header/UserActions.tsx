@@ -1,81 +1,104 @@
 "use client";
 
+import { useState, useRef, useEffect } from "react";
 import { authClient } from "@/lib/auth-client";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { LogOutIcon, ShoppingBagIcon, UserIcon, LogInIcon } from "lucide-react";
+import { LogOutIcon, ShoppingBagIcon, UserIcon, LogInIcon, ChevronDown } from "lucide-react";
 
 const UserActions = () => {
   const { data: session } = authClient.useSession();
+  const [open, setOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  // Fecha o dropdown ao clicar fora
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   if (session?.user) {
     return (
-      <div className="flex items-center  space-x-6">
-        <Button
-          asChild
-          variant="ghost"
-          size="sm"
-          className="text-slate-700 bg-[#fefefe] h-9 w-30 hover:text-white hover:bg-slate-400 transition-all duration-500 ease-in-out"
+      <div className="relative flex items-center" ref={dropdownRef}>
+        {/* Botão de abrir/fechar o dropdown */}
+        <button
+          onClick={() => setOpen(!open)}
+          className="flex items-center gap-2 bg-slate-100 px-3 py-1 rounded-full text-slate-900 hover:bg-slate-200 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-slate-300 focus:ring-offset-2"
         >
-          <Link href="/pedidos" className="flex items-center gap-1">
-            <ShoppingBagIcon className="w-4 h-4" />
-            Pedidos
-          </Link>
-        </Button>
+          {/* Avatar do usuário */}
+          <Avatar className="w-8.5 h-8 border-2 border-slate-300">
+            <AvatarImage
+              src={session.user.image ?? undefined}
+              alt={session.user.name ?? "Avatar do usuário"}
+            />
+            <AvatarFallback className="bg-rose-400 text-white font-bold text-sm">
+              {session.user.name?.charAt(0).toUpperCase() ?? "U"}
+            </AvatarFallback>
+          </Avatar>
 
-        <Button
-          asChild
-          variant="ghost"
-          size="sm"
-          className="text-slate-700 bg-[#fefefefe] h-9 w-28 hover:text-white hover:bg-slate-700 transition-all duration-500 ease-in-out"
-        >
-          <Link href="/conta" className="flex items-center gap-2">
-            <UserIcon className="w-4 h-4" />
-            Conta
-          </Link>
-        </Button>
+          {/* Nome e seta */}
+          <span className="text-sm md:text-md font-medium max-w-[100px] truncate hidden sm:block">
+            {session.user.name}
+          </span>
+          <ChevronDown className={`w-4 h-4 transition-transform ${open ? "rotate-180" : ""}`} />
+        </button>
 
-        <Avatar className="w-8 h-8 border-2 border-gray-200">
-          <AvatarImage
-            src={session.user.image ?? undefined}
-            alt={session.user.name ?? "Avatar do usuário"}
-          />
-          <AvatarFallback className="bg-rose-400 text-white font-bold text-sm">
-            {session.user.name?.charAt(0).toUpperCase() ?? "U"}
-          </AvatarFallback>
-        </Avatar>
+        {/* Dropdown - Animação de entrada e saída */}
+        {open && (
+          <div
+            className="absolute top-full right-0 mt-2 w-56 p-2 bg-white rounded-lg shadow-xl border border-gray-100 z-50 animate-fade-in"
+          >
+            <div className="flex flex-col gap-1">
+              {/* Pedidos */}
+              <Link
+                href="/pedidos"
+                className="flex items-center gap-2 px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors duration-200"
+              >
+                <ShoppingBagIcon className="w-4 h-4 text-slate-500" />
+                <span className="font-medium">Meus Pedidos</span>
+              </Link>
+              
+              {/* Conta */}
+              <Link
+                href="/conta"
+                className="flex items-center gap-2 px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors duration-200"
+              >
+                <UserIcon className="w-4 h-4 text-slate-500" />
+                <span className="font-medium">Minha Conta</span>
+              </Link>
 
-        <span className="text-md text-white font-medium max-w-32 truncate">
-          {session.user.name}
-        </span>
+              {/* Linha separadora */}
+              <div className="h-px w-full bg-slate-200 my-1" />
 
-        <Button
-          onClick={() => authClient.signOut()}
-          variant="outline"
-          size="sm"
-          className="text-gray-600 h-9 hover:text-gray-800 hover:bg-gray-50 border-gray-300"
-        >
-          <LogOutIcon className="w-4 h-4 mr-1" />
-          Sair
-        </Button>
+              {/* Sair */}
+              <button
+                onClick={() => authClient.signOut()}
+                className="w-full flex items-center gap-2 px-3 py-2 text-red-500 hover:bg-red-50 rounded-lg transition-colors duration-200"
+              >
+                <LogOutIcon className="w-4 h-4" />
+                <span className="font-medium">Sair</span>
+              </button>
+            </div>
+          </div>
+        )}
       </div>
     );
   }
 
   // Usuário não logado
   return (
-    <Button
-      asChild
-      variant="ghost"
-      size="sm"
-      className="text-white bg-white text-gay-800 h-9 hover:bg-white"
+    <Link
+      href="/authentication"
+      className="flex items-center gap-2 bg-slate-100 text-slate-900 px-3 py-2 rounded-lg hover:bg-slate-200 transition-colors duration-200"
     >
-      <Link href="/authentication" className="flex items-center gap-1">
-        <LogInIcon className="w-4 h-4" />
-        Entrar
-      </Link>
-    </Button>
+      <LogInIcon className="w-4 h-4" />
+      <span className="font-medium">Entrar</span>
+    </Link>
   );
 };
 

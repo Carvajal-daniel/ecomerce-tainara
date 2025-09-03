@@ -24,17 +24,16 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
-
   return (
     <html lang="pt-br">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <CartProvider>
-    <Toaster />
-        {children}
-        </CartProvider>
+    
+          <Toaster />
+          <CartProvider>
+          {children}
+          </CartProvider>
       </body>
     </html>
   );
