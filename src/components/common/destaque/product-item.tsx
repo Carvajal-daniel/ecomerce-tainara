@@ -25,7 +25,7 @@ const handleClick = (id: string, slug: string) => {
 };
 
   return (
-    <div className="grid sm:grid-cols-1 md:grid-cols-10 md:gap-6 p-2">
+    <div className="grid sm:grid-cols-1 md:grid-cols-4 md:gap-6 p-2">
       {products?.map((product) => (
         <div
           key={product.id}
@@ -40,14 +40,13 @@ const handleClick = (id: string, slug: string) => {
           )}
 
           {/* Imagem */}
-          <div className="relative overflow-hidden rounded-lg w-full mb-4">
+          <div className="relative overflow-hidden rounded-lg w-full mb-4 aspect-3/4">
             <Image
-              width={400}
-              height={400}
+              fill
               src={product.image || "/placeholder.jpg"}
               alt={product.name}
               loading="lazy"
-              className="w-full max-h-[27rem] h-full sm:h-[24rem] md:h-[30rem] lg:w-[40rem] lg:h-[30rem] object-cover transition-transform duration-300 group-hover:scale-105"
+              className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
             />
 
             {/* Badges */}
@@ -73,7 +72,7 @@ const handleClick = (id: string, slug: string) => {
               {product.name}
             </h3>
 
-            <button className="mt-auto cursor-pointer bg-gray-900 hover:bg-gray-800 text-white font-medium py-3 px-6 rounded-lg transition-colors duration-200 text-sm">
+            <button className="mt-auto cursor-pointer bg-slate-800 hover:bg-gray-800 text-white font-medium py-3 rounded-lg transition-colors duration-200 text-sm">
               Ver Produto
             </button>
           </div>

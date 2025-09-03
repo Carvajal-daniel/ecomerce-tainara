@@ -13,6 +13,7 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useCart } from "@/context/CartContext";
+import toast from "react-hot-toast";
 
 const formatBRL = (n: number) =>
   n.toLocaleString("pt-BR", {
@@ -23,7 +24,7 @@ const formatBRL = (n: number) =>
 export default function CartItem() {
   const [isClient, setIsClient] = useState(false);
   const router = useRouter();
-  const { cartItems, removeItem } = useCart();
+  const { cartItems, removeItem, addItem } = useCart();
 
   useEffect(() => {
     setIsClient(true);
@@ -35,6 +36,19 @@ export default function CartItem() {
     (sum, item) => sum + item.price * item.quantity,
     0
   );
+
+  const getToastPosition = () =>
+    window.innerWidth < 768 ? "top-center" : "bottom-right";
+
+  const handleRemoveItem = (id: string) => {
+    removeItem(id);
+    toast.success("Item removido do carrinho!", { position: getToastPosition() });
+  };
+
+  const handleAddItem = (item: any) => {
+    addItem(item);
+    toast.success("Item adicionado ao carrinho!", { position: getToastPosition() });
+  };
 
   return (
     <div>
@@ -115,7 +129,7 @@ export default function CartItem() {
                       R$ {formatBRL(item.price * item.quantity)}
                     </span>
                     <button
-                      onClick={() => removeItem(item.id)}
+                      onClick={() => handleRemoveItem(item.id)}
                       className="mt-2 flex items-center gap-1 text-xs text-slate-400 hover:text-red-500 cursor-pointer transition-colors"
                     >
                       <Trash2 className="w-3.5 h-3.5" />

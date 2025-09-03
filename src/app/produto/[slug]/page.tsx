@@ -1,5 +1,5 @@
 import HeaderWrapper from "@/components/common/header/HeaderWrapper";
-import ProductClient from "@/components/common/ProductClient";
+import ProductClient from "@/components/common/ProductClient/ProductClient";
 import { db } from "@/db";
 import { featuredTable, productTable } from "@/db/schema";
 import { eq } from "drizzle-orm";

@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { Toaster } from "react-hot-toast";
 import { CartProvider } from "@/context/CartContext";
-
+import ClientProviders from "@/components/ClientProviders";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -19,21 +18,17 @@ export const metadata: Metadata = {
   description: "Created by Daniel",
 };
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="pt-br">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-    
-          <Toaster />
-          <CartProvider>
-          {children}
-          </CartProvider>
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <CartProvider>
+          <ClientProviders>{children}</ClientProviders>
+        </CartProvider>
       </body>
     </html>
   );
