@@ -8,7 +8,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { ShoppingBag, Trash2 } from "lucide-react";
+import { ShoppingBag, ShoppingBasket, Trash2 } from "lucide-react";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
@@ -55,8 +55,8 @@ export default function CartItem() {
       <Sheet>
         {/* Botão do carrinho */}
         <SheetTrigger asChild>
-          <button className="p-2 relative cursor-pointer rounded-xl bg-[#fefefe] hover:bg-slate-200 transition-colors shadow-md">
-            <ShoppingBag className="md:w-6.5 md:h-6 h-4.5 w-4.5 text-slate-700" />
+          <button className="p-2 relative cursor-pointer  hover:bg-slate-200 transition-colors shadow-md">
+            <ShoppingBasket className="md:w-7 md:h-7 h-5 w-5 text-[#fefefe]" />
             {cartItems.length > 0 && (
               <span className="absolute -top-1 -right-1 bg-rose-500 text-white text-[10px] w-5 h-5 rounded-full flex items-center justify-center font-semibold shadow">
                 {cartItems.length}
