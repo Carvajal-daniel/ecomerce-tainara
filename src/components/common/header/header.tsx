@@ -52,13 +52,11 @@ export default function Header({ categories }: HeaderProps) {
   }, [pathname]);
 
   // Clique mobile com loader full screen
-  const handleCategoryClick = (slug: string) => {
-    setLoading(true);
-    setTimeout(() => {
-      router.push(`/category/${slug}`);
-      setLoading(false);
-    }, 400);
-  };
+ const handleCategoryClick = (slug: string) => {
+  setLoading(true);
+  router.push(`/category/${slug}`);
+};
+
 
   return (
     <header className="bg-black/90 backdrop-blur-sm sticky top-0 z-50 border-b border-gray-200 shadow-sm">
