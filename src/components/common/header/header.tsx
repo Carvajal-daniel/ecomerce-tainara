@@ -52,12 +52,13 @@ export default function Header({ categories }: HeaderProps) {
   }, [pathname]);
 
   // Clique mobile com loader full screen
-const handleCategoryClick = async (slug: string) => {
-  window.dispatchEvent(new Event("next:navigation:start"));
-  await router.push(`/category/${slug}`);
-  window.dispatchEvent(new Event("next:navigation:complete"));
-};
-
+  const handleCategoryClick = (slug: string) => {
+    setLoading(true);
+    setTimeout(() => {
+      router.push(`/category/${slug}`);
+      setLoading(false);
+    }, 400);
+  };
 
   return (
     <header className="bg-black/90 backdrop-blur-sm sticky top-0 z-50 border-b border-gray-200 shadow-sm">
@@ -163,8 +164,8 @@ const handleCategoryClick = async (slug: string) => {
           >
             <ul className="flex space-x-1 min-w-max">
               <li>
-                <button
-                  onClick={() => handleCategoryClick("todos")}
+                <Link
+                  href="/produtos"
                   className={`inline-block whitespace-nowrap px-3 py-1.5 rounded-full text-xs font-medium transition-all duration-200 active:scale-95 hover:shadow-sm ${
                     pathname === "/produtos"
                       ? "bg-rose-50 text-rose-600 border border-rose-200"
@@ -172,7 +173,7 @@ const handleCategoryClick = async (slug: string) => {
                   }`}
                 >
                   Todos
-                </button>
+                </Link>
               </li>
 
               {categories.map((cat) => (
