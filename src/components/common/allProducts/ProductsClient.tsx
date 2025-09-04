@@ -1,9 +1,10 @@
 'use client'
 
-import React, { useState, useMemo } from 'react'
+import React, { useState, useMemo, useEffect } from 'react'
 import FilterBar from './FilterBar'
 import ProductCard from './ProductCard'
 import EmptyState from './EmptyState'
+import { useLoading } from '@/context/LoadingContext'
 
 interface ProductVariation {
   id: string
@@ -30,45 +31,40 @@ interface ProductsClientProps {
   allCategories: ProductCategory[]
 }
 
+
 const ProductsClient: React.FC<ProductsClientProps> = ({ products, allCategories }) => {
+  const { setLoading } = useLoading()
   const [selectedCategory, setSelectedCategory] = useState('all')
   const [searchTerm, setSearchTerm] = useState('')
 
-  // Precalcula contagem por categoria uma única vez
+  useEffect(() => {
+    // Dados carregaram, pode desligar o loader
+    setLoading(false)
+  }, [setLoading])
+
   const categoryCount = useMemo(() => {
     const counts: Record<string, number> = {}
     for (const product of products) {
-      if (product.category?.slug) {
-        counts[product.category.slug] = (counts[product.category.slug] || 0) + 1
-      }
+      if (product.category?.slug) counts[product.category.slug] = (counts[product.category.slug] || 0) + 1
     }
     return counts
   }, [products])
 
-  // Filtra produtos no client
   const filteredProducts = useMemo(() => {
     const search = searchTerm.toLowerCase()
     return products.filter((p) => {
       const matchCategory = selectedCategory === 'all' || p.category?.slug === selectedCategory
-      const matchSearch =
-        !search ||
-        p.name.toLowerCase().includes(search) ||
-        p.category?.name.toLowerCase().includes(search)
+      const matchSearch = !search || p.name.toLowerCase().includes(search) || p.category?.name.toLowerCase().includes(search)
       return matchCategory && matchSearch
     })
   }, [products, selectedCategory, searchTerm])
 
-  if (!products?.length) {
-    return <EmptyState type="no-products" />
-  }
+  if (!products?.length) return <EmptyState type="no-products" />
 
   return (
     <div>
       <FilterBar
-        categories={allCategories.map((cat) => ({
-          ...cat,
-          count: categoryCount[cat.slug] || 0,
-        }))}
+        categories={allCategories.map((cat) => ({ ...cat, count: categoryCount[cat.slug] || 0 }))}
         selectedCategory={selectedCategory}
         searchTerm={searchTerm}
         onCategoryChange={setSelectedCategory}

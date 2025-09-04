@@ -1,26 +1,24 @@
+'use client'
 
-"use client";
+import { createContext, useContext, useState, ReactNode } from 'react'
 
-import { createContext, useContext, useState, ReactNode } from "react";
-
-interface LoadingContextProps {
-  loading: boolean;
-  setLoading: (value: boolean) => void;
+interface LoadingContextType {
+  loading: boolean
+  setLoading: (state: boolean) => void
 }
 
-const LoadingContext = createContext<LoadingContextProps>({
+const LoadingContext = createContext<LoadingContextType>({
   loading: false,
   setLoading: () => {},
-});
+})
 
-export function LoadingProvider({ children }: { children: ReactNode }) {
-  const [loading, setLoading] = useState(false);
-
+export const LoadingProvider = ({ children }: { children: ReactNode }) => {
+  const [loading, setLoading] = useState(false)
   return (
     <LoadingContext.Provider value={{ loading, setLoading }}>
       {children}
     </LoadingContext.Provider>
-  );
+  )
 }
 
-export const useLoading = () => useContext(LoadingContext);
+export const useLoading = () => useContext(LoadingContext)

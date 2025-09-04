@@ -1,15 +1,17 @@
 
-import React from 'react';
+import HeaderWrapper from '@/components/common/header/HeaderWrapper'
+import PaginaDePerfilServer from '@/components/common/perfil/PaginaDePerfilServer'
+import React from 'react'
 
-const PaginaDePerfil: React.FC = () => {
-
-
+const PerfilPage = () => {
   return (
-    <div className="bg-gray-100 min-h-screen py-10">
-      <h1 className="text-3xl font-bold text-center mb-10 text-gray-700">A Minha Conta</h1>
- 
+    <>
+      <HeaderWrapper/>
+    <div className="min-h-screen bg-gray-100 px-3 md:px-0  pt-3">
+      <PaginaDePerfilServer />
     </div>
-  );
-};
+    </>
+  )
+}
 
-export default PaginaDePerfil;
+export default PerfilPage

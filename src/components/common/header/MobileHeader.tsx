@@ -83,7 +83,7 @@ const MobileHeader = ({ categories }: HeaderProps) => {
 
           <div className="flex gap-2">
             <Link
-              href={session?.user ? "/minha-conta" : "/authentication"}
+              href={session?.user ? "/perfil" : "/authentication"}
               className="flex-1 flex items-center justify-center gap-1.5 py-2.5 px-2 rounded-xl border border-slate-200 text-slate-700 text-sm hover:border-rose-300 hover:text-rose-600 transition-all duration-300 hover:shadow-md"
             >
               <User className="w-4 h-4" />
