@@ -42,12 +42,16 @@ export default function CartItem() {
 
   const handleRemoveItem = (id: string) => {
     removeItem(id);
-    toast.success("Item removido do carrinho!", { position: getToastPosition() });
+    toast.success("Item removido do carrinho!", {
+      position: getToastPosition(),
+    });
   };
 
   const handleAddItem = (item: any) => {
     addItem(item);
-    toast.success("Item adicionado ao carrinho!", { position: getToastPosition() });
+    toast.success("Item adicionado ao carrinho!", {
+      position: getToastPosition(),
+    });
   };
 
   return (
@@ -55,8 +59,8 @@ export default function CartItem() {
       <Sheet>
         {/* Botão do carrinho */}
         <SheetTrigger asChild>
-          <button className="p-2 relative cursor-pointer  hover:bg-slate-200 transition-colors shadow-md">
-            <ShoppingBasket className="md:w-7 md:h-7 h-5 w-5 text-[#fefefe]" />
+          <button className="p-2 relative cursor-pointer hover:bg-slate-800 h transition-colors duration-300 rounded-2xl shadow-md group">
+            <ShoppingBasket className="md:w-7 md:h-7 h-5 w-5 text-[#fefefe] group-hover:text-slate-100 transition-colors duration-300" />
             {cartItems.length > 0 && (
               <span className="absolute -top-1 -right-1 bg-rose-500 text-white text-[10px] w-5 h-5 rounded-full flex items-center justify-center font-semibold shadow">
                 {cartItems.length}

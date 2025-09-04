@@ -2,12 +2,13 @@
 
 import { useRef, useEffect } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { ChevronDown } from "lucide-react";
 import DesktopHeader from "./DesktopHeader";
 import MobileHeader from "./MobileHeader";
 import UserActions from "./UserActions";
 import CartItem from "../cart/cartItem";
+import { useLoading } from "@/context/LoadingContext";
 
 interface Product {
   id: string;
@@ -28,7 +29,9 @@ interface HeaderProps {
 
 export default function Header({ categories }: HeaderProps) {
   const pathname = usePathname();
+  const router = useRouter();
   const scrollRef = useRef<HTMLDivElement>(null);
+  const { setLoading } = useLoading();
 
   useEffect(() => {
     const container = scrollRef.current;
@@ -41,12 +44,20 @@ export default function Header({ categories }: HeaderProps) {
     if (activeLink) {
       requestAnimationFrame(() => {
         activeLink.scrollIntoView({
-          behavior: 'smooth',
-          inline: 'center'
+          behavior: "smooth",
+          inline: "center",
         });
       });
     }
   }, [pathname]);
+
+  // Clique mobile com loader full screen
+const handleCategoryClick = async (slug: string) => {
+  window.dispatchEvent(new Event("next:navigation:start"));
+  await router.push(`/category/${slug}`);
+  window.dispatchEvent(new Event("next:navigation:complete"));
+};
+
 
   return (
     <header className="bg-black/90 backdrop-blur-sm sticky top-0 z-50 border-b border-gray-200 shadow-sm">
@@ -152,8 +163,8 @@ export default function Header({ categories }: HeaderProps) {
           >
             <ul className="flex space-x-1 min-w-max">
               <li>
-                <Link
-                  href="/produtos"
+                <button
+                  onClick={() => handleCategoryClick("todos")}
                   className={`inline-block whitespace-nowrap px-3 py-1.5 rounded-full text-xs font-medium transition-all duration-200 active:scale-95 hover:shadow-sm ${
                     pathname === "/produtos"
                       ? "bg-rose-50 text-rose-600 border border-rose-200"
@@ -161,13 +172,13 @@ export default function Header({ categories }: HeaderProps) {
                   }`}
                 >
                   Todos
-                </Link>
+                </button>
               </li>
 
               {categories.map((cat) => (
                 <li key={cat.id}>
-                  <Link
-                    href={`/category/${cat.slug}`}
+                  <button
+                    onClick={() => handleCategoryClick(cat.slug)}
                     className={`inline-block whitespace-nowrap px-3 py-1.5 rounded-full text-xs font-medium transition-all duration-200 active:scale-95 hover:shadow-sm ${
                       pathname === `/category/${cat.slug}`
                         ? "bg-rose-50 text-rose-600 border border-rose-200"
@@ -175,7 +186,7 @@ export default function Header({ categories }: HeaderProps) {
                     }`}
                   >
                     {cat.name}
-                  </Link>
+                  </button>
                 </li>
               ))}
             </ul>

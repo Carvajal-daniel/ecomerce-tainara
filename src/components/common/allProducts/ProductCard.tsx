@@ -76,14 +76,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         {/* Overlay gradient */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
-        {/* Category badge */}
-        {product.category?.name && (
-          <div className="absolute top-3 left-3">
-            <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-white/90 text-gray-700 backdrop-blur-sm">
-              {product.category.name}
-            </span>
-          </div>
-        )}
+       
       </div>
 
       {/* Content */}
