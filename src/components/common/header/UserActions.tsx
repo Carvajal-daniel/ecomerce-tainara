@@ -65,7 +65,7 @@ const UserActions = () => {
               
               {/* Conta */}
               <Link
-                href="/conta"
+                href="/perfil"
                 className="flex items-center gap-2 px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors duration-200"
               >
                 <UserIcon className="w-4 h-4 text-slate-500" />

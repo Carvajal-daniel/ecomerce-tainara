@@ -1,17 +1,24 @@
 import { relations, sql } from "drizzle-orm";
-import { pgTable, text, timestamp, boolean, integer, unique, check } from "drizzle-orm/pg-core";
+import { pgTable, text, timestamp, boolean, integer, unique, check, varchar } from "drizzle-orm/pg-core";
 
 // =====================
 // USERS
 // =====================
+
 export const user = pgTable("user", {
   id: text("id").primaryKey(),
   name: text("name").notNull(),
+  cpf: text("cpf").unique(),
+  phone: text("phone"),
   email: text("email").notNull().unique(),
-  emailVerified: boolean("email_verified")
-  .$defaultFn(() => false)
-  .notNull(),
+  emailVerified: boolean("email_verified").$defaultFn(() => false).notNull(),
   image: text("image"),
+  cep: text("cep"),
+  rua: text("rua"),          
+  bairro: text("bairro"),    
+  cidade: text("cidade"),    
+  uf: text("uf"),            
+  numero: text("numero"),    
   createdAt: timestamp("created_at").$defaultFn(() => new Date()).notNull(),
   updatedAt: timestamp("updated_at").$defaultFn(() => new Date()).notNull(),
 });
@@ -134,63 +141,8 @@ export const featuredTable = pgTable("featured", {
   created_at: timestamp("created_at").defaultNow().notNull(),
   updated_at: timestamp("updated_at").defaultNow().notNull(), // adicionar
 });
-// =====================
-// CART
-// =====================
-export const cartTable = pgTable("cart", {
-  id: text("id").primaryKey(),
-  user_id: text("user_id")
-    .notNull()
-    .references(() => user.id, { onDelete: "cascade" })
-    .unique(), 
-  created_at: timestamp("created_at").defaultNow().notNull(),
-  updated_at: timestamp("updated_at").defaultNow().notNull(),
-});
 
-// =====================
-// CART ITEMS
-// =====================
-export const cartItemTable = pgTable(
-  "cart_item",
-  {
-    id: text("id").primaryKey(),
-    cart_id: text("cart_id")
-      .notNull()
-      .references(() => cartTable.id, { onDelete: "cascade" }),
-    product_variation_id: text("product_variation_id")
-      .notNull()
-      .references(() => productVariationTable.id, { onDelete: "cascade" }),
-    quantity: integer("quantity").default(1).notNull(), // quantidade padrão 1
-    created_at: timestamp("created_at").defaultNow().notNull(),
-    updated_at: timestamp("updated_at").defaultNow().notNull(),
-  },
-  (table) => [
-    unique("cart_product_unique").on(table.cart_id, table.product_variation_id),
-    check("quantity_check", sql`${table.quantity} > 0`)
-  ]
-);
 
-// =====================
-// RELATIONS
-// =====================
-export const cartRelations = relations(cartTable, ({ one, many }) => ({
-  user: one(user, {
-    fields: [cartTable.user_id],
-    references: [user.id],
-  }),
-  cartItems: many(cartItemTable),
-}));
-
-export const cartItemRelations = relations(cartItemTable, ({ one }) => ({
-  cart: one(cartTable, {
-    fields: [cartItemTable.cart_id],
-    references: [cartTable.id],
-  }),
-  productVariation: one(productVariationTable, {
-    fields: [cartItemTable.product_variation_id],
-    references: [productVariationTable.id],
-  }),
-}));
 
 
 export const featuredRelations = relations(featuredTable, ({ one }) => ({

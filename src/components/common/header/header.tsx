@@ -43,7 +43,6 @@ export default function Header({ categories }: HeaderProps) {
     }
   }
 
-  // Ao mudar de página, centraliza o item ativo **uma vez**
   useEffect(() => {
     const timeout = setTimeout(() => {
       if (pathname === "/produtos") {

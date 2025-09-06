@@ -5,10 +5,6 @@ import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import * as schema from "@/db/schema";
 import { db } from "@/db";
 
-
-console.log(Object.keys(schema)); 
-
-
 export const auth = betterAuth({
   emailAndPassword: {
     enabled: true,
@@ -31,3 +27,4 @@ export const auth = betterAuth({
   },
   
 });
+
