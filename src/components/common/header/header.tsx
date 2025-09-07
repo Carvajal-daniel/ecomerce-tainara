@@ -2,26 +2,15 @@
 
 import { useRef, useEffect } from "react"
 import Link from "next/link"
-import { usePathname, useRouter } from "next/navigation"
+import { usePathname } from "next/navigation"
 import DesktopHeader from "./DesktopHeader"
 import MobileHeader from "./MobileHeader"
 import UserActions from "./UserActions"
 import CartItem from "../cart/cartItem"
 import { useLoading } from "@/context/LoadingContext"
 import { ChevronDown } from "lucide-react"
-
-interface Product {
-  id: string
-  name: string
-  slug: string
-}
-
-interface Category {
-  id: string
-  name: string
-  slug: string
-  products: Product[]
-}
+import { Category } from "@/types"
+import { useNavigation } from "@/utils/navigation"
 
 interface HeaderProps {
   categories: Category[]
@@ -29,9 +18,8 @@ interface HeaderProps {
 
 export default function Header({ categories }: HeaderProps) {
   const pathname = usePathname()
-  const router = useRouter()
   const scrollRef = useRef<HTMLDivElement>(null)
-  const { setLoading } = useLoading()
+  const { navigateToCategory, navigateToProducts } = useNavigation()
 
   // Centraliza o item ativo no scroll mobile
   const scrollToItem = (id: string) => {
@@ -56,13 +44,11 @@ export default function Header({ categories }: HeaderProps) {
   }, [pathname])
 
   const handleCategoryClick = (slug: string) => {
-    setLoading(true)
-    router.push(`/category/${slug}`)
+    navigateToCategory(slug)
   }
 
   const handleAllClick = () => {
-    setLoading(true)
-    router.push(`/produtos`)
+    navigateToProducts()
   }
 
   return (

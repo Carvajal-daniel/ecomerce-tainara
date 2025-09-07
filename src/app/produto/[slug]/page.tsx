@@ -1,5 +1,6 @@
 import HeaderWrapper from "@/components/common/header/HeaderWrapper";
 import ProductClient from "@/components/common/ProductClient/ProductClient";
+import PageWrapper from "@/components/PageWrapper";
 import { db } from "@/db";
 import { featuredTable, productTable } from "@/db/schema";
 import { eq } from "drizzle-orm";
@@ -26,12 +27,12 @@ const ProductPage = async ({ params }: ProductPageProps) => {
   });
 
   return (
-    <>
+    <PageWrapper>
       <HeaderWrapper />
       <main className="pt-1">
         <ProductClient product={product} feature={feature} /> 
       </main>
-    </>
+    </PageWrapper>
   );
 };
 

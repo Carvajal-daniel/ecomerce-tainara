@@ -153,12 +153,12 @@ export const featuredRelations = relations(featuredTable, ({ one }) => ({
 }));
 
 
-export const productVariationRelations = relations(productVariationTable, ({ one,  }) => ({
+export const productVariationRelations = relations(productVariationTable, ({ one }) => ({
   product: one(productTable, {
     fields: [productVariationTable.product_id],
     references: [productTable.id],
   }),
-}))
+}));
 
 // =====================
 // RELAÇÕES
@@ -166,9 +166,7 @@ export const productVariationRelations = relations(productVariationTable, ({ one
 export const categoryRelations = relations(categoryTable, ({ many }) => ({
   products: many(productTable),
   banners: many(bannerTable),
-}),
-
-);
+}));
 
 export const bannerRelations = relations(bannerTable, ({ one }) => ({
   category: one(categoryTable, {
@@ -177,11 +175,10 @@ export const bannerRelations = relations(bannerTable, ({ one }) => ({
   }),
 }));
 
-export const productRelations = relations(productTable, ({ one,many }) => ({
+export const productRelations = relations(productTable, ({ one, many }) => ({
   category: one(categoryTable, {
     fields: [productTable.category_id],
     references: [categoryTable.id],
   }),
-
   variations: many(productVariationTable),
 }));

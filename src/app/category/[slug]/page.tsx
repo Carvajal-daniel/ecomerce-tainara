@@ -1,5 +1,6 @@
 
 import CategoryProduct from "@/components/common/CategoryProducts/CategoryProduct"
+import PageWrapper from "@/components/PageWrapper"
 
 interface CategoryProductPageProps {
   params: Promise<{ slug: string }>
@@ -10,9 +11,9 @@ const CategoryProductPage = async ({params}: CategoryProductPageProps) => {
   const {slug} = await params
 
   return (
-    <div>
+    <PageWrapper>
       <CategoryProduct slug={slug}/>
-    </div>
+    </PageWrapper>
   )
 }
 

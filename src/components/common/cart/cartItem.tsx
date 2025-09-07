@@ -8,26 +8,17 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { Check, ShoppingBag, ShoppingBasket, Trash2 } from "lucide-react";
+import { ShoppingBag, ShoppingBasket, Trash2 } from "lucide-react";
 import Image from "next/image";
 import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
 import { useCart } from "@/context/CartContext";
-
-
-const formatBRL = (n: number) =>
-  n.toLocaleString("pt-BR", {
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2,
-  });
+import { formatBRL } from "@/utils/format";
+import { useNavigation } from "@/utils/navigation";
 
 export default function CartItem() {
   const [isClient, setIsClient] = useState(false);
-  const router = useRouter();
-  const { cartItems, removeItem, addItem } = useCart();
-
-  
- 
+  const { cartItems, removeItem, totalPrice } = useCart();
+  const { navigateToCheckout } = useNavigation();
 
   useEffect(() => {
     setIsClient(true);
@@ -35,21 +26,12 @@ export default function CartItem() {
 
   if (!isClient) return null;
 
-  const totalPrice = cartItems.reduce(
-    (sum, item) => sum + item.price * item.quantity,
-    0
-  );
-
-  const getToastPosition = () =>
-    window.innerWidth < 768 ? "top-center" : "bottom-right";
-
   const handleRemoveItem = (id: string) => {
     removeItem(id);
-  
   };
 
   const handleCheckout = () => {
-    router.push("/checkout");
+    navigateToCheckout();
   };
 
 

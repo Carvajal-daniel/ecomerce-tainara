@@ -1,54 +1,23 @@
 "use client";
 
 import React, { useState } from "react";
-import { useRouter } from "next/navigation";
 import Image from "next/image";
-
-interface ProductVariation {
-  id: string;
-  image_url?: string;
-  price?: number;
-}
-
-interface ProductCategory {
-  id: string;
-  name: string;
-  slug: string;
-}
-
-interface Product {
-  id: string;
-  name: string;
-  slug: string;
-  description?: string;
-  category?: ProductCategory;
-  variations: ProductVariation[];
-}
-
-interface ProductCardProps {
-  product: Product;
-}
+import { Product, ProductCardProps } from "@/types";
+import { formatPrice } from "@/utils/format";
+import { useNavigation } from "@/utils/navigation";
+import LoadingOverlay from "../LoadingOverlay";
 
 
 
-const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
+const ProductCard: React.FC<ProductCardProps> = ({ product, showLoader = true }) => {
   const [loading, setLoading] = useState(false);
-  const router = useRouter();
-
-  const formatPrice = (price: number) => {
-    return (price / 100).toLocaleString("pt-BR", {
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2,
-    });
-  };
-
-  const handleGoBack = () => {
-  router.back();
-};
+  const { navigateToProduct } = useNavigation();
 
   const handleClick = () => {
-    setLoading(true);
-    router.push(`/produto/${product.slug}`);
+    if (showLoader) {
+      setLoading(true);
+    }
+    navigateToProduct(product.slug);
   };
   
 
@@ -57,12 +26,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
       onClick={handleClick}
       className="group relative cursor-pointer bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 overflow-hidden border border-gray-100"
     >
-      {/* Loader */}
-      {loading && (
-        <div className="absolute inset-0 bg-white/70 backdrop-blur-sm flex items-center justify-center z-20">
-          <div className="w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
-        </div>
-      )}
+      <LoadingOverlay isLoading={loading} />
 
       {/* Image */}
     <div className="relative overflow-hidden bg-gray-100 md:aspect-3/5 aspect-3/4 lg:aspect-[3/4.3]">

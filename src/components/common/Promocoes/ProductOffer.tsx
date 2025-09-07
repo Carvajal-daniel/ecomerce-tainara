@@ -1,38 +1,23 @@
 "use client";
 
 import React, { useState } from "react";
-import { useRouter } from "next/navigation";
 import Image from "next/image";
+import { ProductWithFeature } from "@/types";
+import { useNavigation } from "@/utils/navigation";
+import LoadingOverlay from "../LoadingOverlay";
 
 interface ProductOfferProps {
-  productOffer: {
-    id: string;
-    is_offer: boolean;
-    offer: number | null; // desconto em reais
-    product: {
-      id: string;
-      name: string;
-      description: string;
-      image: string;
-      slug: string;
-      variations: {
-        id: string;
-        name: string;
-        price: number; // em centavos
-        image_url: string;
-      }[];
-    };
-  }[];
+  productOffer: ProductWithFeature[];
 }
 
 const ProductOfferPage = ({ productOffer }: ProductOfferProps) => {
   const [loadingCard, setLoadingCard] = useState<string | null>(null);
-  const router = useRouter();
+  const { navigateToProduct } = useNavigation();
 
- const handleClick = (id: string, slug: string) => {
-  setLoadingCard(id);
-  router.push(`/produto/${slug}`);
-};
+  const handleClick = (id: string, slug: string) => {
+    setLoadingCard(id);
+    navigateToProduct(slug);
+  };
 
 
   return (
@@ -57,12 +42,7 @@ const ProductOfferPage = ({ productOffer }: ProductOfferProps) => {
               onClick={() => handleClick(item.id, item.product.slug)}
               className="group relative cursor-pointer bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300 ease-in-out"
             >
-              {/* Loader Overlay */}
-              {loadingCard === item.id && (
-                <div className="absolute inset-0 bg-white/70 backdrop-blur-sm flex items-center justify-center z-20">
-                  <div className="w-10 h-10 border-2 border-gray-800 border-t-transparent rounded-full animate-spin"></div>
-                </div>
-              )}
+              <LoadingOverlay isLoading={loadingCard === item.id} size="lg" />
 
               {/* Badge de Oferta */}
               {item.is_offer && (

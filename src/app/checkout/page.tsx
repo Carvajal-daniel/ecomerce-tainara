@@ -1,5 +1,6 @@
 import CheckoutItems from "@/components/common/Checkout/checkout";
 import HeaderWrapper from "@/components/common/header/HeaderWrapper";
+import PageWrapper from "@/components/PageWrapper";
 import { db } from "@/db";
 import { user } from "@/db/schema";
 import { auth } from "@/lib/auth";
@@ -35,12 +36,12 @@ const Index = async () => {
   const userLoggedIn = !!session;
 
   return (
-    <>
+    <PageWrapper>
       <HeaderWrapper />
       <div className="min-h-screen px-3 md:px-0 pt-3">
         <CheckoutItems UserAddress={addres}  />
       </div>
-    </>
+    </PageWrapper>
   );
 };
 

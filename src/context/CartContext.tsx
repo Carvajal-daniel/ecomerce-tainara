@@ -1,23 +1,9 @@
 "use client";
 
-import CartItem from '@/components/common/cart/cartItem';
 import React, { createContext, useContext, useState, ReactNode, useEffect } from 'react';
 import toast from 'react-hot-toast';
-
-interface CartItem {
-  id: string;
-  name: string;
-  price: number;
-  imageUrl: string;
-  quantity: number;
-}
-
-interface CartContextType {
-  cartItems: CartItem[];
-  addItem: (item: CartItem) => void;
-  removeItem: (id: string) => void;
-  totalItems: number;
-}
+import { CartItem, CartContextType } from '@/types';
+import { getCartItems, setCartItems } from '@/utils/storage';
 
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
@@ -27,19 +13,15 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
 
   // Carrega os itens do localStorage ao montar o componente
   useEffect(() => {
-    const storedItems = localStorage.getItem("cartItems");
-    if (storedItems) {
-      try {
-        setCartItems(JSON.parse(storedItems));
-      } catch (e) {
-        console.error("Erro ao ler o carrinho do localStorage", e);
-      }
+    const storedItems = getCartItems();
+    if (storedItems && storedItems.length > 0) {
+      setCartItems(storedItems);
     }
   }, []);
 
   // Salva no localStorage sempre que o carrinho mudar
   useEffect(() => {
-    localStorage.setItem("cartItems", JSON.stringify(cartItems));
+    setCartItems(cartItems);
   }, [cartItems]);
 
   const addItem = (item: CartItem) => {
@@ -68,10 +50,37 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     toast.error('Item removido do carrinho.');
   };
 
+  const updateQuantity = (id: string, quantity: number) => {
+    if (quantity <= 0) {
+      removeItem(id);
+      return;
+    }
+    
+    setCartItems((prevItems) =>
+      prevItems.map((item) =>
+        item.id === id ? { ...item, quantity } : item
+      )
+    );
+  };
+
+  const clearCart = () => {
+    setCartItems([]);
+    toast.success('Carrinho limpo!');
+  };
+
   const totalItems = cartItems.reduce((total, item) => total + item.quantity, 0);
+  const totalPrice = cartItems.reduce((total, item) => total + (item.price * item.quantity), 0);
 
   return (
-    <CartContext.Provider value={{ cartItems, addItem, removeItem, totalItems }}>
+    <CartContext.Provider value={{ 
+      cartItems, 
+      addItem, 
+      removeItem, 
+      updateQuantity,
+      clearCart,
+      totalItems,
+      totalPrice
+    }}>
       {children}
     </CartContext.Provider>
   );

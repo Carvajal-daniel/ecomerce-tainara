@@ -5,7 +5,8 @@ import { ArrowLeft } from "lucide-react";
 import ProductImage from "./ProductImage";
 import ProductDetails from "./ProductDetails";
 import ImageModal from "./ImageModal";
-import { Product, Feature } from "@/utils/types";
+import { Product, Feature } from "@/types";
+import { useNavigation } from "@/utils/navigation";
 
 interface Props {
   product: Product;
@@ -16,8 +17,9 @@ const ProductClient: React.FC<Props> = ({ product, feature }) => {
   const [quantity, setQuantity] = useState(1);
   const [isLiked, setIsLiked] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const { navigateBack } = useNavigation();
 
-  const handleGoBack = () => window.history.back();
+  const handleGoBack = () => navigateBack();
 
   const variation = product.variations[0];
 

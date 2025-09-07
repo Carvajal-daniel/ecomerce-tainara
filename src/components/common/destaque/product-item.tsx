@@ -2,7 +2,8 @@
 
 import Image from "next/image";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useNavigation } from "@/utils/navigation";
+import LoadingOverlay from "../LoadingOverlay";
 
 interface ProductItemProps {
   products: {
@@ -17,12 +18,12 @@ interface ProductItemProps {
 
 const ProductItemDestaque = ({ products }: ProductItemProps) => {
   const [loadingCard, setLoadingCard] = useState<string | null>(null);
-  const router = useRouter();
+  const { navigateToProduct } = useNavigation();
 
-const handleClick = (id: string, slug: string) => {
-  setLoadingCard(id);
-  router.push(`/produto/${slug}`);
-};
+  const handleClick = (id: string, slug: string) => {
+    setLoadingCard(id);
+    navigateToProduct(slug);
+  };
 
   return (
     <div className="grid sm:grid-cols-1 md:grid-cols-4 md:gap-6 p-2">
@@ -32,12 +33,10 @@ const handleClick = (id: string, slug: string) => {
           onClick={() => handleClick(product.id, product.slug)}
           className="group relative lg:w-[22rem] bg-white rounded-xl p-2 flex flex-col transition-all duration-300 hover:shadow-xl cursor-pointer border border-gray-100 hover:border-gray-200"
         >
-          {/* Loader Overlay */}
-          {loadingCard === product.id && (
-            <div className="absolute inset-0 bg-white/90 backdrop-blur-sm flex items-center justify-center z-20 rounded-xl">
-              <div className="w-8 h-8 border-2 border-gray-300 border-t-gray-900 rounded-full animate-spin"></div>
-            </div>
-          )}
+          <LoadingOverlay 
+            isLoading={loadingCard === product.id} 
+            className="rounded-xl"
+          />
 
           {/* Imagem */}
           <div className="relative overflow-hidden rounded-lg w-full mb-4 aspect-3/4">
