@@ -2,7 +2,7 @@
 
 import { CreditCard, Smartphone, Lock, Check } from "lucide-react";
 import { Dispatch, SetStateAction } from "react";
-import { CardData, UserAddress } from "./types";
+import { CardData, UserAddress } from "@/types";
 
 interface Props {
   total: number;

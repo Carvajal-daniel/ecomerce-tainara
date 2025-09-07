@@ -2,22 +2,12 @@
 export interface Category {
   id: string;
   name: string;
-  imageUrl: string;
+  imageUrl?: string;
   slug: string;
   created_at?: Date | string;
   updated_at?: Date | string;
   // Relacionamentos
-  products?: {
-    id: string;
-    name: string;
-    description: string;
-    image: string;
-    slug: string;
-    is_active: boolean;
-    category_id: string;
-    created_at?: Date | string;
-    updated_at?: Date | string;
-  }[];
+  products?: any[];
   banners?: Banner[];
 }
 

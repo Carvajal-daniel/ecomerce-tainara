@@ -1,4 +1,4 @@
-import { UserAddress } from "./types";
+import { UserAddress } from "@/types";
 
 interface Props {
   address: UserAddress;

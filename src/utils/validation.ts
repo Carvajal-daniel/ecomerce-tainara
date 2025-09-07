@@ -37,7 +37,7 @@ export const validateRange = (value: number, min: number, max: number): boolean 
 };
 
 export const validateImageFile = (file: File): { isValid: boolean; error?: string } => {
-  if (!IMAGE_CONFIG.allowedTypes.includes(file.type)) {
+  if (!IMAGE_CONFIG.allowedTypes.includes(file.type as any)) {
     return {
       isValid: false,
       error: 'Tipo de arquivo não permitido. Use JPEG, PNG ou WebP.'

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { CartItem, CardData, UserAddress } from "./types";
+import { CartItem, CardData, UserAddress } from "@/types";
 import OrderSummary from "./OrderSummary";
 import PaymentMethods from "./PaymentMethods";
 

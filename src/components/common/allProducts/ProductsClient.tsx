@@ -5,26 +5,7 @@ import FilterBar from './FilterBar'
 import ProductCard from './ProductCard'
 import EmptyState from './EmptyState'
 import { useLoading } from '@/context/LoadingContext'
-
-interface ProductVariation {
-  id: string
-  image_url?: string
-  price?: number
-}
-
-interface ProductCategory {
-  id: string
-  name: string
-  slug: string
-}
-
-interface Product {
-  id: string
-  name: string
-  slug: string
-  category?: ProductCategory
-  variations: ProductVariation[]
-}
+import { Product, ProductCategory } from '@/types'
 
 interface ProductsClientProps {
   products: Product[]

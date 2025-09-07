@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { ShoppingBag } from "lucide-react";
-import { CartItem } from "./types";
+import { CartItem } from "@/types";
 
 interface Props {
   items: CartItem[];

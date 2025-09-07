@@ -2,17 +2,17 @@
 export interface User {
   id: string;
   name: string;
-  cpf?: string;
-  phone?: string;
+  cpf?: string | null;
+  phone?: string | null;
   email: string;
   emailVerified: boolean;
-  image?: string;
-  cep?: string;
-  rua?: string;
-  bairro?: string;
-  cidade?: string;
-  uf?: string;
-  numero?: string;
+  image?: string | null;
+  cep?: string | null;
+  rua?: string | null;
+  bairro?: string | null;
+  cidade?: string | null;
+  uf?: string | null;
+  numero?: string | null;
   createdAt?: Date | string;
   updatedAt?: Date | string;
 }

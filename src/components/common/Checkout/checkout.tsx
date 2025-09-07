@@ -2,7 +2,7 @@
 
 import { useCart } from "@/context/CartContext";
 import CheckoutPage from "@/components/common/Checkout/CheckoutPage";
-import { UserAddress } from "./types"; // tipo do endereço do usuário
+import { UserAddress } from "@/types"; // tipo do endereço do usuário
 
 interface Props {
   UserAddress: UserAddress;

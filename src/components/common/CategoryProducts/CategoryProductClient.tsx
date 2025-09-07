@@ -4,27 +4,7 @@
 import React, { useEffect } from "react";
 import { useLoading } from "@/context/LoadingContext";
 import ProductCard from "../allProducts/ProductCard";
-
-interface ProductVariation {
-  id: string;
-  image_url?: string;
-  price?: number;
-}
-
-interface ProductCategory {
-  id: string;
-  name: string;
-  slug: string;
-}
-
-interface Product {
-  id: string;
-  name: string;
-  slug: string;
-  description?: string;
-  category?: ProductCategory;
-  variations: ProductVariation[];
-}
+import { Product } from "@/types";
 
 interface CategoryProductClientProps {
   categoryName: string;

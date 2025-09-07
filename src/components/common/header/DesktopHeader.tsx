@@ -1,20 +1,11 @@
 "use client";
 
 import SearchBar from "./SearchBar";
-
-interface Product {
-  id: string;
-  name: string;
-  slug: string;
-}
-
-interface Category {
-  products: Product[];
-}
+import { Category } from "@/types";
 
 export default function DesktopHeader({ categories }: { categories: Category[] }) {
 
-  const products = categories.flatMap(cat => cat.products);
+  const products = categories.flatMap(cat => cat.products || []);
 
   return (
     <div className="hidden md:flex flex-1 items-center justify-end space-x-4 ">

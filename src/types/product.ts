@@ -5,7 +5,7 @@ export interface ProductVariation {
   price: number; // em centavos
   product_id: string;
   slug: string;
-  sizes?: string;
+  sizes?: string | null;
   color: string;
   image_url: string;
   created_at?: Date | string;
@@ -15,7 +15,7 @@ export interface ProductVariation {
 export interface ProductCategory {
   id: string;
   name: string;
-  imageUrl?: string;
+  imageUrl?: string | null;
   slug: string;
   created_at?: Date | string;
   updated_at?: Date | string;
@@ -32,7 +32,7 @@ export interface Product {
   created_at?: Date | string;
   updated_at?: Date | string;
   // Relacionamentos
-  category?: ProductCategory;
+  category?: ProductCategory | null;
   variations: ProductVariation[];
 }
 
@@ -47,7 +47,7 @@ export interface ProductImageProps {
   imageUrl: string;
   productName: string;
   hasOffer?: boolean;
-  offerPercent?: number;
+  offerPercent?: number | null;
   onClick?: () => void;
 }
 
@@ -65,7 +65,7 @@ export interface ProductDetailsProps {
     ends_at?: Date | string | null;
     is_new?: boolean;
     is_featured?: boolean;
-  };
+  } | null;
   quantity: number;
   setQuantity: (quantity: number) => void;
   isLiked: boolean;

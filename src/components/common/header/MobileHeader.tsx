@@ -18,19 +18,7 @@ import {
 import Link from "next/link";
 import { authClient } from "@/lib/auth-client";
 import { useState } from "react";
-
-interface Product {
-  id: string;
-  name: string;
-  slug: string;
-}
-
-interface Category {
-  id: string;
-  name: string;
-  slug: string;
-  products: Product[];
-}
+import { Category } from "@/types";
 
 interface HeaderProps {
   categories: Category[];
