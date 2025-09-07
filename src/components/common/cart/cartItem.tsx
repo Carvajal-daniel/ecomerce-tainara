@@ -8,12 +8,12 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { ShoppingBag, ShoppingBasket, Trash2 } from "lucide-react";
+import { Check, ShoppingBag, ShoppingBasket, Trash2 } from "lucide-react";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useCart } from "@/context/CartContext";
-import toast from "react-hot-toast";
+
 
 const formatBRL = (n: number) =>
   n.toLocaleString("pt-BR", {
@@ -25,6 +25,9 @@ export default function CartItem() {
   const [isClient, setIsClient] = useState(false);
   const router = useRouter();
   const { cartItems, removeItem, addItem } = useCart();
+
+  
+ 
 
   useEffect(() => {
     setIsClient(true);
@@ -42,17 +45,13 @@ export default function CartItem() {
 
   const handleRemoveItem = (id: string) => {
     removeItem(id);
-    toast.success("Item removido do carrinho!", {
-      position: getToastPosition(),
-    });
+  
   };
 
-  const handleAddItem = (item: any) => {
-    addItem(item);
-    toast.success("Item adicionado ao carrinho!", {
-      position: getToastPosition(),
-    });
+  const handleCheckout = () => {
+    router.push("/checkout");
   };
+
 
   return (
     <div>
@@ -149,7 +148,7 @@ export default function CartItem() {
           {cartItems.length > 0 && (
             <div className="border-t p-4 bg-white sticky bottom-0 shadow-inner">
               <button
-                onClick={() => router.push("/checkout")}
+                onClick={handleCheckout}
                 className="w-full bg-green-600 hover:bg-green-700 cursor-pointer text-white py-3 rounded-lg font-semibold text-sm shadow-md transition-colors"
               >
                 Finalizar Compra • R$ {formatBRL(totalPrice)}

@@ -1,5 +1,6 @@
 "use client";
 
+import CartItem from '@/components/common/cart/cartItem';
 import React, { createContext, useContext, useState, ReactNode, useEffect } from 'react';
 import toast from 'react-hot-toast';
 
@@ -17,6 +18,7 @@ interface CartContextType {
   removeItem: (id: string) => void;
   totalItems: number;
 }
+
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
