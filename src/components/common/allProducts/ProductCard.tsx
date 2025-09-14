@@ -32,7 +32,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, showLoader = true })
     <div className="relative overflow-hidden bg-gray-100 md:aspect-3/5 aspect-3/4 lg:aspect-[3/4.3]">
         <Image
           fill
-          src={product.variations[0]?.image_url || "/placeholder.jpg"}
+          src={product.image ?? "/placeholder.jpg"}
           alt={product.name}
           className="md:w-[25rem] h-[17rem] object-cover group-hover:scale-103 transition-transform duration-500"
         />

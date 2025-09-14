@@ -31,7 +31,6 @@ export interface Product {
   category_id: string;
   created_at?: Date | string;
   updated_at?: Date | string;
-  // Relacionamentos
   category?: ProductCategory | null;
   variations: ProductVariation[];
 }

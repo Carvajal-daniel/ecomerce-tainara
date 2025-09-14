@@ -1,6 +1,13 @@
 // Componente reutilizável para estados vazios
 import React from 'react';
-import { EmptyStateProps } from '@/types';
+
+interface EmptyStateProps {
+  type: 'no-products' | 'no-results' | 'error' | 'loading' | string;
+  title?: string;
+  message?: string;
+  onReset?: () => void;
+  onRetry?: () => void;
+}
 
 const EmptyState: React.FC<EmptyStateProps> = ({
   type,

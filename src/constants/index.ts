@@ -1,4 +1,4 @@
-// Constantes do sistema
+
 export const APP_CONFIG = {
   name: 'E-commerce Store',
   description: 'Loja online criada por Daniel',
